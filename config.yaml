@@ -228,8 +228,6 @@ markup:
         lineNos: true
         lineNumbersInTable: true
         tabWidth: 4
-##汉字统计
-hasCJKLanguage: true
 
 valine:
     enable: true 
