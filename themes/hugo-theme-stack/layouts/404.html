@@ -1,0 +1,10 @@
+{{ define "main" }}
+<!--
+    <div class="not-found-card">
+        <h1 class="article-title">{{ T "notFound.title" }}</h1>
+        <h2 class="article-subtitle">{{ T "notFound.subtitle" }}</h2>
+    </div>
+-->
+    <a href="/"><img src="/404.png" style="display: inline-block; width: 100%; max-width: 100%; height: auto;" /></a>
+    {{ partialCached "footer/footer" . }}
+{{ end }}
