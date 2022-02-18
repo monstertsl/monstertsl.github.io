@@ -1,4 +1,4 @@
-baseurl: http://tanging.tk
+baseurl: https://www.tanging.tk
 languageCode: zh-CN
 theme: hugo-theme-stack
 paginate: 5
@@ -234,5 +234,6 @@ valine:
     appId: '9Qqu6dElNWUKcRsKxErr9iB6-gzGzoHsz'
     appKey: 'DRsQbVzdGSlnq3rC5LJzNqDG'
     avatar: 'hide'
+    lang: 'zh-CN'
     placeholder: 
     visitor: true

@@ -1,4 +1,4 @@
-<script src='https://cdn.jsdelivr.net/gh/bigs3cir/picture/blog/files/2021/03/02/Valine.min.js'></script>
+<script src='/js/Valine.min.js'></script>
 <!-- 上面引入我修改過的Valine程式 -->
 <div id="vcomments"></div>
 
@@ -178,6 +178,7 @@
         padding: 20px;
         max-height: 350px;
         resize: none;
+        border-top: 1px solid rgb(225, 225, 225)
     }
     
     #vcomments .vedit {
@@ -356,7 +357,7 @@
         avatar: 'hide',
         placeholder: placeholder,
         enableQQ: false,
-        lang:'zh',
+        lang:'zh-CN',
         requiredFields: ['nick'],
         recordIP: false,
         visitor: true
