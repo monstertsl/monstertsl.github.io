@@ -162,29 +162,3 @@ style:
 ### 配置各类图标
 
 图标放在：`/assets/icons`，svg格式，配置方式参考[文档](https://docs.stack.jimmycai.com/zh/configuration/custom-menu)
-
-<br>
-
-### 其他参考
-
-其他我站修改及Hugo博客搭建教程可参见以下文章，作者代码水平为0，写作时间跨度较大，参考时务必注意：
-
-[Hugo | 一起动手搭建个人博客吧](https://mantyke.icu/2021/hugo-build-blog/)
-
-[Hugo | 看中 Stack 主题的归档功能，搬家并做修改](https://mantyke.icu/2021/f9f0ec87/)
-
-[Hugo | 另一篇 Stack 主题装修记录](https://mantyke.icu/2021/a08f1963/)
-
-[Hugo | 为 Blog 增加评论区](https://mantyke.icu/2021/comment/)
-
-[Hugo | 以正确姿势自动添加文章最后更新时间](https://mantyke.icu/2021/47a5331b/)
-
-[Hugo | 在文章中插入轮播图片](https://mantyke.icu/2021/cf2cf0fb/)
-
-[Hugo | 第三篇 Stack 主题装修记录，堂堂再临！](https://mantyke.icu/2022/stack-theme-furnish03/)
-
-<br>
-
-如果您喜欢或使用这个魔改版主题成功搭建了自己的个人博客，欢迎到我的[个人博客](https://mantyke.icu/2022/stack-theme-mod/)中留言告诉我，我会很开心的！
-
-<br>
