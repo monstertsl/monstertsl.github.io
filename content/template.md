@@ -17,7 +17,10 @@ comments:
 hidden: true
 #分类
 categories:
-    - 
+    - 教程
+    - 渗透
+    - 系统安全
+    - 笔记
 #标签
 tags:
     - 
