@@ -11,7 +11,7 @@ image:
 license: 
 #优先级
 weight: 
-#评论开关，默认true
+#评论开关，默认false,如果使用了这个关键字会关闭评论，如果要开启评论，删除这个关键字即可
 comments: 
 #隐藏文章，默认false
 hidden: true
