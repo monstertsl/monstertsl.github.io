@@ -25,6 +25,7 @@
 	{{- end -}}
 {{- end -}}
 
+<!--
 <figure>
 	<a href="{{ $Permalink }}" {{ if $galleryImage }}data-size="{{ $image.Width }}x{{ $image.Height }}"{{ end }}>
 		<img src="{{ $Permalink }}"
@@ -43,5 +44,16 @@
 	</a>
 	{{ with $alt }}
 	<figcaption>{{ . | markdownify }}</figcaption>
+	{{ end }}
+</figure>
+-->
+
+<figure>
+	{{if .Page.Site.Params.fancybox }}
+	<div class="gallery-image">
+	<a data-fancybox="gallery" href="{{ .Destination | safeURL }}">
+	<img src="{{ .Destination | safeURL }}" alt="{{ .Text }}" {{ with .Title}} title="{{ . }}"{{ end }} />
+	</a>
+	</div>
 	{{ end }}
 </figure>
