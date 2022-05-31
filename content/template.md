@@ -31,4 +31,13 @@ toc:
 lastmod:
 ---
 
-![图片描述](图片路径) 
+![图片描述](https://www.tanging.tk/img/avatar_hucb8ce81f57d228c65e46b5f9568ac00b_304553_300x0_resize_box_3.png)   
+
+[超级链接](https://www.tanging.tk/)
+
+```
+代码
+``` 
+`标记`  <mark>黄色标记</mark>    **加粗**    <cite>斜体</cite>   注释[^1]
+
+[^1]: 注释内容

@@ -224,10 +224,10 @@ markup:
         ordered: true
         startLevel: 2
     highlight:
-        noClasses: false
+        noClasses:  false
         codeFences: true
         guessSyntax: true
-        lineNoStart: 1
+        lineNoStart: 0
         lineNos: true
         lineNumbersInTable: true
         tabWidth: 4

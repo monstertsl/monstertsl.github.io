@@ -149,7 +149,7 @@ $defaultTagColors: #fff, #fff, #fff, #fff, #fff;
 
 [data-scheme="light"] {
     --pre-text-color: #272822;
-    --pre-background-color: #fafafa;
+    --pre-background-color: #f2f2f2;
     @import "partials/highlight/light.scss";
 }
 
