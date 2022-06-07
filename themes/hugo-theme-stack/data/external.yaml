@@ -1,19 +1,19 @@
 Vibrant:
-    - src: https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js
+    - src: https://unpkg.com/node-vibrant@3.1.5/dist/vibrant.min.js
       integrity: sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g=
       type: script
 
 KaTeX:
-    - src: https://cdn.jsdelivr.net/npm/katex@0.13.13/dist/katex.min.css
+    - src: https://unpkg.com/katex@0.13.13/dist/katex.min.css
       integrity: sha384-RZU/ijkSsFbcmivfdRBQDtwuwVqK7GMOw6IMvKyeWL2K5UAlyp6WonmB8m7Jd0Hn
       type: style
 
-    - src: https://cdn.jsdelivr.net/npm/katex@0.13.13/dist/katex.min.js
+    - src: https://unpkg.com/katex@0.13.13/dist/katex.min.js
       integrity: sha384-pK1WpvzWVBQiP0/GjnvRxV4mOb0oxFuyRxJlk6vVw146n3egcN5C925NCP7a7BY8
       type: script
       defer: true
 
-    - src: https://cdn.jsdelivr.net/npm/katex@0.13.13/dist/contrib/auto-render.min.js
+    - src: https://unpkg.com/katex@0.13.13/dist/contrib/auto-render.min.js
       integrity: sha384-vZTG03m+2yp6N6BNi5iM4rW4oIwk5DfcNdFfxkk9ZWpDriOkXX8voJBFrAO7MpVl
       type: script
       defer: true
