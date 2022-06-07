@@ -7,8 +7,35 @@
         box-shadow: var(--shadow-l1);
         padding: var(--card-padding);
     }
+
     .waline-container .vcount {
         color: var(--card-text-color-main);
+    }
+    /*选项下边框*/
+    .v[data-class="v"] .vheader{
+        border-bottom: 1px solid var(--waline-border-color);
+    }
+    /*选项字号*/
+    .v[data-class="v"] .vheader label{
+        font-size: 1em;
+    }
+    /*选项内容字号*/
+    .v[data-class="v"] .vheader input{
+        font-size: 0.9em;
+    }
+    /*取消waline版权显示*/
+    .v[data-class="v"] .vpower{
+        font-size: 0;
+    }
+    /*输入框颜色*/
+    .v[data-class="v"] .veditor:focus, .v[data-class="v"] .vinput:focus {
+        background: #fff;
+    }
+    /*功能栏上边框*/
+    .v[data-class="v"] .vfooter{
+        margin: 0%;
+        padding: 10px;
+        border-top: 1px solid var(--waline-border-color);
     }
 </style>
 

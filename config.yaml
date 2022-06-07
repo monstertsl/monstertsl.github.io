@@ -60,7 +60,7 @@ params:
 
     comments:
         enabled: true
-        provider: valine
+        provider: waline
 
         disqusjs:
             shortname:
@@ -88,20 +88,23 @@ params:
             autoCreateIssue: false
 
         # Waline client configuration see: https://waline.js.org/en/reference/client.html
-        #waline:
-        #    serverURL:
-        #    lang:
-        #    visitor:
-        #    avatar:
-        #    emoji:
-        #        - https://cdn.jsdelivr.net/gh/walinejs/emojis/weibo
-        #    requiredMeta:
-        #        - name
-        #        - email
-        #        - url
-        #    placeholder:
-        #    locale:
-        #        admin: Admin
+        waline:
+            serverURL: https://waline-seven-dusky.vercel.app/
+            lang: zh-CN
+            visitor: true
+            avatar: hide
+            emoji:
+                - https://unpkg.com/@waline/emojis@1.0.1/alus
+                - https://unpkg.com/@waline/emojis@1.0.1/bilibili
+                - https://unpkg.com/@waline/emojis@1.0.1/tw-emoji
+            requiredMeta:
+                - nick
+                - mail
+                - link
+            placeholder: "来都来了，说点什么再走嘛！"
+            recordIP: true
+            locale:
+                admin: Admin
 
         twikoo:
             envId:
@@ -232,11 +235,3 @@ markup:
         lineNumbersInTable: true
         tabWidth: 4
 
-valine:
-    enable: true 
-    appId: '9Qqu6dElNWUKcRsKxErr9iB6-gzGzoHsz'
-    appKey: 'DRsQbVzdGSlnq3rC5LJzNqDG'
-    avatar: 'hide'
-    lang: 'zh-CN'
-    placeholder: 
-    visitor: true
