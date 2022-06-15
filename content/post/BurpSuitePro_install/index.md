@@ -80,9 +80,9 @@ lastmod:
 ### 注册机下载
 这里提供两个版本的注册机（中文/英文）
 
-[BurpLoaderKeygenCn.jar，包含中文翻译文件，提取码: 60fa](https://www.aliyundrive.com/s/CgDZb7oUpp6 )
+[BurpLoaderKeygen.jar，只有破解功能](https://github.com/h3110w0r1d-y/BurpLoaderKeygen)
 
-[BurpLoaderKeygen.jar，只有破解功能，提取码: cd55](https://www.aliyundrive.com/s/V2Sba28PBC8)
+[BurpLoaderKeygenCn.jar，包含中文翻译文件](https://github.com/h3110w0r1d-y/BurpLoaderKeygen/releases/tag/2.0)
 
 ### 破解Burp Suite
 
