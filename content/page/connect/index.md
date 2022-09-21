@@ -1,7 +1,7 @@
 ---
 title: "联系"
 slug: "connect"
-description: 如果你有什么好的建议，或者有什么意见请在下方的评论框留言,或者使用邮箱联系我
+description: 如果你有什么好的建议，或者有什么意见请直接使用邮箱联系我
 readingTime: false
 license: false
 toc: false
@@ -24,7 +24,7 @@ menu:
 # 联系
 
 {{< quote >}}
-如果你有什么好的建议，或者有什么意见请在下方的评论框留言,或者使用邮箱联系我
+如果你有什么好的建议，或者有什么意见请直接使用邮箱联系我
 {{</quote >}}
 
 

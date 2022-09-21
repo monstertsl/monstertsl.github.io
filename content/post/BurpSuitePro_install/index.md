@@ -204,4 +204,4 @@ java -noverify -Dsun.java2d.uiScale=1 --illegal-access=permit -Dfile.encoding=ut
 
 ![](img/2022-05-31-11-51-43.png)
 
->如果后续还有什么问题，或者链接挂掉了请留言或者直接发[邮件](monstertsl@qq.com)联系我
+>如果后续还有什么问题，或者链接挂掉了请直接发[邮件](monstertsl@qq.com)联系我

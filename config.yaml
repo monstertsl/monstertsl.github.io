@@ -59,8 +59,8 @@ params:
             default: Licensed under CC BY-NC-SA 4.0
 
     comments:
-        enabled: true
-        provider: waline
+        enabled: false
+        provider: 
 
         disqusjs:
             shortname:

@@ -23,4 +23,4 @@ menu:
 
 博客使用[hugo](https://gohugo.io/)开源框架搭建而成，模板使用的是[小球飞鱼](https://mantyke.icu/),修改版本的[Stack](https://docs.stack.jimmycai.com/zh/),托管在`GitHub`上面,使用[vercel](https://vercel.com)进行托管加速
 
-如果你有什么好的建议，或者有什么意见请在下方的评论框留言,或者使用邮箱<monstertsl@qq.com>联系我
+如果你有什么好的建议，或者有什么意见请使用邮箱<monstertsl@qq.com>联系我
