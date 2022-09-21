@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+<script src="https://unpkg.com/jquery@3.5.1/dist/jquery.min.js"></script>
+<link rel="stylesheet" href="/css/jquery.fancybox.min.css" />
+<script src="/js/jquery.fancybox.min.js"></script>
+
+
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='将我们搭建好的博客展示出来'><title>将搭建好的博客文件托管到GitHub并且使用vercel来进行博客内容创建托管</title>
+
+<link rel='canonical' href='https://www.tanging.tk/%E5%B0%86%E6%90%AD%E5%BB%BA%E5%A5%BD%E7%9A%84%E5%8D%9A%E5%AE%A2%E6%96%87%E4%BB%B6%E6%89%98%E7%AE%A1%E5%88%B0github%E5%B9%B6%E4%B8%94%E4%BD%BF%E7%94%A8vercel%E6%9D%A5%E8%BF%9B%E8%A1%8C%E5%8D%9A%E5%AE%A2%E5%86%85%E5%AE%B9%E5%88%9B%E5%BB%BA%E6%89%98%E7%AE%A1/'>
+
+<link rel="stylesheet" href="/scss/style.min.5232e281d44c5251a8ee61c0b288c4194f14138f638b6bef3ea5434ca47284bc.css"><meta property='og:title' content='将搭建好的博客文件托管到GitHub并且使用vercel来进行博客内容创建托管'>
+<meta property='og:description' content='将我们搭建好的博客展示出来'>
+<meta property='og:url' content='https://www.tanging.tk/%E5%B0%86%E6%90%AD%E5%BB%BA%E5%A5%BD%E7%9A%84%E5%8D%9A%E5%AE%A2%E6%96%87%E4%BB%B6%E6%89%98%E7%AE%A1%E5%88%B0github%E5%B9%B6%E4%B8%94%E4%BD%BF%E7%94%A8vercel%E6%9D%A5%E8%BF%9B%E8%A1%8C%E5%8D%9A%E5%AE%A2%E5%86%85%E5%AE%B9%E5%88%9B%E5%BB%BA%E6%89%98%E7%AE%A1/'>
+<meta property='og:site_name' content='Monstertsl&#39;s Blog'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='GitHub' /><meta property='article:tag' content='Hugo' /><meta property='article:tag' content='vercel' /><meta property='article:tag' content='blog' /><meta property='article:published_time' content='2022-03-07T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2022-03-07T00:00:00&#43;00:00'/><meta property='og:image' content='https://www.tanging.tk/%E5%B0%86%E6%90%AD%E5%BB%BA%E5%A5%BD%E7%9A%84%E5%8D%9A%E5%AE%A2%E6%96%87%E4%BB%B6%E6%89%98%E7%AE%A1%E5%88%B0github%E5%B9%B6%E4%B8%94%E4%BD%BF%E7%94%A8vercel%E6%9D%A5%E8%BF%9B%E8%A1%8C%E5%8D%9A%E5%AE%A2%E5%86%85%E5%AE%B9%E5%88%9B%E5%BB%BA%E6%89%98%E7%AE%A1/cover.png' />
+<meta name="twitter:title" content="将搭建好的博客文件托管到GitHub并且使用vercel来进行博客内容创建托管">
+<meta name="twitter:description" content="将我们搭建好的博客展示出来"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://www.tanging.tk/%E5%B0%86%E6%90%AD%E5%BB%BA%E5%A5%BD%E7%9A%84%E5%8D%9A%E5%AE%A2%E6%96%87%E4%BB%B6%E6%89%98%E7%AE%A1%E5%88%B0github%E5%B9%B6%E4%B8%94%E4%BD%BF%E7%94%A8vercel%E6%9D%A5%E8%BF%9B%E8%A1%8C%E5%8D%9A%E5%AE%A2%E5%86%85%E5%AE%B9%E5%88%9B%E5%BB%BA%E6%89%98%E7%AE%A1/cover.png' />
+    <link rel="shortcut icon" href="/icon.png" />
+<style>
+    :root {
+        --article-font-family: "Noto Serif SC", var(--base-font-family);
+    }
+</style>
+
+<script> 
+		(function () {
+		    const customFont = document.createElement('link');
+		    customFont.href = "https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;700&display=swap"; 
+		    customFont.type = "text/css";
+		    customFont.rel = "stylesheet";
+		
+		    document.head.appendChild(customFont);
+		}());
+</script>
+
+    </head>
+    <body class="
+    article-page
+">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex 
+    <!-- 
+        extended
+     -->
+    on-phone--column extended
+">
+    
+<div id="article-toolbar">
+    <a href="https://www.tanging.tk" class="back-home">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="15 6 9 12 15 18" />
+</svg>
+
+
+
+        <span>返回</span>
+    </a>
+</div>
+    <aside class="sidebar left-sidebar sticky">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header class="site-info">
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hucb8ce81f57d228c65e46b5f9568ac00b_304553_300x0_resize_box_3.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+            </figure>
+            
+        
+        
+        <h1 class="site-name"><a href="/">Monstertsl&#39;s Blog</a></h1>
+        <h2 class="site-description">菊有英。芙蓉冷。汉宫秋老。芰荷化为衣。橙橘登。山药乳。</h2></header>
+
+    <ol class="menu" id="main-menu">
+        
+        
+        
+
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/about/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/connect/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-messages" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M21 14l-3 -3h-7a1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1h9a1 1 0 0 1 1 1v10" />
+  <path d="M14 15v2a1 1 0 0 1 -1 1h-7l-3 3v-10a1 1 0 0 1 1 -1h2" />
+</svg>
+
+
+
+                
+                <span>联系</span>
+            </a>
+        </li>
+        
+
+        
+            <li id="dark-mode-toggle">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                <span>暗色模式</span>
+            </li>
+        
+    </ol>
+</aside>
+
+<main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/%E5%B0%86%E6%90%AD%E5%BB%BA%E5%A5%BD%E7%9A%84%E5%8D%9A%E5%AE%A2%E6%96%87%E4%BB%B6%E6%89%98%E7%AE%A1%E5%88%B0github%E5%B9%B6%E4%B8%94%E4%BD%BF%E7%94%A8vercel%E6%9D%A5%E8%BF%9B%E8%A1%8C%E5%8D%9A%E5%AE%A2%E5%86%85%E5%AE%B9%E5%88%9B%E5%BB%BA%E6%89%98%E7%AE%A1/">
+                <img src="/%E5%B0%86%E6%90%AD%E5%BB%BA%E5%A5%BD%E7%9A%84%E5%8D%9A%E5%AE%A2%E6%96%87%E4%BB%B6%E6%89%98%E7%AE%A1%E5%88%B0github%E5%B9%B6%E4%B8%94%E4%BD%BF%E7%94%A8vercel%E6%9D%A5%E8%BF%9B%E8%A1%8C%E5%8D%9A%E5%AE%A2%E5%86%85%E5%AE%B9%E5%88%9B%E5%BB%BA%E6%89%98%E7%AE%A1/cover_hudd9118879c33d53f203d455e6a8354d8_361182_800x0_resize_box_3.png"
+                        srcset="/%E5%B0%86%E6%90%AD%E5%BB%BA%E5%A5%BD%E7%9A%84%E5%8D%9A%E5%AE%A2%E6%96%87%E4%BB%B6%E6%89%98%E7%AE%A1%E5%88%B0github%E5%B9%B6%E4%B8%94%E4%BD%BF%E7%94%A8vercel%E6%9D%A5%E8%BF%9B%E8%A1%8C%E5%8D%9A%E5%AE%A2%E5%86%85%E5%AE%B9%E5%88%9B%E5%BB%BA%E6%89%98%E7%AE%A1/cover_hudd9118879c33d53f203d455e6a8354d8_361182_800x0_resize_box_3.png 800w, /%E5%B0%86%E6%90%AD%E5%BB%BA%E5%A5%BD%E7%9A%84%E5%8D%9A%E5%AE%A2%E6%96%87%E4%BB%B6%E6%89%98%E7%AE%A1%E5%88%B0github%E5%B9%B6%E4%B8%94%E4%BD%BF%E7%94%A8vercel%E6%9D%A5%E8%BF%9B%E8%A1%8C%E5%8D%9A%E5%AE%A2%E5%86%85%E5%AE%B9%E5%88%9B%E5%BB%BA%E6%89%98%E7%AE%A1/cover_hudd9118879c33d53f203d455e6a8354d8_361182_1600x0_resize_box_3.png 1600w"
+                        width="800" 
+                        height="377" 
+                        loading="lazy"
+                        alt="Featured image of post 将搭建好的博客文件托管到GitHub并且使用vercel来进行博客内容创建托管" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/%E6%95%99%E7%A8%8B/" >
+                教程
+            </a>
+        
+            <a href="/categories/%E7%AC%94%E8%AE%B0/" >
+                笔记
+            </a>
+        
+    </header>
+    
+
+    <h2 class="article-title">
+        <a href="/%E5%B0%86%E6%90%AD%E5%BB%BA%E5%A5%BD%E7%9A%84%E5%8D%9A%E5%AE%A2%E6%96%87%E4%BB%B6%E6%89%98%E7%AE%A1%E5%88%B0github%E5%B9%B6%E4%B8%94%E4%BD%BF%E7%94%A8vercel%E6%9D%A5%E8%BF%9B%E8%A1%8C%E5%8D%9A%E5%AE%A2%E5%86%85%E5%AE%B9%E5%88%9B%E5%BB%BA%E6%89%98%E7%AE%A1/">将搭建好的博客文件托管到GitHub并且使用vercel来进行博客内容创建托管</a>
+    </h2>
+
+    
+    <h3 class="article-subtitle">
+        将我们搭建好的博客展示出来
+    </h3>
+    
+
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Mar 07, 2022</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-pencil" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4"></path>
+  <line x1="13.5" y1="6.5" x2="17.5" y2="10.5"></line>
+</svg>
+                <time class="article-words">
+                    2117 字
+                </time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 5 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+</div>
+</header>
+
+    <section class="article-content">
+    
+    
+    <blockquote>
+<p>在前一篇文章<a class="link" href="https://www.tanging.tk/%E9%9B%B6%E5%9F%BA%E7%A1%80%E4%BB%8E0%E5%88%B0%E6%9C%89%E4%BD%BF%E7%94%A8hugo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/"  target="_blank" rel="noopener"
+    >零基础，从 0 到有使用 hugo 搭建个人博客</a>中，已经用了非常详细的语言来描述如何使用hugo这个框架来搭建个人博客，并且进行本地生成测试，这篇文章也会十分详细的用识字老奶奶都看得懂的教程详细的告诉大家怎么将自己搭建好的博客放到公网上面</p>
+</blockquote>
+<h2 id="使用github进行博客文件托管">使用GitHub进行博客文件托管</h2>
+<p>因为我们在自己本地搭建好的博客是在只能自己访问的，所以我们如果想要将自己搭建好的博客放到公网上面就需要在公网上有地方来储存我们的博客文件，这个时候像<a class="link" href="https://github.com/"  target="_blank" rel="noopener"
+    >GitHub</a>或者<a class="link" href="https://gitee.com/"  target="_blank" rel="noopener"
+    >Gitee</a>这种托管网站就非常的适合,但是这这里就出现了一个问题<code>Gitee</code>比较快，但是限制比较多，<code>Github</code>有时候又很慢甚至上不去，所以我们就需要用到<a class="link" href="https://vercel.com"  target="_blank" rel="noopener"
+    >vercel</a>,来帮助我们对博客进行静态生成页面托管</p>
+<h3 id="创建github账号">创建GitHub账号</h3>
+<p>打开<a class="link" href="https://github.com/"  target="_blank" rel="noopener"
+    >GitHub</a>，点击右上角的<code>Sign up</code>开始注册账号，它会一步一步的引导操作，邮箱-密码-用户名（建议多想一下好的因为不能重复）-是否接收广告，然后就是一些个性化的东东，所以创建账号这步就不做过多阐述
+
+
+<figure>
+	
+	<div class="gallery-image">
+	<a data-fancybox="gallery" href="img/2022-03-04-15-52-07.png">
+	<img src="img/2022-03-04-15-52-07.png" alt=""  />
+	</a>
+	</div>
+	
+</figure>
+
+
+<figure>
+	
+	<div class="gallery-image">
+	<a data-fancybox="gallery" href="img/2022-03-04-15-53-40.png">
+	<img src="img/2022-03-04-15-53-40.png" alt=""  />
+	</a>
+	</div>
+	
+</figure></p>
+<p><strong>GitHub的使用过程中可能会受到网络的影响，所以请多一点点耐心</strong></p>
+<h3 id="创建仓库">创建仓库</h3>
+<p><strong>注意现在使用两种方法上传到GitHub（见下文），如果使用GitHub桌面客户端的话，可以不用先创建仓库，请选择适合自己的方法</strong></p>
+<p>当我们创建好GitHub账号之后就需要创建一个用来储存我们博客文件的仓库</p>
+<p>点击图中我圈出来的两个地方中的任意一个都是创建仓库的（如果觉得英文界面不方便也可以使用插件来进行翻译）
+
+
+<figure>
+	
+	<div class="gallery-image">
+	<a data-fancybox="gallery" href="img/2022-03-04-16-06-17.png">
+	<img src="img/2022-03-04-16-06-17.png" alt=""  />
+	</a>
+	</div>
+	
+</figure></p>
+<p>填写好要创建的仓库名，仓库名看个人喜好叫blog或者***blog都行反正看自己，选择是否公开，再创建就可以了，建议将<code>Add a README file(添加自述文件)</code>给勾选上（这里为了方便附上中文界面对照）
+
+
+<figure>
+	
+	<div class="gallery-image">
+	<a data-fancybox="gallery" href="img/2022-03-04-16-13-16.png">
+	<img src="img/2022-03-04-16-13-16.png" alt=""  />
+	</a>
+	</div>
+	
+</figure>
+
+
+<figure>
+	
+	<div class="gallery-image">
+	<a data-fancybox="gallery" href="img/2022-03-04-16-16-28.png">
+	<img src="img/2022-03-04-16-16-28.png" alt=""  />
+	</a>
+	</div>
+	
+</figure></p>
+<p>现在仓库已经创建好了，它就来到了仓库初始页面
+
+
+<figure>
+	
+	<div class="gallery-image">
+	<a data-fancybox="gallery" href="img/2022-03-04-16-17-44.png">
+	<img src="img/2022-03-04-16-17-44.png" alt=""  />
+	</a>
+	</div>
+	
+</figure>
+根据页面提示有两种方法可以将我们的文件上传到仓库，使用GitHub桌面客户端或者使用git工具，我们现在分两种来介绍，大家根据自己的需求来使用</p>
+<h4 id="使用github桌面客户端上传较简单">使用GitHub桌面客户端上传（较简单）</h4>
+<p>点击这个➡<a class="link" href="https://desktop.github.com/"  target="_blank" rel="noopener"
+    >GitHub Desktop</a>下载GitHub桌面客户端，运行它就会自动安装
+
+
+<figure>
+	
+	<div class="gallery-image">
+	<a data-fancybox="gallery" href="img/2022-03-04-16-29-54.png">
+	<img src="img/2022-03-04-16-29-54.png" alt=""  />
+	</a>
+	</div>
+	
+</figure>
+打开GitHub Desktop，点击<code>Add an Existing Repository from your hard drive</code>，然后选择博客文件路径，但是它现在会提示让你创建成一个储存仓库，因为它现在还不是一个仓库，点击下面的<code>create repository</code>就会自动跳转到创建仓库，它会帮你填写好信息，直接创建就可以了
+
+
+<figure>
+	
+	<div class="gallery-image">
+	<a data-fancybox="gallery" href="img/2022-03-07-11-29-13.png">
+	<img src="img/2022-03-07-11-29-13.png" alt=""  />
+	</a>
+	</div>
+	
+</figure>
+
+
+<figure>
+	
+	<div class="gallery-image">
+	<a data-fancybox="gallery" href="img/2022-03-07-11-32-16.png">
+	<img src="img/2022-03-07-11-32-16.png" alt=""  />
+	</a>
+	</div>
+	
+</figure></p>
+<p>它会自己将全部文件添加到暂存区，这个时候点击任何一个<code>Publish repository</code>开始推送，如果开始没有登陆过它就会弹出让你登陆，点击<code>Sign in</code>它会弹出提示使用浏览器登陆，按照它的提示登陆即可,登陆成功后再点击<code>Publish repository</code>会让你填写命名远程仓库，这个时候也可以直接默认就行，然后就会开始上传，上传完成后，也可以再GitHub仓库里面看见这个仓库
+
+
+<figure>
+	
+	<div class="gallery-image">
+	<a data-fancybox="gallery" href="img/2022-03-07-13-45-25.png">
+	<img src="img/2022-03-07-13-45-25.png" alt=""  />
+	</a>
+	</div>
+	
+</figure>
+
+
+<figure>
+	
+	<div class="gallery-image">
+	<a data-fancybox="gallery" href="img/2022-03-07-13-58-15.png">
+	<img src="img/2022-03-07-13-58-15.png" alt=""  />
+	</a>
+	</div>
+	
+</figure></p>
+<p><strong>在登陆和之后的上传过程中可能受到网络环境的影响请不要着急，如果上传失败多上传几次就好了</strong></p>
+<h4 id="使用git工具上传">使用git工具上传</h4>
+<p>如果需要使用git工具进行上传需要先安装git工具，点击这个➡<a class="link" href="https://git-scm.com/downloads"  target="_blank" rel="noopener"
+    >git</a>，关于git这个工具的安装在这里就不做过多的阐述，如果有不会的小伙伴可以参考一下这篇文件<a class="link" href="https://blog.csdn.net/huangqqdy/article/details/83032408"  target="_blank" rel="noopener"
+    >Git下载、安装与环境配置</a>,或者可以去看看别的安装教程</p>
+<p>当我们创建好一个空白的仓库的时候，它其实会有提示我们怎么去推送到这个仓库</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">0
+</span><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">git init    #初始化仓库
+</span></span><span class="line"><span class="cl">git add .   #将文件添加到暂存区，这里的 . 表示全部文件
+</span></span><span class="line"><span class="cl">git commit -m &#34;first commit&#34;    #提交信息（可以自己修改）
+</span></span><span class="line"><span class="cl">git branch -M main  #重命名分支，因为尽量保持和远端同名（只有第一次需要弄）
+</span></span><span class="line"><span class="cl">git remote add origin https://github.com/monstertsl/mybolg.git  #添加远程仓库目标地址
+</span></span><span class="line"><span class="cl">git push -u origin main     #推送本地分支到远程的main分支
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>转到你的博客文件夹，打开终端，将这几条命令，逐条敲入，如果出现报错就查一下为什么(一般很少出现报错)，当出现下图这个提示的时候就表示已经全部上传上去了。</p>
+<p><strong>受到网络环境的影响，一般最后推送上传那个步骤得多尝试几次</strong></p>
+<p>
+
+<figure>
+	
+	<div class="gallery-image">
+	<a data-fancybox="gallery" href="img/2022-03-07-14-32-09.png">
+	<img src="img/2022-03-07-14-32-09.png" alt=""  />
+	</a>
+	</div>
+	
+</figure></p>
+<p>再登陆到GitHub里面看看也可以看见上传好了（框选出来的就是刚刚自定义的提交信息），这里会发现一个问题，就是为什么上传的文件夹和本地的不一样多，这是因为空文件夹不上传，还有就是每次上传的时候可以先将本地的<code>resources</code>这个目录删除，因为它是本地预览时临时生成的，并没有多大用处
+
+
+<figure>
+	
+	<div class="gallery-image">
+	<a data-fancybox="gallery" href="img/2022-03-07-14-34-37.png">
+	<img src="img/2022-03-07-14-34-37.png" alt=""  />
+	</a>
+	</div>
+	
+</figure></p>
+<h2 id="使用vercel来进行博客内容创建托管">使用vercel来进行博客内容创建托管</h2>
+<h3 id="创建vercel账号">创建vercel账号</h3>
+<p>打开<a class="link" href="https://vercel.com"  target="_blank" rel="noopener"
+    >vercel</a>网站，点击右上角的<code>Login</code>，然后直接选择使用GitHub登陆就可以了（如果觉得慢，也可以用邮箱创建账号登陆）
+
+
+<figure>
+	
+	<div class="gallery-image">
+	<a data-fancybox="gallery" href="img/2022-03-07-14-42-48.png">
+	<img src="img/2022-03-07-14-42-48.png" alt=""  />
+	</a>
+	</div>
+	
+</figure>
+
+
+<figure>
+	
+	<div class="gallery-image">
+	<a data-fancybox="gallery" href="img/2022-03-07-14-43-19.png">
+	<img src="img/2022-03-07-14-43-19.png" alt=""  />
+	</a>
+	</div>
+	
+</figure></p>
+<h3 id="创建托管项目">创建托管项目</h3>
+<p>登陆成功后，点击页面上的<code>New Project</code>创建新的项目
+
+
+<figure>
+	
+	<div class="gallery-image">
+	<a data-fancybox="gallery" href="img/2022-03-07-14-45-58.png">
+	<img src="img/2022-03-07-14-45-58.png" alt=""  />
+	</a>
+	</div>
+	
+</figure></p>
+<p>选择从GitHub导入
+
+
+<figure>
+	
+	<div class="gallery-image">
+	<a data-fancybox="gallery" href="img/2022-03-07-14-48-03.png">
+	<img src="img/2022-03-07-14-48-03.png" alt=""  />
+	</a>
+	</div>
+	
+</figure></p>
+<p>选择我们的博客文件
+
+
+<figure>
+	
+	<div class="gallery-image">
+	<a data-fancybox="gallery" href="img/2022-03-07-14-49-52.png">
+	<img src="img/2022-03-07-14-49-52.png" alt=""  />
+	</a>
+	</div>
+	
+</figure></p>
+<p><code>Project Name(项目名称)</code>可以自己随便命名，在<code>Framework Preset(框架)</code>选择Hugo，然后点开下面的，<code>Environment Variables(环境变量)</code>添加一条变量名称为<code>HUGO_VERSION</code>，值为本地hugo版本号的变量，再点击<code>Add</code>添加，设置好后点击下面的<code>Deploy(部署)</code>就会开始部署
+
+
+<figure>
+	
+	<div class="gallery-image">
+	<a data-fancybox="gallery" href="img/2022-03-07-14-54-32.png">
+	<img src="img/2022-03-07-14-54-32.png" alt=""  />
+	</a>
+	</div>
+	
+</figure></p>
+<p>只需要稍等片刻，就会创建好我们的静态页面，我们可以通过它给到域名来访问，也可以自己购买域名进行绑定
+
+
+<figure>
+	
+	<div class="gallery-image">
+	<a data-fancybox="gallery" href="img/2022-03-07-15-05-25.png">
+	<img src="img/2022-03-07-15-05-25.png" alt=""  />
+	</a>
+	</div>
+	
+</figure>
+
+
+<figure>
+	
+	<div class="gallery-image">
+	<a data-fancybox="gallery" href="img/2022-03-07-15-06-39.png">
+	<img src="img/2022-03-07-15-06-39.png" alt=""  />
+	</a>
+	</div>
+	
+</figure></p>
+<blockquote>
+<p>如果有什么不明白的地方，请直接发邮件给我，看见我都会回复的</p>
+</blockquote>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/github/">GitHub</a>
+        
+            <a href="/tags/hugo/">Hugo</a>
+        
+            <a href="/tags/vercel/">vercel</a>
+        
+            <a href="/tags/blog/">blog</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    <aside class="related-contents--wrapper">
+    
+    
+        <h2 class="section-title">相关文章</h2>
+        <div class="related-contents">
+            <div class="flex article-list--tile">
+                
+                    
+<article class="has-image">
+    <a href="/%E9%9B%B6%E5%9F%BA%E7%A1%80%E4%BB%8E0%E5%88%B0%E6%9C%89%E4%BD%BF%E7%94%A8hugo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/">
+        
+        
+            <div class="article-image">
+                <img src="/%E9%9B%B6%E5%9F%BA%E7%A1%80%E4%BB%8E0%E5%88%B0%E6%9C%89%E4%BD%BF%E7%94%A8hugo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/cover.7e83e72417f23cb55271ef34d5eadade_hu80ad1e0a84bf0a6eeb06b9dd1a27e5bf_68722_250x150_fill_box_smart1_3.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post 零基础，从0到有使用hugo搭建个人博客"
+                        
+                        data-hash="md5-foPnJBfyPLVSce801era3g==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">零基础，从0到有使用hugo搭建个人博客</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="has-image">
+    <a href="/burp-suite-pro%E5%AE%89%E8%A3%85%E7%A0%B4%E8%A7%A3/">
+        
+        
+            <div class="article-image">
+                <img src="/burp-suite-pro%E5%AE%89%E8%A3%85%E7%A0%B4%E8%A7%A3/_hu01953c3dd819e2955c5ee5ac3db5fe30_103117_1d46de58a007faa074b5bcfa1ae43030.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post Burp Suite Pro安装破解"
+                        
+                        data-hash="md5-Xz//eZUC6F4j68yKYJTVCg==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Burp Suite Pro安装破解</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="has-image">
+    <a href="/%E9%80%9A%E8%BF%87arp%E6%AC%BA%E9%AA%97-dns%E5%8A%AB%E6%8C%81%E5%86%85%E7%BD%91%E5%87%86%E5%A4%87%E9%92%93%E9%B1%BC%E7%BD%91%E9%A1%B5%E8%AF%B1%E5%AF%BC%E4%B8%8B%E8%BD%BD%E5%AE%89%E8%A3%85android%E6%9C%A8%E9%A9%AC%E5%86%8D%E9%80%9A%E8%BF%87msf%E5%88%A9%E7%94%A8android%E6%9C%A8%E9%A9%AC%E6%B8%97%E9%80%8F%E6%89%8B%E6%9C%BA%E8%B6%85%E8%AF%A6%E7%BB%86/">
+        
+        
+            <div class="article-image">
+                <img src="/%E9%80%9A%E8%BF%87arp%E6%AC%BA%E9%AA%97-dns%E5%8A%AB%E6%8C%81%E5%86%85%E7%BD%91%E5%87%86%E5%A4%87%E9%92%93%E9%B1%BC%E7%BD%91%E9%A1%B5%E8%AF%B1%E5%AF%BC%E4%B8%8B%E8%BD%BD%E5%AE%89%E8%A3%85android%E6%9C%A8%E9%A9%AC%E5%86%8D%E9%80%9A%E8%BF%87msf%E5%88%A9%E7%94%A8android%E6%9C%A8%E9%A9%AC%E6%B8%97%E9%80%8F%E6%89%8B%E6%9C%BA%E8%B6%85%E8%AF%A6%E7%BB%86/_hu7f050847fc1e7eb5d325bb547eee7c41_721429_ad73e4caf909de8572912ba6e26c6bb8.jpg" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post 通过ARP欺骗&#43;DNS劫持内网准备钓鱼网页诱导下载安装Android木马再通过MSF利用Android木马渗透手机（超详细）"
+                        
+                        data-hash="md5-HQOVQ9AsQ1z66sit4mmEig==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">通过ARP欺骗&#43;DNS劫持内网准备钓鱼网页诱导下载安装Android木马再通过MSF利用Android木马渗透手机（超详细）</h2>
+        </div>
+    </a>
+</article>
+                
+            </div>
+        </div>
+    
+</aside>
+
+     
+     
+        
+    
+
+    <footer class="site-footer">
+  
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+
+<script>
+(function(u, c) {
+  var d = document, t = 'script', o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+  o.src = u;
+  if (c) { o.addEventListener('load', function(e) { c(e); }); }
+  s.parentNode.insertBefore(o, s);
+})('http://cdn.bootcss.com/pangu/3.3.0/pangu.min.js', function() {
+  pangu.spacingPage();
+});
+</script>
+
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2022 <a href="https://stack-theme-mod.vercel.app/">Monstertsl</a>·<i class="fas fa-bell"></i> <a id="days">0</a>Days<br>
+      共写了8.7k字·共 5篇文章</br><span><p>
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.2.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a><br />
+         <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">© Licensed Under CC BY-NC-SA 4.0</a>
+    </section>
+
+<script>
+var s1 = '2022-02-15';
+s1 = new Date(s1.replace(/-/g, "/"));
+s2 = new Date();
+var days = s2.getTime() - s1.getTime();
+var number_of_days = parseInt(days / (1000 * 60 * 60 * 24));
+document.getElementById('days').innerHTML = number_of_days;
+</script>
+    
+</footer>
+
+
+
+
+            </main>
+    
+    
+    
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#使用github进行博客文件托管">使用GitHub进行博客文件托管</a>
+      <ol>
+        <li><a href="#创建github账号">创建GitHub账号</a></li>
+        <li><a href="#创建仓库">创建仓库</a>
+          <ol>
+            <li><a href="#使用github桌面客户端上传较简单">使用GitHub桌面客户端上传（较简单）</a></li>
+            <li><a href="#使用git工具上传">使用git工具上传</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#使用vercel来进行博客内容创建托管">使用vercel来进行博客内容创建托管</a>
+      <ol>
+        <li><a href="#创建vercel账号">创建vercel账号</a></li>
+        <li><a href="#创建托管项目">创建托管项目</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+        
+            <form action="/search/" class="search-form widget" >
+        <p>
+            <label>搜索</label>
+            <input name="keyword" required placeholder="在这里输入你想要查找的内容..." />
+        
+            <button title="搜索">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+            </button>
+        </p>
+    </form>
+        
+            <section class="widget tagCloud">
+    <div class="widget-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-tag" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11 3L20 12a1.5 1.5 0 0 1 0 2L14 20a1.5 1.5 0 0 1 -2 0L3 11v-4a4 4 0 0 1 4 -4h4" />
+  <circle cx="9" cy="9" r="2" />
+</svg>
+
+
+
+    </div>
+    <h2 class="widget-title section-title">标签</h2>
+
+    <div class="tagCloud-tags">
+        
+            <a href="/tags/hugo/" class="font_size_2">
+                Hugo
+            </a>
+        
+            <a href="/tags/android/" class="font_size_1">
+                Android
+            </a>
+        
+            <a href="/tags/blog/" class="font_size_1">
+                blog
+            </a>
+        
+            <a href="/tags/burpsuite/" class="font_size_1">
+                BurpSuite
+            </a>
+        
+            <a href="/tags/github/" class="font_size_1">
+                GitHub
+            </a>
+        
+            <a href="/tags/html/" class="font_size_1">
+                html
+            </a>
+        
+            <a href="/tags/kali/" class="font_size_1">
+                kali
+            </a>
+        
+            <a href="/tags/markdown/" class="font_size_1">
+                markdown
+            </a>
+        
+            <a href="/tags/msf/" class="font_size_1">
+                msf
+            </a>
+        
+            <a href="/tags/themes/" class="font_size_1">
+                themes
+            </a>
+        
+    </div>
+</section>
+        
+            <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-infinity" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M9.828 9.172a4 4 0 1 0 0 5.656 a10 10 0 0 0 2.172 -2.828a10 10 0 0 1 2.172 -2.828 a4 4 0 1 1 0 5.656a10 10 0 0 1 -2.172 -2.828a10 10 0 0 0 -2.172 -2.828" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">归档</h2>
+
+        
+        
+        
+        
+        
+        <div class="widget-archive--list">
+            <div class="archives-year">
+                    <a href="/archives/#2022">
+                        
+                            <span class="year">2022</span>
+                            <span class="count">5</span>
+                        
+                    </a> 
+                </div>
+            
+        </div>
+    </section>
+        
+    </aside>
+
+
+        </div>
+        <script 
+                src="https://unpkg.com/node-vibrant@3.1.5/dist/vibrant.min.js"integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

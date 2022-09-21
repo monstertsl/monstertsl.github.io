@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>blog on Monstertsl&#39;s Blog</title>
+    <link>https://www.tanging.tk/tags/blog/</link>
+    <description>Recent content in blog on Monstertsl&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Mon, 07 Mar 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://www.tanging.tk/tags/blog/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>将搭建好的博客文件托管到GitHub并且使用vercel来进行博客内容创建托管</title>
+      <link>https://www.tanging.tk/%E5%B0%86%E6%90%AD%E5%BB%BA%E5%A5%BD%E7%9A%84%E5%8D%9A%E5%AE%A2%E6%96%87%E4%BB%B6%E6%89%98%E7%AE%A1%E5%88%B0github%E5%B9%B6%E4%B8%94%E4%BD%BF%E7%94%A8vercel%E6%9D%A5%E8%BF%9B%E8%A1%8C%E5%8D%9A%E5%AE%A2%E5%86%85%E5%AE%B9%E5%88%9B%E5%BB%BA%E6%89%98%E7%AE%A1/</link>
+      <pubDate>Mon, 07 Mar 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.tanging.tk/%E5%B0%86%E6%90%AD%E5%BB%BA%E5%A5%BD%E7%9A%84%E5%8D%9A%E5%AE%A2%E6%96%87%E4%BB%B6%E6%89%98%E7%AE%A1%E5%88%B0github%E5%B9%B6%E4%B8%94%E4%BD%BF%E7%94%A8vercel%E6%9D%A5%E8%BF%9B%E8%A1%8C%E5%8D%9A%E5%AE%A2%E5%86%85%E5%AE%B9%E5%88%9B%E5%BB%BA%E6%89%98%E7%AE%A1/</guid>
+      <description>在前一篇文章零基础，从 0 到有使用 hugo 搭建个人博客中，已经用了非常详细的语言来描述如何使用hugo这个框架来搭建个人博客，并且进行本地生成测试，</description>
+    </item>
+    
+  </channel>
+</rss>
