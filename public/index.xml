@@ -7,6 +7,363 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-CN</language>
         <lastBuildDate>Thu, 22 Sep 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://www.tanging.tk/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>将Hugo托管到4everland</title>
+        <link>https://www.tanging.tk/%E5%B0%86hugo%E6%89%98%E7%AE%A1%E5%88%B04everland/</link>
+        <pubDate>Thu, 22 Sep 2022 00:00:00 +0000</pubDate>
+        
+        <guid>https://www.tanging.tk/%E5%B0%86hugo%E6%89%98%E7%AE%A1%E5%88%B04everland/</guid>
+        <description>&lt;img src="https://www.tanging.tk/%E5%B0%86hugo%E6%89%98%E7%AE%A1%E5%88%B04everland/hosting.png" alt="Featured image of post 将Hugo托管到4everland" /&gt;&lt;blockquote&gt;
+&lt;p&gt;在前面的文章&lt;a class=&#34;link&#34; href=&#34;https://www.tanging.tk/%E5%B0%86%E6%90%AD%E5%BB%BA%E5%A5%BD%E7%9A%84%E5%8D%9A%E5%AE%A2%E6%96%87%E4%BB%B6%E6%89%98%E7%AE%A1%E5%88%B0github%E5%B9%B6%E4%B8%94%E4%BD%BF%E7%94%A8vercel%E6%9D%A5%E8%BF%9B%E8%A1%8C%E5%8D%9A%E5%AE%A2%E5%86%85%E5%AE%B9%E5%88%9B%E5%BB%BA%E6%89%98%E7%AE%A1/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;将搭建好的博客文件托管到GitHub并且使用vercel来进行博客内容创建托管&lt;/a&gt;,中我们使用了vercel作为我们的博客托管平台，但是近期发现好像不能正常访问，疑似被墙，所以现在将托管的博客迁移到&lt;a class=&#34;link&#34; href=&#34;https://4everland.org/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;4everland&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;关于4everland&#34;&gt;关于4everland&lt;/h2&gt;
+&lt;p&gt;4EVERLAND是一个以区块链技术为驱动专为Web3.0设计的云计算平台。为了帮助开发者高效开发Web3.0应用，在IPFS之上构建了一个共识驱动的Swarm系统。它极大地提高了数据I/O效率。同时开发了基于TEE的存储。它帮助开发者实现更稳定的内容存储、高效的内容分发、快速的网络访问、文件读取和防止存储欺诈。&lt;/p&gt;
+&lt;h2 id=&#34;创建4everland账户&#34;&gt;创建4everland账户&lt;/h2&gt;
+&lt;p&gt;打开&lt;a class=&#34;link&#34; href=&#34;https://4everland.org/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;4everland&lt;/a&gt;官网，点击右上角的登录按钮。
+
+
+&lt;figure&gt;
+	
+	&lt;div class=&#34;gallery-image&#34;&gt;
+	&lt;a data-fancybox=&#34;gallery&#34; href=&#34;img/2022-09-22-16-31-57.png&#34;&gt;
+	&lt;img src=&#34;img/2022-09-22-16-31-57.png&#34; alt=&#34;&#34;  /&gt;
+	&lt;/a&gt;
+	&lt;/div&gt;
+	
+&lt;/figure&gt;
+
+
+&lt;figure&gt;
+	
+	&lt;div class=&#34;gallery-image&#34;&gt;
+	&lt;a data-fancybox=&#34;gallery&#34; href=&#34;img/2022-09-22-16-38-09.png&#34;&gt;
+	&lt;img src=&#34;img/2022-09-22-16-38-09.png&#34; alt=&#34;&#34;  /&gt;
+	&lt;/a&gt;
+	&lt;/div&gt;
+	
+&lt;/figure&gt;
+在之前4everland是支持使用GitHub账户进行登录，但是目前GitHub登录方式在进行维护中，在这里如果有这其中的显示的钱包账号的话就直接登录，没有钱包账户就创建一个，创建钱包账户的过程过于简单就不在这里阐述了&lt;/p&gt;
+&lt;h2 id=&#34;创建托管项目&#34;&gt;创建托管项目&lt;/h2&gt;
+&lt;h3 id=&#34;在开始创建项目托管之前&#34;&gt;在开始创建项目托管之前&lt;/h3&gt;
+&lt;p&gt;在创建托管之前，我们需要依照之前的文章&lt;a class=&#34;link&#34; href=&#34;https://www.tanging.tk/%E5%B0%86%E6%90%AD%E5%BB%BA%E5%A5%BD%E7%9A%84%E5%8D%9A%E5%AE%A2%E6%96%87%E4%BB%B6%E6%89%98%E7%AE%A1%E5%88%B0github%E5%B9%B6%E4%B8%94%E4%BD%BF%E7%94%A8vercel%E6%9D%A5%E8%BF%9B%E8%A1%8C%E5%8D%9A%E5%AE%A2%E5%86%85%E5%AE%B9%E5%88%9B%E5%BB%BA%E6%89%98%E7%AE%A1/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;将搭建好的博客文件托管到GitHub并且使用vercel来进行博客内容创建托管&lt;/a&gt;，先将我们的项目文件托管到GitHub上面，但是在上传到GitHub之前，我们最好先使用&lt;code&gt;hugo&lt;/code&gt;命令对我们已有的项目博客文件生成静态文件，可以看见这个生成的文件产生了两个静态文件的文件夹&lt;code&gt;public&lt;/code&gt;和&lt;code&gt;resources&lt;/code&gt;,这里&lt;strong&gt;public&lt;/strong&gt;目录是我们后面会用到的
+
+
+&lt;figure&gt;
+	
+	&lt;div class=&#34;gallery-image&#34;&gt;
+	&lt;a data-fancybox=&#34;gallery&#34; href=&#34;img/2022-09-22-16-50-12.png&#34;&gt;
+	&lt;img src=&#34;img/2022-09-22-16-50-12.png&#34; alt=&#34;&#34;  /&gt;
+	&lt;/a&gt;
+	&lt;/div&gt;
+	
+&lt;/figure&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;在之前使用vercel托管的时候，我们是不需要生成静态文件的，但是我目前还没有找到4everland直接生成预览的方法，感觉4everland直接上传静态文件不上传工程文件也可以部署，如果后面有朋友找到可以直接部署不需要生成静态文件的方法请务必发邮件到&lt;a class=&#34;link&#34; href=&#34;mailto:monstertsl@qq.com&#34; &gt;monstertsl@qq.com&lt;/a&gt;教我一下，十分感谢！！！&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;开始使用4everland托管我们的静态文件&#34;&gt;开始使用4everland托管我们的静态文件&lt;/h3&gt;
+&lt;p&gt;在这里我们点击右上角的&lt;code&gt;New Project&lt;/code&gt;创建新的项目
+
+
+&lt;figure&gt;
+	
+	&lt;div class=&#34;gallery-image&#34;&gt;
+	&lt;a data-fancybox=&#34;gallery&#34; href=&#34;img/2022-09-22-17-02-12.png&#34;&gt;
+	&lt;img src=&#34;img/2022-09-22-17-02-12.png&#34; alt=&#34;&#34;  /&gt;
+	&lt;/a&gt;
+	&lt;/div&gt;
+	
+&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;在左边设置绑定我们的GitHub进行连接方便读取我们托管到GitHub上面的项目文件，按照弹出的提示一步一步操作基本就没啥问题，同意安装和授权就行了
+
+
+&lt;figure&gt;
+	
+	&lt;div class=&#34;gallery-image&#34;&gt;
+	&lt;a data-fancybox=&#34;gallery&#34; href=&#34;img/2022-09-22-17-05-49.png&#34;&gt;
+	&lt;img src=&#34;img/2022-09-22-17-05-49.png&#34; alt=&#34;&#34;  /&gt;
+	&lt;/a&gt;
+	&lt;/div&gt;
+	
+&lt;/figure&gt;
+
+
+&lt;figure&gt;
+	
+	&lt;div class=&#34;gallery-image&#34;&gt;
+	&lt;a data-fancybox=&#34;gallery&#34; href=&#34;img/2022-09-22-17-06-40.png&#34;&gt;
+	&lt;img src=&#34;img/2022-09-22-17-06-40.png&#34; alt=&#34;&#34;  /&gt;
+	&lt;/a&gt;
+	&lt;/div&gt;
+	
+&lt;/figure&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;绑定GitHub后，后面就不需要再重新绑定了&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;刷新一下，选择我们托管的GitHub的项目文件
+
+
+&lt;figure&gt;
+	
+	&lt;div class=&#34;gallery-image&#34;&gt;
+	&lt;a data-fancybox=&#34;gallery&#34; href=&#34;img/2022-09-22-17-10-47.png&#34;&gt;
+	&lt;img src=&#34;img/2022-09-22-17-10-47.png&#34; alt=&#34;&#34;  /&gt;
+	&lt;/a&gt;
+	&lt;/div&gt;
+	
+&lt;/figure&gt;&lt;/p&gt;
+&lt;h2 id=&#34;创建部署&#34;&gt;创建部署&lt;/h2&gt;
+&lt;h3 id=&#34;设置部署参数&#34;&gt;设置部署参数&lt;/h3&gt;
+&lt;p&gt;当我们选择完项目文件后，就进入参数设置，这里只有一个需要注意的地方就是前面我们提到的&lt;code&gt;public&lt;/code&gt;目录，在根目录这里选择我们的静态文件&lt;code&gt;public&lt;/code&gt;目录，设置好项目名称和项目框架（因为这里使用的是静态文件，所以好像不用选择项目框架默认&lt;code&gt;other&lt;/code&gt;也可以）就可以直接部署了
+
+
+&lt;figure&gt;
+	
+	&lt;div class=&#34;gallery-image&#34;&gt;
+	&lt;a data-fancybox=&#34;gallery&#34; href=&#34;img/2022-09-22-17-14-03.png&#34;&gt;
+	&lt;img src=&#34;img/2022-09-22-17-14-03.png&#34; alt=&#34;&#34;  /&gt;
+	&lt;/a&gt;
+	&lt;/div&gt;
+	
+&lt;/figure&gt;
+
+
+&lt;figure&gt;
+	
+	&lt;div class=&#34;gallery-image&#34;&gt;
+	&lt;a data-fancybox=&#34;gallery&#34; href=&#34;img/2022-09-22-17-16-27.png&#34;&gt;
+	&lt;img src=&#34;img/2022-09-22-17-16-27.png&#34; alt=&#34;&#34;  /&gt;
+	&lt;/a&gt;
+	&lt;/div&gt;
+	
+&lt;/figure&gt;&lt;/p&gt;
+&lt;h3 id=&#34;上线&#34;&gt;上线&lt;/h3&gt;
+&lt;p&gt;点击部署后，它就会拉取我们存储库中的项目文件进行部署，只需要稍稍的等待就可以部署完成
+
+
+&lt;figure&gt;
+	
+	&lt;div class=&#34;gallery-image&#34;&gt;
+	&lt;a data-fancybox=&#34;gallery&#34; href=&#34;img/2022-09-22-17-19-52.png&#34;&gt;
+	&lt;img src=&#34;img/2022-09-22-17-19-52.png&#34; alt=&#34;&#34;  /&gt;
+	&lt;/a&gt;
+	&lt;/div&gt;
+	
+&lt;/figure&gt;&lt;/p&gt;
+&lt;h2 id=&#34;使用自定义域名&#34;&gt;使用自定义域名&lt;/h2&gt;
+&lt;p&gt;我们可以使用它分配的系统域名进行访问，当然也可以使用我们自己的域名，更加方便记忆
+
+
+&lt;figure&gt;
+	
+	&lt;div class=&#34;gallery-image&#34;&gt;
+	&lt;a data-fancybox=&#34;gallery&#34; href=&#34;img/2022-09-22-17-22-22.png&#34;&gt;
+	&lt;img src=&#34;img/2022-09-22-17-22-22.png&#34; alt=&#34;&#34;  /&gt;
+	&lt;/a&gt;
+	&lt;/div&gt;
+	
+&lt;/figure&gt;&lt;/p&gt;
+&lt;h3 id=&#34;注册域名&#34;&gt;注册域名&lt;/h3&gt;
+&lt;p&gt;在这里我使用的是从&lt;a class=&#34;link&#34; href=&#34;https://www.freenom.com&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;freenom&lt;/a&gt;上面薅的免费域名，具体注册方法可以参考一下这篇文章&lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/xiong_min/article/details/125591170&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;freenom域名申请教程&lt;/a&gt;，当然如果你有钱也可以直接去买别的好的域名&lt;/p&gt;
+&lt;h3 id=&#34;使用腾讯云dnspod进行freenom域名解析&#34;&gt;使用腾讯云DNSPOD进行freenom域名解析&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;如果你是直接使用是国内的域名服务商注册的域名就可以跳过这个步骤了，因为这个是为了加快国外域名服务商的DNS解析速度&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;同时因为在国内使用，如果使用freenom的DNS解析服务器的话会稍微有一点点慢，所以我们使用腾讯dnspod进行解析会稍微快一点&lt;/p&gt;
+&lt;p&gt;打开腾讯&lt;a class=&#34;link&#34; href=&#34;https://www.dnspod.cn/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;dnspod&lt;/a&gt;官网点击右上角进入控制台
+
+
+&lt;figure&gt;
+	
+	&lt;div class=&#34;gallery-image&#34;&gt;
+	&lt;a data-fancybox=&#34;gallery&#34; href=&#34;img/2022-09-22-17-33-27.png&#34;&gt;
+	&lt;img src=&#34;img/2022-09-22-17-33-27.png&#34; alt=&#34;&#34;  /&gt;
+	&lt;/a&gt;
+	&lt;/div&gt;
+	
+&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;再点击&lt;code&gt;管理控制台&lt;/code&gt;
+
+
+&lt;figure&gt;
+	
+	&lt;div class=&#34;gallery-image&#34;&gt;
+	&lt;a data-fancybox=&#34;gallery&#34; href=&#34;img/2022-09-22-17-34-44.png&#34;&gt;
+	&lt;img src=&#34;img/2022-09-22-17-34-44.png&#34; alt=&#34;&#34;  /&gt;
+	&lt;/a&gt;
+	&lt;/div&gt;
+	
+&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;点击域名解析，点击&lt;code&gt;添加域名&lt;/code&gt;，把薅来的域名添加进去并确认，然后它就会提示未使用&lt;code&gt;未使用 DNSPod&lt;/code&gt;
+
+
+&lt;figure&gt;
+	
+	&lt;div class=&#34;gallery-image&#34;&gt;
+	&lt;a data-fancybox=&#34;gallery&#34; href=&#34;img/2022-09-22-17-55-30.png&#34;&gt;
+	&lt;img src=&#34;img/2022-09-22-17-55-30.png&#34; alt=&#34;&#34;  /&gt;
+	&lt;/a&gt;
+	&lt;/div&gt;
+	
+&lt;/figure&gt;
+
+
+&lt;figure&gt;
+	
+	&lt;div class=&#34;gallery-image&#34;&gt;
+	&lt;a data-fancybox=&#34;gallery&#34; href=&#34;img/2022-09-22-17-37-36.png&#34;&gt;
+	&lt;img src=&#34;img/2022-09-22-17-37-36.png&#34; alt=&#34;&#34;  /&gt;
+	&lt;/a&gt;
+	&lt;/div&gt;
+	
+&lt;/figure&gt;
+
+
+&lt;figure&gt;
+	
+	&lt;div class=&#34;gallery-image&#34;&gt;
+	&lt;a data-fancybox=&#34;gallery&#34; href=&#34;img/2022-09-22-17-38-04.png&#34;&gt;
+	&lt;img src=&#34;img/2022-09-22-17-38-04.png&#34; alt=&#34;&#34;  /&gt;
+	&lt;/a&gt;
+	&lt;/div&gt;
+	
+&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;现在我们打开&lt;a class=&#34;link&#34; href=&#34;https://www.freenom.com&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;freenom&lt;/a&gt;,登录后选到&lt;code&gt; Services&lt;/code&gt;-&lt;code&gt;My Domains &lt;/code&gt;
+
+
+&lt;figure&gt;
+	
+	&lt;div class=&#34;gallery-image&#34;&gt;
+	&lt;a data-fancybox=&#34;gallery&#34; href=&#34;img/2022-09-22-17-42-01.png&#34;&gt;
+	&lt;img src=&#34;img/2022-09-22-17-42-01.png&#34; alt=&#34;&#34;  /&gt;
+	&lt;/a&gt;
+	&lt;/div&gt;
+	
+&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;选到需要腾讯dnspod进行解析的域名，点击后面的&lt;code&gt;Manage Domain&lt;/code&gt;
+
+
+&lt;figure&gt;
+	
+	&lt;div class=&#34;gallery-image&#34;&gt;
+	&lt;a data-fancybox=&#34;gallery&#34; href=&#34;img/2022-09-22-17-44-13.png&#34;&gt;
+	&lt;img src=&#34;img/2022-09-22-17-44-13.png&#34; alt=&#34;&#34;  /&gt;
+	&lt;/a&gt;
+	&lt;/div&gt;
+	
+&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;再点开&lt;code&gt;Management Tools&lt;/code&gt;-&lt;code&gt;Nameservers&lt;/code&gt;
+
+
+&lt;figure&gt;
+	
+	&lt;div class=&#34;gallery-image&#34;&gt;
+	&lt;a data-fancybox=&#34;gallery&#34; href=&#34;img/2022-09-22-17-44-50.png&#34;&gt;
+	&lt;img src=&#34;img/2022-09-22-17-44-50.png&#34; alt=&#34;&#34;  /&gt;
+	&lt;/a&gt;
+	&lt;/div&gt;
+	
+&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;把腾讯dnspod提供的服务器地址填写进去，确认即可，在腾讯dnspod页面，重新验证一下，会提示已经设置正确
+
+
+&lt;figure&gt;
+	
+	&lt;div class=&#34;gallery-image&#34;&gt;
+	&lt;a data-fancybox=&#34;gallery&#34; href=&#34;img/2022-09-22-17-46-44.png&#34;&gt;
+	&lt;img src=&#34;img/2022-09-22-17-46-44.png&#34; alt=&#34;&#34;  /&gt;
+	&lt;/a&gt;
+	&lt;/div&gt;
+	
+&lt;/figure&gt;
+
+
+&lt;figure&gt;
+	
+	&lt;div class=&#34;gallery-image&#34;&gt;
+	&lt;a data-fancybox=&#34;gallery&#34; href=&#34;img/2022-09-22-17-47-57.png&#34;&gt;
+	&lt;img src=&#34;img/2022-09-22-17-47-57.png&#34; alt=&#34;&#34;  /&gt;
+	&lt;/a&gt;
+	&lt;/div&gt;
+	
+&lt;/figure&gt;
+
+
+&lt;figure&gt;
+	
+	&lt;div class=&#34;gallery-image&#34;&gt;
+	&lt;a data-fancybox=&#34;gallery&#34; href=&#34;img/2022-09-22-17-48-19.png&#34;&gt;
+	&lt;img src=&#34;img/2022-09-22-17-48-19.png&#34; alt=&#34;&#34;  /&gt;
+	&lt;/a&gt;
+	&lt;/div&gt;
+	
+&lt;/figure&gt;&lt;/p&gt;
+&lt;h3 id=&#34;为4everland设置自定义域名&#34;&gt;为4everland设置自定义域名&lt;/h3&gt;
+&lt;p&gt;打开我们的4everland控制台，找到需要自定义域名的网站，点击设置，再点击&lt;code&gt;Domains&lt;/code&gt;
+
+
+&lt;figure&gt;
+	
+	&lt;div class=&#34;gallery-image&#34;&gt;
+	&lt;a data-fancybox=&#34;gallery&#34; href=&#34;img/2022-09-22-17-50-24.png&#34;&gt;
+	&lt;img src=&#34;img/2022-09-22-17-50-24.png&#34; alt=&#34;&#34;  /&gt;
+	&lt;/a&gt;
+	&lt;/div&gt;
+	
+&lt;/figure&gt;
+将我们的域名填写进去点击&lt;code&gt;Add&lt;/code&gt;（当然这里可以设置多个域名，过程是一样的），它提示我们还需要设置一下,添加两条解析记录
+
+
+&lt;figure&gt;
+	
+	&lt;div class=&#34;gallery-image&#34;&gt;
+	&lt;a data-fancybox=&#34;gallery&#34; href=&#34;img/2022-09-22-17-52-51.png&#34;&gt;
+	&lt;img src=&#34;img/2022-09-22-17-52-51.png&#34; alt=&#34;&#34;  /&gt;
+	&lt;/a&gt;
+	&lt;/div&gt;
+	
+&lt;/figure&gt;
+
+
+&lt;figure&gt;
+	
+	&lt;div class=&#34;gallery-image&#34;&gt;
+	&lt;a data-fancybox=&#34;gallery&#34; href=&#34;img/2022-09-22-17-53-46.png&#34;&gt;
+	&lt;img src=&#34;img/2022-09-22-17-53-46.png&#34; alt=&#34;&#34;  /&gt;
+	&lt;/a&gt;
+	&lt;/div&gt;
+	
+&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;打开我们的腾讯dnspod控制台，打开我们需要设置的域名依照提示将记录添加进去，过一会就会看见，设置正确的提示，这样就可以直接用我们的域名访问我们的网站了。
+
+
+&lt;figure&gt;
+	
+	&lt;div class=&#34;gallery-image&#34;&gt;
+	&lt;a data-fancybox=&#34;gallery&#34; href=&#34;img/2022-09-22-17-58-26.png&#34;&gt;
+	&lt;img src=&#34;img/2022-09-22-17-58-26.png&#34; alt=&#34;&#34;  /&gt;
+	&lt;/a&gt;
+	&lt;/div&gt;
+	
+&lt;/figure&gt;
+
+
+&lt;figure&gt;
+	
+	&lt;div class=&#34;gallery-image&#34;&gt;
+	&lt;a data-fancybox=&#34;gallery&#34; href=&#34;img/2022-09-22-17-58-38.png&#34;&gt;
+	&lt;img src=&#34;img/2022-09-22-17-58-38.png&#34; alt=&#34;&#34;  /&gt;
+	&lt;/a&gt;
+	&lt;/div&gt;
+	
+&lt;/figure&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>Burp Suite Pro安装破解</title>
         <link>https://www.tanging.tk/burp-suite-pro%E5%AE%89%E8%A3%85%E7%A0%B4%E8%A7%A3/</link>
         <pubDate>Thu, 26 May 2022 00:00:00 +0000</pubDate>
