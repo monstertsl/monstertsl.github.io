@@ -2,7 +2,7 @@
 #标题
 title: 将Hugo托管到4everland
 #副标题
-description: 体验免费的web3去中心化的托管平台，使用腾讯
+description: 体验免费的web3去中心化的托管平台，使用腾讯DNSpod进行解析
 #日期
 date: 2022-09-22
 #封面图片
@@ -14,7 +14,7 @@ weight:
 #评论开关，默认false,如果使用了这个关键字会关闭评论，如果要开启评论，删除这个关键字即可
 comments: 
 #隐藏文章，默认false
-hidden: true
+hidden: 
 #分类
 categories:
     - 教程
