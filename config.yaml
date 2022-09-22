@@ -94,9 +94,6 @@ params:
             visitor: true
             avatar: hide
             emoji:
-                - https://unpkg.com/@waline/emojis@1.0.1/alus
-                - https://unpkg.com/@waline/emojis@1.0.1/bilibili
-                - https://unpkg.com/@waline/emojis@1.0.1/tw-emoji
             requiredMeta:
                 - nick
                 - mail

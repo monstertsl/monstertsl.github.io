@@ -2,28 +2,43 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://www.tanging.tk/tags/4everland/</loc>
+    <lastmod>2022-09-22T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.tanging.tk/tags/blog/</loc>
+    <lastmod>2022-09-22T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.tanging.tk/categories/</loc>
+    <lastmod>2022-09-22T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.tanging.tk/tags/github/</loc>
+    <lastmod>2022-09-22T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.tanging.tk/tags/hugo/</loc>
+    <lastmod>2022-09-22T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.tanging.tk/</loc>
+    <lastmod>2022-09-22T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.tanging.tk/post/</loc>
+    <lastmod>2022-09-22T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.tanging.tk/tags/</loc>
+    <lastmod>2022-09-22T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.tanging.tk/categories/%E7%AC%94%E8%AE%B0/</loc>
+    <lastmod>2022-09-22T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.tanging.tk/%E5%B0%86hugo%E6%89%98%E7%AE%A1%E5%88%B04everland/</loc>
+    <lastmod>2022-09-22T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.tanging.tk/categories/%E6%95%99%E7%A8%8B/</loc>
+    <lastmod>2022-09-22T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>https://www.tanging.tk/burp-suite-pro%E5%AE%89%E8%A3%85%E7%A0%B4%E8%A7%A3/</loc>
     <lastmod>2022-05-26T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://www.tanging.tk/tags/burpsuite/</loc>
-    <lastmod>2022-05-26T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://www.tanging.tk/categories/</loc>
-    <lastmod>2022-05-26T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://www.tanging.tk/</loc>
-    <lastmod>2022-05-26T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://www.tanging.tk/post/</loc>
-    <lastmod>2022-05-26T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://www.tanging.tk/tags/</loc>
-    <lastmod>2022-05-26T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://www.tanging.tk/categories/%E7%AC%94%E8%AE%B0/</loc>
-    <lastmod>2022-05-26T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://www.tanging.tk/categories/%E6%95%99%E7%A8%8B/</loc>
     <lastmod>2022-05-26T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://www.tanging.tk/tags/%E7%A0%B4%E8%A7%A3/</loc>
@@ -34,15 +49,6 @@
   </url><url>
     <loc>https://www.tanging.tk/categories/%E6%B8%97%E9%80%8F%E5%B7%A5%E5%85%B7/</loc>
     <lastmod>2022-05-26T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://www.tanging.tk/tags/blog/</loc>
-    <lastmod>2022-03-07T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://www.tanging.tk/tags/github/</loc>
-    <lastmod>2022-03-07T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://www.tanging.tk/tags/hugo/</loc>
-    <lastmod>2022-03-07T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://www.tanging.tk/tags/vercel/</loc>
     <lastmod>2022-03-07T00:00:00+00:00</lastmod>

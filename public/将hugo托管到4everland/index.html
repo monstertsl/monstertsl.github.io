@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+<script src="https://unpkg.com/jquery@3.5.1/dist/jquery.min.js"></script>
+<link rel="stylesheet" href="/css/jquery.fancybox.min.css" />
+<script src="/js/jquery.fancybox.min.js"></script>
+
+
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='体验免费的web3去中心化的托管平台，使用腾讯'><title>将Hugo托管到4everland</title>
+
+<link rel='canonical' href='https://www.tanging.tk/%E5%B0%86hugo%E6%89%98%E7%AE%A1%E5%88%B04everland/'>
+
+<link rel="stylesheet" href="/scss/style.min.5232e281d44c5251a8ee61c0b288c4194f14138f638b6bef3ea5434ca47284bc.css"><meta property='og:title' content='将Hugo托管到4everland'>
+<meta property='og:description' content='体验免费的web3去中心化的托管平台，使用腾讯'>
+<meta property='og:url' content='https://www.tanging.tk/%E5%B0%86hugo%E6%89%98%E7%AE%A1%E5%88%B04everland/'>
+<meta property='og:site_name' content='Monstertsl&#39;s Blog'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='GitHub' /><meta property='article:tag' content='Hugo' /><meta property='article:tag' content='4everland' /><meta property='article:tag' content='blog' /><meta property='article:published_time' content='2022-09-22T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2022-09-22T00:00:00&#43;00:00'/><meta property='og:image' content='https://www.tanging.tk/%E5%B0%86hugo%E6%89%98%E7%AE%A1%E5%88%B04everland/hosting.png' />
+<meta name="twitter:title" content="将Hugo托管到4everland">
+<meta name="twitter:description" content="体验免费的web3去中心化的托管平台，使用腾讯"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://www.tanging.tk/%E5%B0%86hugo%E6%89%98%E7%AE%A1%E5%88%B04everland/hosting.png' />
+    <link rel="shortcut icon" href="/icon.png" />
+<style>
+    :root {
+        --article-font-family: "Noto Serif SC", var(--base-font-family);
+    }
+</style>
+
+<script> 
+		(function () {
+		    const customFont = document.createElement('link');
+		    customFont.href = "https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;700&display=swap"; 
+		    customFont.type = "text/css";
+		    customFont.rel = "stylesheet";
+		
+		    document.head.appendChild(customFont);
+		}());
+</script>
+
+    </head>
+    <body class="
+    article-page
+">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex 
+    <!-- 
+        extended
+     -->
+    on-phone--column extended
+">
+    
+<div id="article-toolbar">
+    <a href="https://www.tanging.tk" class="back-home">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="15 6 9 12 15 18" />
+</svg>
+
+
+
+        <span>返回</span>
+    </a>
+</div>
+    <aside class="sidebar left-sidebar sticky">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header class="site-info">
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hucb8ce81f57d228c65e46b5f9568ac00b_304553_300x0_resize_box_3.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+            </figure>
+            
+        
+        
+        <h1 class="site-name"><a href="/">Monstertsl&#39;s Blog</a></h1>
+        <h2 class="site-description">菊有英。芙蓉冷。汉宫秋老。芰荷化为衣。橙橘登。山药乳。</h2></header>
+
+    <ol class="menu" id="main-menu">
+        
+        
+        
+
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/about/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/connect/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-messages" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M21 14l-3 -3h-7a1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1h9a1 1 0 0 1 1 1v10" />
+  <path d="M14 15v2a1 1 0 0 1 -1 1h-7l-3 3v-10a1 1 0 0 1 1 -1h2" />
+</svg>
+
+
+
+                
+                <span>联系</span>
+            </a>
+        </li>
+        
+
+        
+            <li id="dark-mode-toggle">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                <span>暗色模式</span>
+            </li>
+        
+    </ol>
+</aside>
+
+<main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/%E5%B0%86hugo%E6%89%98%E7%AE%A1%E5%88%B04everland/">
+                <img src="/%E5%B0%86hugo%E6%89%98%E7%AE%A1%E5%88%B04everland/hosting_huc89ec5f7bcd34fd60463e699cdabcabf_175091_800x0_resize_box_3.png"
+                        srcset="/%E5%B0%86hugo%E6%89%98%E7%AE%A1%E5%88%B04everland/hosting_huc89ec5f7bcd34fd60463e699cdabcabf_175091_800x0_resize_box_3.png 800w, /%E5%B0%86hugo%E6%89%98%E7%AE%A1%E5%88%B04everland/hosting_huc89ec5f7bcd34fd60463e699cdabcabf_175091_1600x0_resize_box_3.png 1600w"
+                        width="800" 
+                        height="445" 
+                        loading="lazy"
+                        alt="Featured image of post 将Hugo托管到4everland" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/%E6%95%99%E7%A8%8B/" >
+                教程
+            </a>
+        
+            <a href="/categories/%E7%AC%94%E8%AE%B0/" >
+                笔记
+            </a>
+        
+    </header>
+    
+
+    <h2 class="article-title">
+        <a href="/%E5%B0%86hugo%E6%89%98%E7%AE%A1%E5%88%B04everland/">将Hugo托管到4everland</a>
+    </h2>
+
+    
+    <h3 class="article-subtitle">
+        体验免费的web3去中心化的托管平台，使用腾讯
+    </h3>
+    
+
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Sep 22, 2022</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-pencil" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4"></path>
+  <line x1="13.5" y1="6.5" x2="17.5" y2="10.5"></line>
+</svg>
+                <time class="article-words">
+                    1805 字
+                </time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 4 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+</div>
+</header>
+
+    <section class="article-content">
+    
+    
+    <blockquote>
+<p>在前面的文章<a class="link" href="https://www.tanging.tk/%E5%B0%86%E6%90%AD%E5%BB%BA%E5%A5%BD%E7%9A%84%E5%8D%9A%E5%AE%A2%E6%96%87%E4%BB%B6%E6%89%98%E7%AE%A1%E5%88%B0github%E5%B9%B6%E4%B8%94%E4%BD%BF%E7%94%A8vercel%E6%9D%A5%E8%BF%9B%E8%A1%8C%E5%8D%9A%E5%AE%A2%E5%86%85%E5%AE%B9%E5%88%9B%E5%BB%BA%E6%89%98%E7%AE%A1/"  target="_blank" rel="noopener"
+    >将搭建好的博客文件托管到GitHub并且使用vercel来进行博客内容创建托管</a>,中我们使用了vercel作为我们的博客托管平台，但是近期发现好像不能正常访问，疑似被墙，所以现在将托管的博客迁移到<a class="link" href="https://4everland.org/"  target="_blank" rel="noopener"
+    >4everland</a></p>
+</blockquote>
+<h2 id="关于4everland">关于4everland</h2>
+<p>4EVERLAND是一个以区块链技术为驱动专为Web3.0设计的云计算平台。为了帮助开发者高效开发Web3.0应用，在IPFS之上构建了一个共识驱动的Swarm系统。它极大地提高了数据I/O效率。同时开发了基于TEE的存储。它帮助开发者实现更稳定的内容存储、高效的内容分发、快速的网络访问、文件读取和防止存储欺诈。</p>
+<h2 id="创建4everland账户">创建4everland账户</h2>
+<p>打开<a class="link" href="https://4everland.org/"  target="_blank" rel="noopener"
+    >4everland</a>官网，点击右上角的登录按钮。
+
+
+<figure>
+	
+	<div class="gallery-image">
+	<a data-fancybox="gallery" href="img/2022-09-22-16-31-57.png">
+	<img src="img/2022-09-22-16-31-57.png" alt=""  />
+	</a>
+	</div>
+	
+</figure>
+
+
+<figure>
+	
+	<div class="gallery-image">
+	<a data-fancybox="gallery" href="img/2022-09-22-16-38-09.png">
+	<img src="img/2022-09-22-16-38-09.png" alt=""  />
+	</a>
+	</div>
+	
+</figure>
+在之前4everland是支持使用GitHub账户进行登录，但是目前GitHub登录方式在进行维护中，在这里如果有这其中的显示的钱包账号的话就直接登录，没有钱包账户就创建一个，创建钱包账户的过程过于简单就不在这里阐述了</p>
+<h2 id="创建托管项目">创建托管项目</h2>
+<h3 id="在开始创建项目托管之前">在开始创建项目托管之前</h3>
+<p>在创建托管之前，我们需要依照之前的文章<a class="link" href="https://www.tanging.tk/%E5%B0%86%E6%90%AD%E5%BB%BA%E5%A5%BD%E7%9A%84%E5%8D%9A%E5%AE%A2%E6%96%87%E4%BB%B6%E6%89%98%E7%AE%A1%E5%88%B0github%E5%B9%B6%E4%B8%94%E4%BD%BF%E7%94%A8vercel%E6%9D%A5%E8%BF%9B%E8%A1%8C%E5%8D%9A%E5%AE%A2%E5%86%85%E5%AE%B9%E5%88%9B%E5%BB%BA%E6%89%98%E7%AE%A1/"  target="_blank" rel="noopener"
+    >将搭建好的博客文件托管到GitHub并且使用vercel来进行博客内容创建托管</a>，先将我们的项目文件托管到GitHub上面，但是在上传到GitHub之前，我们最好先使用<code>hugo</code>命令对我们已有的项目博客文件生成静态文件，可以看见这个生成的文件产生了两个静态文件的文件夹<code>public</code>和<code>resources</code>,这里<strong>public</strong>目录是我们后面会用到的
+
+
+<figure>
+	
+	<div class="gallery-image">
+	<a data-fancybox="gallery" href="img/2022-09-22-16-50-12.png">
+	<img src="img/2022-09-22-16-50-12.png" alt=""  />
+	</a>
+	</div>
+	
+</figure></p>
+<blockquote>
+<p>在之前使用vercel托管的时候，我们是不需要生成静态文件的，但是我目前还没有找到4everland直接生成预览的方法，感觉4everland直接上传静态文件不上传工程文件也可以部署，如果后面有朋友找到可以直接部署不需要生成静态文件的方法请务必发邮件到<a class="link" href="mailto:monstertsl@qq.com" >monstertsl@qq.com</a>教我一下，十分感谢！！！</p>
+</blockquote>
+<h3 id="开始使用4everland托管我们的静态文件">开始使用4everland托管我们的静态文件</h3>
+<p>在这里我们点击右上角的<code>New Project</code>创建新的项目
+
+
+<figure>
+	
+	<div class="gallery-image">
+	<a data-fancybox="gallery" href="img/2022-09-22-17-02-12.png">
+	<img src="img/2022-09-22-17-02-12.png" alt=""  />
+	</a>
+	</div>
+	
+</figure></p>
+<p>在左边设置绑定我们的GitHub进行连接方便读取我们托管到GitHub上面的项目文件，按照弹出的提示一步一步操作基本就没啥问题，同意安装和授权就行了
+
+
+<figure>
+	
+	<div class="gallery-image">
+	<a data-fancybox="gallery" href="img/2022-09-22-17-05-49.png">
+	<img src="img/2022-09-22-17-05-49.png" alt=""  />
+	</a>
+	</div>
+	
+</figure>
+
+
+<figure>
+	
+	<div class="gallery-image">
+	<a data-fancybox="gallery" href="img/2022-09-22-17-06-40.png">
+	<img src="img/2022-09-22-17-06-40.png" alt=""  />
+	</a>
+	</div>
+	
+</figure></p>
+<blockquote>
+<p>绑定GitHub后，后面就不需要再重新绑定了</p>
+</blockquote>
+<p>刷新一下，选择我们托管的GitHub的项目文件
+
+
+<figure>
+	
+	<div class="gallery-image">
+	<a data-fancybox="gallery" href="img/2022-09-22-17-10-47.png">
+	<img src="img/2022-09-22-17-10-47.png" alt=""  />
+	</a>
+	</div>
+	
+</figure></p>
+<h2 id="创建部署">创建部署</h2>
+<h3 id="设置部署参数">设置部署参数</h3>
+<p>当我们选择完项目文件后，就进入参数设置，这里只有一个需要注意的地方就是前面我们提到的<code>public</code>目录，在根目录这里选择我们的静态文件<code>public</code>目录，设置好项目名称和项目框架（因为这里使用的是静态文件，所以好像不用选择项目框架默认<code>other</code>也可以）就可以直接部署了
+
+
+<figure>
+	
+	<div class="gallery-image">
+	<a data-fancybox="gallery" href="img/2022-09-22-17-14-03.png">
+	<img src="img/2022-09-22-17-14-03.png" alt=""  />
+	</a>
+	</div>
+	
+</figure>
+
+
+<figure>
+	
+	<div class="gallery-image">
+	<a data-fancybox="gallery" href="img/2022-09-22-17-16-27.png">
+	<img src="img/2022-09-22-17-16-27.png" alt=""  />
+	</a>
+	</div>
+	
+</figure></p>
+<h3 id="上线">上线</h3>
+<p>点击部署后，它就会拉取我们存储库中的项目文件进行部署，只需要稍稍的等待就可以部署完成
+
+
+<figure>
+	
+	<div class="gallery-image">
+	<a data-fancybox="gallery" href="img/2022-09-22-17-19-52.png">
+	<img src="img/2022-09-22-17-19-52.png" alt=""  />
+	</a>
+	</div>
+	
+</figure></p>
+<h2 id="使用自定义域名">使用自定义域名</h2>
+<p>我们可以使用它分配的系统域名进行访问，当然也可以使用我们自己的域名，更加方便记忆
+
+
+<figure>
+	
+	<div class="gallery-image">
+	<a data-fancybox="gallery" href="img/2022-09-22-17-22-22.png">
+	<img src="img/2022-09-22-17-22-22.png" alt=""  />
+	</a>
+	</div>
+	
+</figure></p>
+<h3 id="注册域名">注册域名</h3>
+<p>在这里我使用的是从<a class="link" href="https://www.freenom.com"  target="_blank" rel="noopener"
+    >freenom</a>上面薅的免费域名，具体注册方法可以参考一下这篇文章<a class="link" href="https://blog.csdn.net/xiong_min/article/details/125591170"  target="_blank" rel="noopener"
+    >freenom域名申请教程</a>，当然如果你有钱也可以直接去买别的好的域名</p>
+<h3 id="使用腾讯云dnspod进行freenom域名解析">使用腾讯云DNSPOD进行freenom域名解析</h3>
+<p><strong>如果你是直接使用是国内的域名服务商注册的域名就可以跳过这个步骤了，因为这个是为了加快国外域名服务商的DNS解析速度</strong></p>
+<p>同时因为在国内使用，如果使用freenom的DNS解析服务器的话会稍微有一点点慢，所以我们使用腾讯dnspod进行解析会稍微快一点</p>
+<p>打开腾讯<a class="link" href="https://www.dnspod.cn/"  target="_blank" rel="noopener"
+    >dnspod</a>官网点击右上角进入控制台
+
+
+<figure>
+	
+	<div class="gallery-image">
+	<a data-fancybox="gallery" href="img/2022-09-22-17-33-27.png">
+	<img src="img/2022-09-22-17-33-27.png" alt=""  />
+	</a>
+	</div>
+	
+</figure></p>
+<p>再点击<code>管理控制台</code>
+
+
+<figure>
+	
+	<div class="gallery-image">
+	<a data-fancybox="gallery" href="img/2022-09-22-17-34-44.png">
+	<img src="img/2022-09-22-17-34-44.png" alt=""  />
+	</a>
+	</div>
+	
+</figure></p>
+<p>点击域名解析，点击<code>添加域名</code>，把薅来的域名添加进去并确认，然后它就会提示未使用<code>未使用 DNSPod</code>
+
+
+<figure>
+	
+	<div class="gallery-image">
+	<a data-fancybox="gallery" href="img/2022-09-22-17-55-30.png">
+	<img src="img/2022-09-22-17-55-30.png" alt=""  />
+	</a>
+	</div>
+	
+</figure>
+
+
+<figure>
+	
+	<div class="gallery-image">
+	<a data-fancybox="gallery" href="img/2022-09-22-17-37-36.png">
+	<img src="img/2022-09-22-17-37-36.png" alt=""  />
+	</a>
+	</div>
+	
+</figure>
+
+
+<figure>
+	
+	<div class="gallery-image">
+	<a data-fancybox="gallery" href="img/2022-09-22-17-38-04.png">
+	<img src="img/2022-09-22-17-38-04.png" alt=""  />
+	</a>
+	</div>
+	
+</figure></p>
+<p>现在我们打开<a class="link" href="https://www.freenom.com"  target="_blank" rel="noopener"
+    >freenom</a>,登录后选到<code> Services</code>-<code>My Domains </code>
+
+
+<figure>
+	
+	<div class="gallery-image">
+	<a data-fancybox="gallery" href="img/2022-09-22-17-42-01.png">
+	<img src="img/2022-09-22-17-42-01.png" alt=""  />
+	</a>
+	</div>
+	
+</figure></p>
+<p>选到需要腾讯dnspod进行解析的域名，点击后面的<code>Manage Domain</code>
+
+
+<figure>
+	
+	<div class="gallery-image">
+	<a data-fancybox="gallery" href="img/2022-09-22-17-44-13.png">
+	<img src="img/2022-09-22-17-44-13.png" alt=""  />
+	</a>
+	</div>
+	
+</figure></p>
+<p>再点开<code>Management Tools</code>-<code>Nameservers</code>
+
+
+<figure>
+	
+	<div class="gallery-image">
+	<a data-fancybox="gallery" href="img/2022-09-22-17-44-50.png">
+	<img src="img/2022-09-22-17-44-50.png" alt=""  />
+	</a>
+	</div>
+	
+</figure></p>
+<p>把腾讯dnspod提供的服务器地址填写进去，确认即可，在腾讯dnspod页面，重新验证一下，会提示已经设置正确
+
+
+<figure>
+	
+	<div class="gallery-image">
+	<a data-fancybox="gallery" href="img/2022-09-22-17-46-44.png">
+	<img src="img/2022-09-22-17-46-44.png" alt=""  />
+	</a>
+	</div>
+	
+</figure>
+
+
+<figure>
+	
+	<div class="gallery-image">
+	<a data-fancybox="gallery" href="img/2022-09-22-17-47-57.png">
+	<img src="img/2022-09-22-17-47-57.png" alt=""  />
+	</a>
+	</div>
+	
+</figure>
+
+
+<figure>
+	
+	<div class="gallery-image">
+	<a data-fancybox="gallery" href="img/2022-09-22-17-48-19.png">
+	<img src="img/2022-09-22-17-48-19.png" alt=""  />
+	</a>
+	</div>
+	
+</figure></p>
+<h3 id="为4everland设置自定义域名">为4everland设置自定义域名</h3>
+<p>打开我们的4everland控制台，找到需要自定义域名的网站，点击设置，再点击<code>Domains</code>
+
+
+<figure>
+	
+	<div class="gallery-image">
+	<a data-fancybox="gallery" href="img/2022-09-22-17-50-24.png">
+	<img src="img/2022-09-22-17-50-24.png" alt=""  />
+	</a>
+	</div>
+	
+</figure>
+将我们的域名填写进去点击<code>Add</code>（当然这里可以设置多个域名，过程是一样的），它提示我们还需要设置一下,添加两条解析记录
+
+
+<figure>
+	
+	<div class="gallery-image">
+	<a data-fancybox="gallery" href="img/2022-09-22-17-52-51.png">
+	<img src="img/2022-09-22-17-52-51.png" alt=""  />
+	</a>
+	</div>
+	
+</figure>
+
+
+<figure>
+	
+	<div class="gallery-image">
+	<a data-fancybox="gallery" href="img/2022-09-22-17-53-46.png">
+	<img src="img/2022-09-22-17-53-46.png" alt=""  />
+	</a>
+	</div>
+	
+</figure></p>
+<p>打开我们的腾讯dnspod控制台，打开我们需要设置的域名依照提示将记录添加进去，过一会就会看见，设置正确的提示，这样就可以直接用我们的域名访问我们的网站了。
+
+
+<figure>
+	
+	<div class="gallery-image">
+	<a data-fancybox="gallery" href="img/2022-09-22-17-58-26.png">
+	<img src="img/2022-09-22-17-58-26.png" alt=""  />
+	</a>
+	</div>
+	
+</figure>
+
+
+<figure>
+	
+	<div class="gallery-image">
+	<a data-fancybox="gallery" href="img/2022-09-22-17-58-38.png">
+	<img src="img/2022-09-22-17-58-38.png" alt=""  />
+	</a>
+	</div>
+	
+</figure></p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/github/">GitHub</a>
+        
+            <a href="/tags/hugo/">Hugo</a>
+        
+            <a href="/tags/4everland/">4everland</a>
+        
+            <a href="/tags/blog/">blog</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    <aside class="related-contents--wrapper">
+    
+    
+        <h2 class="section-title">相关文章</h2>
+        <div class="related-contents">
+            <div class="flex article-list--tile">
+                
+                    
+<article class="has-image">
+    <a href="/%E5%B0%86%E6%90%AD%E5%BB%BA%E5%A5%BD%E7%9A%84%E5%8D%9A%E5%AE%A2%E6%96%87%E4%BB%B6%E6%89%98%E7%AE%A1%E5%88%B0github%E5%B9%B6%E4%B8%94%E4%BD%BF%E7%94%A8vercel%E6%9D%A5%E8%BF%9B%E8%A1%8C%E5%8D%9A%E5%AE%A2%E5%86%85%E5%AE%B9%E5%88%9B%E5%BB%BA%E6%89%98%E7%AE%A1/">
+        
+        
+            <div class="article-image">
+                <img src="/%E5%B0%86%E6%90%AD%E5%BB%BA%E5%A5%BD%E7%9A%84%E5%8D%9A%E5%AE%A2%E6%96%87%E4%BB%B6%E6%89%98%E7%AE%A1%E5%88%B0github%E5%B9%B6%E4%B8%94%E4%BD%BF%E7%94%A8vercel%E6%9D%A5%E8%BF%9B%E8%A1%8C%E5%8D%9A%E5%AE%A2%E5%86%85%E5%AE%B9%E5%88%9B%E5%BB%BA%E6%89%98%E7%AE%A1/cover.15adbf43e9185e0a41fbc6bd8588fd9d_hudd9118879c33d53f203d455e6a8354d8_361182_250x150_fill_box_smart1_3.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post 将搭建好的博客文件托管到GitHub并且使用vercel来进行博客内容创建托管"
+                        
+                        data-hash="md5-Fa2/Q&#43;kYXgpB&#43;8a9hYj9nQ==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">将搭建好的博客文件托管到GitHub并且使用vercel来进行博客内容创建托管</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="has-image">
+    <a href="/%E9%9B%B6%E5%9F%BA%E7%A1%80%E4%BB%8E0%E5%88%B0%E6%9C%89%E4%BD%BF%E7%94%A8hugo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/">
+        
+        
+            <div class="article-image">
+                <img src="/%E9%9B%B6%E5%9F%BA%E7%A1%80%E4%BB%8E0%E5%88%B0%E6%9C%89%E4%BD%BF%E7%94%A8hugo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/cover.7e83e72417f23cb55271ef34d5eadade_hu80ad1e0a84bf0a6eeb06b9dd1a27e5bf_68722_250x150_fill_box_smart1_3.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post 零基础，从0到有使用hugo搭建个人博客"
+                        
+                        data-hash="md5-foPnJBfyPLVSce801era3g==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">零基础，从0到有使用hugo搭建个人博客</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="has-image">
+    <a href="/burp-suite-pro%E5%AE%89%E8%A3%85%E7%A0%B4%E8%A7%A3/">
+        
+        
+            <div class="article-image">
+                <img src="/burp-suite-pro%E5%AE%89%E8%A3%85%E7%A0%B4%E8%A7%A3/_hu01953c3dd819e2955c5ee5ac3db5fe30_103117_1d46de58a007faa074b5bcfa1ae43030.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post Burp Suite Pro安装破解"
+                        
+                        data-hash="md5-Xz//eZUC6F4j68yKYJTVCg==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Burp Suite Pro安装破解</h2>
+        </div>
+    </a>
+</article>
+                
+            </div>
+        </div>
+    
+</aside>
+
+     
+    
+
+    <footer class="site-footer">
+  
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+
+<script>
+(function(u, c) {
+  var d = document, t = 'script', o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+  o.src = u;
+  if (c) { o.addEventListener('load', function(e) { c(e); }); }
+  s.parentNode.insertBefore(o, s);
+})('http://cdn.bootcss.com/pangu/3.3.0/pangu.min.js', function() {
+  pangu.spacingPage();
+});
+</script>
+
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2022 <a href="https://stack-theme-mod.vercel.app/">Monstertsl</a>·<i class="fas fa-bell"></i> <a id="days">0</a>Days<br>
+      共写了10.5k字·共 6篇文章</br><span><p>
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.2.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a><br />
+         <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">© Licensed Under CC BY-NC-SA 4.0</a>
+    </section>
+
+<script>
+var s1 = '2022-02-15';
+s1 = new Date(s1.replace(/-/g, "/"));
+s2 = new Date();
+var days = s2.getTime() - s1.getTime();
+var number_of_days = parseInt(days / (1000 * 60 * 60 * 24));
+document.getElementById('days').innerHTML = number_of_days;
+</script>
+    
+</footer>
+
+
+
+
+            </main>
+    
+    
+    
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#关于4everland">关于4everland</a></li>
+    <li><a href="#创建4everland账户">创建4everland账户</a></li>
+    <li><a href="#创建托管项目">创建托管项目</a>
+      <ol>
+        <li><a href="#在开始创建项目托管之前">在开始创建项目托管之前</a></li>
+        <li><a href="#开始使用4everland托管我们的静态文件">开始使用4everland托管我们的静态文件</a></li>
+      </ol>
+    </li>
+    <li><a href="#创建部署">创建部署</a>
+      <ol>
+        <li><a href="#设置部署参数">设置部署参数</a></li>
+        <li><a href="#上线">上线</a></li>
+      </ol>
+    </li>
+    <li><a href="#使用自定义域名">使用自定义域名</a>
+      <ol>
+        <li><a href="#注册域名">注册域名</a></li>
+        <li><a href="#使用腾讯云dnspod进行freenom域名解析">使用腾讯云DNSPOD进行freenom域名解析</a></li>
+        <li><a href="#为4everland设置自定义域名">为4everland设置自定义域名</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+        
+            <form action="/search/" class="search-form widget" >
+        <p>
+            <label>搜索</label>
+            <input name="keyword" required placeholder="在这里输入你想要查找的内容..." />
+        
+            <button title="搜索">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+            </button>
+        </p>
+    </form>
+        
+            <section class="widget tagCloud">
+    <div class="widget-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-tag" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11 3L20 12a1.5 1.5 0 0 1 0 2L14 20a1.5 1.5 0 0 1 -2 0L3 11v-4a4 4 0 0 1 4 -4h4" />
+  <circle cx="9" cy="9" r="2" />
+</svg>
+
+
+
+    </div>
+    <h2 class="widget-title section-title">标签</h2>
+
+    <div class="tagCloud-tags">
+        
+            <a href="/tags/hugo/" class="font_size_3">
+                Hugo
+            </a>
+        
+            <a href="/tags/blog/" class="font_size_2">
+                blog
+            </a>
+        
+            <a href="/tags/github/" class="font_size_2">
+                GitHub
+            </a>
+        
+            <a href="/tags/4everland/" class="font_size_1">
+                4everland
+            </a>
+        
+            <a href="/tags/android/" class="font_size_1">
+                Android
+            </a>
+        
+            <a href="/tags/burpsuite/" class="font_size_1">
+                BurpSuite
+            </a>
+        
+            <a href="/tags/html/" class="font_size_1">
+                html
+            </a>
+        
+            <a href="/tags/kali/" class="font_size_1">
+                kali
+            </a>
+        
+            <a href="/tags/markdown/" class="font_size_1">
+                markdown
+            </a>
+        
+            <a href="/tags/msf/" class="font_size_1">
+                msf
+            </a>
+        
+    </div>
+</section>
+        
+            <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-infinity" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M9.828 9.172a4 4 0 1 0 0 5.656 a10 10 0 0 0 2.172 -2.828a10 10 0 0 1 2.172 -2.828 a4 4 0 1 1 0 5.656a10 10 0 0 1 -2.172 -2.828a10 10 0 0 0 -2.172 -2.828" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">归档</h2>
+
+        
+        
+        
+        
+        
+        <div class="widget-archive--list">
+            <div class="archives-year">
+                    <a href="/archives/#2022">
+                        
+                            <span class="year">2022</span>
+                            <span class="count">5</span>
+                        
+                    </a> 
+                </div>
+            
+        </div>
+    </section>
+        
+    </aside>
+
+
+        </div>
+        <script 
+                src="https://unpkg.com/node-vibrant@3.1.5/dist/vibrant.min.js"integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
