@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+<script src="https://unpkg.com/jquery@3.5.1/dist/jquery.min.js"></script>
+<link rel="stylesheet" href="/css/jquery.fancybox.min.css" />
+<script src="/js/jquery.fancybox.min.js"></script>
+
+
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='JWT是什么 JWT全称为JSON Web Token,将json对象作为载体来传输信息，是为了在网络应用环境间传递声明而执行的一中基于JSON的开放'><title>JWT攻击与防护浅析</title>
+
+<link rel='canonical' href='https://www.tanging.tk/jwt%E6%94%BB%E5%87%BB%E4%B8%8E%E9%98%B2%E6%8A%A4%E6%B5%85%E6%9E%90/'>
+
+<link rel="stylesheet" href="/scss/style.min.fde740c683563b199b3d023974a6be848179ae49a3d5a1e2591b4c4b16c4431a.css"><meta property='og:title' content='JWT攻击与防护浅析'>
+<meta property='og:description' content='JWT是什么 JWT全称为JSON Web Token,将json对象作为载体来传输信息，是为了在网络应用环境间传递声明而执行的一中基于JSON的开放'>
+<meta property='og:url' content='https://www.tanging.tk/jwt%E6%94%BB%E5%87%BB%E4%B8%8E%E9%98%B2%E6%8A%A4%E6%B5%85%E6%9E%90/'>
+<meta property='og:site_name' content='Monstertsl&#39;s Blog'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='JWT' /><meta property='article:tag' content='渗透测试' /><meta property='article:tag' content='令牌' /><meta property='article:published_time' content='2023-04-13T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2023-04-13T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="JWT攻击与防护浅析">
+<meta name="twitter:description" content="JWT是什么 JWT全称为JSON Web Token,将json对象作为载体来传输信息，是为了在网络应用环境间传递声明而执行的一中基于JSON的开放">
+    <link rel="shortcut icon" href="/icon.png" />
+<style>
+    :root {
+        --article-font-family: "Noto Serif SC", var(--base-font-family);
+    }
+</style>
+
+<script> 
+		(function () {
+		    const customFont = document.createElement('link');
+		    customFont.href = "https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;700&display=swap"; 
+		    customFont.type = "text/css";
+		    customFont.rel = "stylesheet";
+		
+		    document.head.appendChild(customFont);
+		}());
+</script>
+
+    </head>
+    <body class="
+    article-page
+">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex 
+    <!-- 
+        extended
+     -->
+    on-phone--column extended
+">
+    
+<div id="article-toolbar">
+    <a href="https://www.tanging.tk" class="back-home">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="15 6 9 12 15 18" />
+</svg>
+
+
+
+        <span>返回</span>
+    </a>
+</div>
+    <aside class="sidebar left-sidebar sticky">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header class="site-info">
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hucb8ce81f57d228c65e46b5f9568ac00b_304553_300x0_resize_box_3.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+            </figure>
+            
+        
+        
+        <h1 class="site-name"><a href="/">Monstertsl&#39;s Blog</a></h1>
+        <h2 class="site-description">蔷薇蔓。木笔书空。棣萼韡韡。杨入大水为萍。海棠睡。绣球落。</h2></header>
+
+    <ol class="menu" id="main-menu">
+        
+        
+        
+
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/about/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/connect/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-messages" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M21 14l-3 -3h-7a1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1h9a1 1 0 0 1 1 1v10" />
+  <path d="M14 15v2a1 1 0 0 1 -1 1h-7l-3 3v-10a1 1 0 0 1 1 -1h2" />
+</svg>
+
+
+
+                
+                <span>联系</span>
+            </a>
+        </li>
+        
+
+        
+            <li id="dark-mode-toggle">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                <span>暗色模式</span>
+            </li>
+        
+    </ol>
+</aside>
+
+<main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/%E6%95%99%E7%A8%8B/" >
+                教程
+            </a>
+        
+            <a href="/categories/%E6%B8%97%E9%80%8F/" >
+                渗透
+            </a>
+        
+            <a href="/categories/%E7%AC%94%E8%AE%B0/" >
+                笔记
+            </a>
+        
+            <a href="/categories/web%E5%AE%89%E5%85%A8/" >
+                web安全
+            </a>
+        
+    </header>
+    
+
+    <h2 class="article-title">
+        <a href="/jwt%E6%94%BB%E5%87%BB%E4%B8%8E%E9%98%B2%E6%8A%A4%E6%B5%85%E6%9E%90/">JWT攻击与防护浅析</a>
+    </h2>
+
+    
+
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Apr 13, 2023</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-pencil" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4"></path>
+  <line x1="13.5" y1="6.5" x2="17.5" y2="10.5"></line>
+</svg>
+                <time class="article-words">
+                    1776 字
+                </time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 4 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+</div>
+</header>
+
+    <section class="article-content">
+    
+    
+    <h2 id="jwt是什么">JWT是什么</h2>
+<p>JWT全称为JSON Web Token,将json对象作为载体来传输信息，是为了在网络应用环境间传递声明而执行的一中基于JSON的开放标准（RFC 7519），一般被用在身份提供者和服务提供者间传递被认证的用户身份信息，也可以增加一些额外的业务逻辑所必须声明信息，该token可被直接用于认证，也可用作加密。</p>
+<h3 id="原理">原理</h3>
+<p>1）客户端提交用户名密码等信息到服务端请求登录，服务端在验证通过后前发一个具有时效性的token，将token返回给客户端</p>
+<p>2）客户端收到token后会将token存储在cookie或localStorage中</p>
+<p>3）随后客户端每次请求都会携带这个token，服务端收到请求后校验该token并在验证通过后返回对应资源</p>
+<h2 id="jwt令牌结构">JWT令牌结构</h2>
+<p>JWT由3部分组成：Headers、Payload、Signature这三个部分构成，这些部分之间用点<code>.</code>号隔开,形如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">0
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.5mhBHqs5_DTLdINd9p5m7ZJ6XD0Xc55kIaCRY5r6HRA
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">0
+</span><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Headers:头部
+</span></span><span class="line"><span class="cl">Payload:有效载荷
+</span></span><span class="line"><span class="cl">Signature:签名
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="headers和payload">Headers和Payload</h3>
+<p>其中头部包含关于令牌本身的元数据，而载荷包含关于用户的实际“声明”，再对其各自使用base64url编码组成JWT的前两个部分，可以对上述令牌的进行解码,得到如下结果：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 0
+</span><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">HEADER:ALGORITHM &amp; TOKEN TYPE
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    {
+</span></span><span class="line"><span class="cl">    &#34;alg&#34;: &#34;HS256&#34;,
+</span></span><span class="line"><span class="cl">    &#34;typ&#34;: &#34;JWT&#34;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">PAYLOAD:DATA
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    {
+</span></span><span class="line"><span class="cl">    &#34;sub&#34;: &#34;1234567890&#34;,
+</span></span><span class="line"><span class="cl">    &#34;name&#34;: &#34;John Doe&#34;,
+</span></span><span class="line"><span class="cl">    &#34;iat&#34;: 1516239022
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">VERIFY SIGNATURE
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    HMACSHA256(
+</span></span><span class="line"><span class="cl">    base64UrlEncode(header) + &#34;.&#34; +
+</span></span><span class="line"><span class="cl">    base64UrlEncode(payload),
+</span></span><span class="line"><span class="cl">    test)
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>因为Headers和Payload只进行base64url编码所以不要将机密信息放在JWT的Headers和Payload</p>
+</blockquote>
+<h3 id="signature">signature</h3>
+<p>这一部分是对前两部分的签名，防止数据被纂改。加入密钥然后就使用header头里的签名算法按以下方式创建签名：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">0
+</span><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">HMACSHA256(
+</span></span><span class="line"><span class="cl">  base64UrlEncode(header) + &#34;.&#34; +
+</span></span><span class="line"><span class="cl">  base64UrlEncode(payload),
+</span></span><span class="line"><span class="cl">  secret)
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>在上面的示例中使用了<code>test</code>这个密钥，在实际中如果使用这种密钥是十分容易被暴力破解的！</p>
+<h2 id="攻击与防护">攻击与防护</h2>
+<h3 id="暴力破解密钥">暴力破解密钥</h3>
+<p>在这里我们使用到一个JWT的密钥爆破工具：<a class="link" href="https://github.com/ticarpi/jwt_tool"  target="_blank" rel="noopener"
+    >jwt_tool</a>，以及一个常用JWT密钥库：<a class="link" href="https://github.com/wallarm/jwt-secrets"  target="_blank" rel="noopener"
+    >jwt-secrets</a>
+靶场地址：<a class="link" href="https://authlab.digi.ninja/JWT_Cracking"  target="_blank" rel="noopener"
+    >JWT_Cracking</a>    <br>
+获取令牌并且复制，使用爆破工具尝试破解，命令格式为：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">0
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">jwt_tool.py JWT -C -d 字典
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>
+
+<figure>
+	
+	<div class="gallery-image">
+	<a data-fancybox="gallery" href="img/2023-04-13-15-48-48.png">
+	<img src="img/2023-04-13-15-48-48.png" alt=""  />
+	</a>
+	</div>
+	
+</figure>
+破解出使用的密钥为<code>hello</code>
+
+
+<figure>
+	
+	<div class="gallery-image">
+	<a data-fancybox="gallery" href="img/2023-04-13-15-50-46.png">
+	<img src="img/2023-04-13-15-50-46.png" alt=""  />
+	</a>
+	</div>
+	
+</figure>
+也可以使用<a class="link" href="https://jwt.io/"  target="_blank" rel="noopener"
+    >JWT.IO</a>进行验证，可以看见提示令牌无效
+
+
+<figure>
+	
+	<div class="gallery-image">
+	<a data-fancybox="gallery" href="img/2023-04-13-15-53-51.png">
+	<img src="img/2023-04-13-15-53-51.png" alt=""  />
+	</a>
+	</div>
+	
+</figure>
+使用<code>hello</code>作为密钥填入，提示签名已验证，证明了密钥的正确
+
+
+<figure>
+	
+	<div class="gallery-image">
+	<a data-fancybox="gallery" href="img/2023-04-13-15-55-49.png">
+	<img src="img/2023-04-13-15-55-49.png" alt=""  />
+	</a>
+	</div>
+	
+</figure>
+修改JWT用户信息进行越权，服务器接收了我们伪造的登录信息
+
+
+<figure>
+	
+	<div class="gallery-image">
+	<a data-fancybox="gallery" href="img/2023-04-13-15-57-25.png">
+	<img src="img/2023-04-13-15-57-25.png" alt=""  />
+	</a>
+	</div>
+	
+</figure>
+
+
+<figure>
+	
+	<div class="gallery-image">
+	<a data-fancybox="gallery" href="img/2023-04-13-15-57-41.png">
+	<img src="img/2023-04-13-15-57-41.png" alt=""  />
+	</a>
+	</div>
+	
+</figure>
+对我们在前文中提到的实例JWT进行破解，因为使用了弱密钥的缘故被很快破解出密钥
+
+
+<figure>
+	
+	<div class="gallery-image">
+	<a data-fancybox="gallery" href="img/2023-04-13-16-00-03.png">
+	<img src="img/2023-04-13-16-00-03.png" alt=""  />
+	</a>
+	</div>
+	
+</figure></p>
+<h3 id="敏感信息泄露">敏感信息泄露</h3>
+<p>靶场地址：<a class="link" href="https://authlab.digi.ninja/Leaky_JWT"  target="_blank" rel="noopener"
+    >Leaky JWT</a>  <br>
+打开靶场，在这里已经模拟受害者被获取到了令牌
+
+
+<figure>
+	
+	<div class="gallery-image">
+	<a data-fancybox="gallery" href="img/2023-04-12-09-43-43.png">
+	<img src="img/2023-04-12-09-43-43.png" alt=""  />
+	</a>
+	</div>
+	
+</figure>
+我们将获取到的令牌放到<a class="link" href="https://jwt.io/"  target="_blank" rel="noopener"
+    >JWT.IO</a>中进行解密，发现开发者直接将用户的账户和密钥放到JWT的载荷中进行传输。
+
+
+<figure>
+	
+	<div class="gallery-image">
+	<a data-fancybox="gallery" href="img/2023-04-12-09-46-36.png">
+	<img src="img/2023-04-12-09-46-36.png" alt=""  />
+	</a>
+	</div>
+	
+</figure>
+其中密钥部分可以看出使用了MD5加密，对其进行解密得到密钥为<code>Password1</code>，使用得到的用户名和密钥进行尝试登录发现可以登录成功。
+
+
+<figure>
+	
+	<div class="gallery-image">
+	<a data-fancybox="gallery" href="img/2023-04-12-09-52-03.png">
+	<img src="img/2023-04-12-09-52-03.png" alt=""  />
+	</a>
+	</div>
+	
+</figure></p>
+<h3 id="未验证签名">未验证签名</h3>
+<p>靶场地址：<a class="link" href="https://portswigger.net/web-security/jwt/lab-jwt-authentication-bypass-via-unverified-signature"  target="_blank" rel="noopener"
+    >通过未经验证的签名绕过 JWT 身份验证</a>
+
+
+<figure>
+	
+	<div class="gallery-image">
+	<a data-fancybox="gallery" href="img/2023-04-13-14-34-08.png">
+	<img src="img/2023-04-13-14-34-08.png" alt=""  />
+	</a>
+	</div>
+	
+</figure>
+进入靶场，首先使用提示的账户信息<code>wiener:peter</code>进行登录，发现成功登录后服务器返回了JWT认证信息
+
+
+<figure>
+	
+	<div class="gallery-image">
+	<a data-fancybox="gallery" href="img/2023-04-13-14-35-42.png">
+	<img src="img/2023-04-13-14-35-42.png" alt=""  />
+	</a>
+	</div>
+	
+</figure>
+刷新页面发现每次请求都会带有认证信息
+
+
+<figure>
+	
+	<div class="gallery-image">
+	<a data-fancybox="gallery" href="img/2023-04-13-14-36-29.png">
+	<img src="img/2023-04-13-14-36-29.png" alt=""  />
+	</a>
+	</div>
+	
+</figure>
+尝试修改修改<code>Payload</code>中的<code>sub</code>为<code>administrator</code>，重新发包，发现可以返回登录的信息
+
+
+<figure>
+	
+	<div class="gallery-image">
+	<a data-fancybox="gallery" href="img/2023-04-13-14-46-21.png">
+	<img src="img/2023-04-13-14-46-21.png" alt=""  />
+	</a>
+	</div>
+	
+</figure>
+替换浏览器中的cookie，已经实现垂直越权登录了管理员账户，并且多了一个功能入口，进去根据要求删除对于用户完成即可完成</p>
+<p>
+
+<figure>
+	
+	<div class="gallery-image">
+	<a data-fancybox="gallery" href="img/2023-04-13-14-48-12.png">
+	<img src="img/2023-04-13-14-48-12.png" alt=""  />
+	</a>
+	</div>
+	
+</figure>
+
+
+<figure>
+	
+	<div class="gallery-image">
+	<a data-fancybox="gallery" href="img/2023-04-13-14-48-33.png">
+	<img src="img/2023-04-13-14-48-33.png" alt=""  />
+	</a>
+	</div>
+	
+</figure></p>
+<h3 id="空加密算法">空加密算法</h3>
+<p>靶场地址：<a class="link" href="https://portswigger.net/web-security/jwt/lab-jwt-authentication-bypass-via-flawed-signature-verification"  target="_blank" rel="noopener"
+    >通过有缺陷的签名验证绕过 JWT 身份验证</a>
+
+
+<figure>
+	
+	<div class="gallery-image">
+	<a data-fancybox="gallery" href="img/2023-04-13-11-26-43.png">
+	<img src="img/2023-04-13-11-26-43.png" alt=""  />
+	</a>
+	</div>
+	
+</figure>
+进入靶场，首先使用提示的账户信息<code>wiener:peter</code>进行登录，发现成功登录后服务器返回了JWT认证信息
+
+
+<figure>
+	
+	<div class="gallery-image">
+	<a data-fancybox="gallery" href="img/2023-04-13-13-54-29.png">
+	<img src="img/2023-04-13-13-54-29.png" alt=""  />
+	</a>
+	</div>
+	
+</figure>
+刷新页面发现每次请求都会带有认证信息
+
+
+<figure>
+	
+	<div class="gallery-image">
+	<a data-fancybox="gallery" href="img/2023-04-13-13-55-57.png">
+	<img src="img/2023-04-13-13-55-57.png" alt=""  />
+	</a>
+	</div>
+	
+</figure>
+使用上个实例同样的方法，对登录用户的信息进行修改，在题干中已经提示了接受未签名的JWT，所以只需要修改JWT的前两部分<code>Headers</code>中的<code>alg</code>为<code>none</code>，修改<code>Payload</code>中的<code>sub</code>为<code>administrator</code>，因为<code>Signature</code>部分使用了<code>Headers</code>中声明的加密算法进行加密，所以删除掉这部分(但是要保留最后的<code>.</code>构成一个完整的JWT)发现可以正常返回管理员账户信息
+
+
+<figure>
+	
+	<div class="gallery-image">
+	<a data-fancybox="gallery" href="img/2023-04-13-14-06-08.png">
+	<img src="img/2023-04-13-14-06-08.png" alt=""  />
+	</a>
+	</div>
+	
+</figure></p>
+<p>替换cookie，刷新页面发现登录了管理员账户，并且多了一个功能入口，进去根据要求删除对于用户完成即可完成</p>
+<p>
+
+<figure>
+	
+	<div class="gallery-image">
+	<a data-fancybox="gallery" href="img/2023-04-13-14-20-47.png">
+	<img src="img/2023-04-13-14-20-47.png" alt=""  />
+	</a>
+	</div>
+	
+</figure>
+
+
+<figure>
+	
+	<div class="gallery-image">
+	<a data-fancybox="gallery" href="img/2023-04-13-14-22-02.png">
+	<img src="img/2023-04-13-14-22-02.png" alt=""  />
+	</a>
+	</div>
+	
+</figure></p>
+<h3 id="jwt头部参数注入">JWT头部参数注入</h3>
+<h3 id="jwk参数注入">jwk参数注入</h3>
+<h3 id="kid参数注入">kid参数注入</h3>
+<h3 id="算法修改攻击">算法修改攻击</h3>
+<h2 id="参考链接">参考链接</h2>
+<p><a class="link" href="https://www.topsec.com.cn/newsx/3727"  target="_blank" rel="noopener"
+    >检测与防护能力—浅析JWT攻击类型</a><br>
+<a class="link" href="https://blog.csdn.net/qq_44159028/article/details/129683126"  target="_blank" rel="noopener"
+    >web渗透之jwt 安全问题</a><br>
+<a class="link" href="https://blog.csdn.net/m0_62422842/article/details/124971440"  target="_blank" rel="noopener"
+    >JWT总结</a><br>
+<a class="link" href="https://zhuanlan.zhihu.com/p/593391315?utm_id=0"  target="_blank" rel="noopener"
+    >浅析JWT Attack</a><br>
+<a class="link" href="https://blog.csdn.net/cdyunaq/article/details/122561096"  target="_blank" rel="noopener"
+    >渗透测试-JWT攻击</a></p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/jwt/">JWT</a>
+        
+            <a href="/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/">渗透测试</a>
+        
+            <a href="/tags/%E4%BB%A4%E7%89%8C/">令牌</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    <aside class="related-contents--wrapper">
+    
+    
+        <h2 class="section-title">相关文章</h2>
+        <div class="related-contents">
+            <div class="flex article-list--tile">
+                
+                    
+<article class="has-image">
+    <a href="/%E5%B0%86hugo%E6%89%98%E7%AE%A1%E5%88%B04everland/">
+        
+        
+            <div class="article-image">
+                <img src="/%E5%B0%86hugo%E6%89%98%E7%AE%A1%E5%88%B04everland/hosting.da1aa08f80ef978364cdcb0ec4af22a1_huc89ec5f7bcd34fd60463e699cdabcabf_175091_250x150_fill_box_smart1_3.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post 将Hugo托管到4everland"
+                        
+                        data-hash="md5-2hqgj4Dvl4NkzcsOxK8ioQ==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">将Hugo托管到4everland</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="has-image">
+    <a href="/burp-suite-pro%E5%AE%89%E8%A3%85%E7%A0%B4%E8%A7%A3/">
+        
+        
+            <div class="article-image">
+                <img src="/burp-suite-pro%E5%AE%89%E8%A3%85%E7%A0%B4%E8%A7%A3/_hu01953c3dd819e2955c5ee5ac3db5fe30_103117_1d46de58a007faa074b5bcfa1ae43030.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post Burp Suite Pro安装破解"
+                        
+                        data-hash="md5-Xz//eZUC6F4j68yKYJTVCg==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Burp Suite Pro安装破解</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="has-image">
+    <a href="/%E5%B0%86%E6%90%AD%E5%BB%BA%E5%A5%BD%E7%9A%84%E5%8D%9A%E5%AE%A2%E6%96%87%E4%BB%B6%E6%89%98%E7%AE%A1%E5%88%B0github%E5%B9%B6%E4%B8%94%E4%BD%BF%E7%94%A8vercel%E6%9D%A5%E8%BF%9B%E8%A1%8C%E5%8D%9A%E5%AE%A2%E5%86%85%E5%AE%B9%E5%88%9B%E5%BB%BA%E6%89%98%E7%AE%A1/">
+        
+        
+            <div class="article-image">
+                <img src="/%E5%B0%86%E6%90%AD%E5%BB%BA%E5%A5%BD%E7%9A%84%E5%8D%9A%E5%AE%A2%E6%96%87%E4%BB%B6%E6%89%98%E7%AE%A1%E5%88%B0github%E5%B9%B6%E4%B8%94%E4%BD%BF%E7%94%A8vercel%E6%9D%A5%E8%BF%9B%E8%A1%8C%E5%8D%9A%E5%AE%A2%E5%86%85%E5%AE%B9%E5%88%9B%E5%BB%BA%E6%89%98%E7%AE%A1/cover.15adbf43e9185e0a41fbc6bd8588fd9d_hudd9118879c33d53f203d455e6a8354d8_361182_250x150_fill_box_smart1_3.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post 将搭建好的博客文件托管到GitHub并且使用vercel来进行博客内容创建托管"
+                        
+                        data-hash="md5-Fa2/Q&#43;kYXgpB&#43;8a9hYj9nQ==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">将搭建好的博客文件托管到GitHub并且使用vercel来进行博客内容创建托管</h2>
+        </div>
+    </a>
+</article>
+                
+            </div>
+        </div>
+    
+</aside>
+
+     
+    
+
+    <footer class="site-footer">
+  
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+
+<script>
+(function(u, c) {
+  var d = document, t = 'script', o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+  o.src = u;
+  if (c) { o.addEventListener('load', function(e) { c(e); }); }
+  s.parentNode.insertBefore(o, s);
+})('http://cdn.bootcss.com/pangu/3.3.0/pangu.min.js', function() {
+  pangu.spacingPage();
+});
+</script>
+
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2023 <a href="https://stack-theme-mod.vercel.app/">Monstertsl</a>·<i class="fas fa-bell"></i> <a id="days">0</a>Days<br>
+      共写了12.7k字·共 8篇文章</br><span><p>
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.2.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a><br />
+         <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">© Licensed Under CC BY-NC-SA 4.0</a>
+    </section>
+
+<script>
+var s1 = '2022-02-15';
+s1 = new Date(s1.replace(/-/g, "/"));
+s2 = new Date();
+var days = s2.getTime() - s1.getTime();
+var number_of_days = parseInt(days / (1000 * 60 * 60 * 24));
+document.getElementById('days').innerHTML = number_of_days;
+</script>
+    
+</footer>
+
+
+
+
+            </main>
+    
+    
+    
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#jwt是什么">JWT是什么</a>
+      <ol>
+        <li><a href="#原理">原理</a></li>
+      </ol>
+    </li>
+    <li><a href="#jwt令牌结构">JWT令牌结构</a>
+      <ol>
+        <li><a href="#headers和payload">Headers和Payload</a></li>
+        <li><a href="#signature">signature</a></li>
+      </ol>
+    </li>
+    <li><a href="#攻击与防护">攻击与防护</a>
+      <ol>
+        <li><a href="#暴力破解密钥">暴力破解密钥</a></li>
+        <li><a href="#敏感信息泄露">敏感信息泄露</a></li>
+        <li><a href="#未验证签名">未验证签名</a></li>
+        <li><a href="#空加密算法">空加密算法</a></li>
+        <li><a href="#jwt头部参数注入">JWT头部参数注入</a></li>
+        <li><a href="#jwk参数注入">jwk参数注入</a></li>
+        <li><a href="#kid参数注入">kid参数注入</a></li>
+        <li><a href="#算法修改攻击">算法修改攻击</a></li>
+      </ol>
+    </li>
+    <li><a href="#参考链接">参考链接</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+        
+            <form action="/search/" class="search-form widget" >
+        <p>
+            <label>搜索</label>
+            <input name="keyword" required placeholder="在这里输入你想要查找的内容..." />
+        
+            <button title="搜索">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+            </button>
+        </p>
+    </form>
+        
+            <section class="widget tagCloud">
+    <div class="widget-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-tag" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11 3L20 12a1.5 1.5 0 0 1 0 2L14 20a1.5 1.5 0 0 1 -2 0L3 11v-4a4 4 0 0 1 4 -4h4" />
+  <circle cx="9" cy="9" r="2" />
+</svg>
+
+
+
+    </div>
+    <h2 class="widget-title section-title">标签</h2>
+
+    <div class="tagCloud-tags">
+        
+            <a href="/tags/hugo/" class="font_size_3">
+                Hugo
+            </a>
+        
+            <a href="/tags/blog/" class="font_size_2">
+                blog
+            </a>
+        
+            <a href="/tags/github/" class="font_size_2">
+                GitHub
+            </a>
+        
+            <a href="/tags/4everland/" class="font_size_1">
+                4everland
+            </a>
+        
+            <a href="/tags/android/" class="font_size_1">
+                Android
+            </a>
+        
+            <a href="/tags/burpsuite/" class="font_size_1">
+                BurpSuite
+            </a>
+        
+            <a href="/tags/html/" class="font_size_1">
+                html
+            </a>
+        
+            <a href="/tags/jwt/" class="font_size_1">
+                JWT
+            </a>
+        
+            <a href="/tags/kali/" class="font_size_1">
+                kali
+            </a>
+        
+            <a href="/tags/markdown/" class="font_size_1">
+                markdown
+            </a>
+        
+    </div>
+</section>
+        
+            <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-infinity" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M9.828 9.172a4 4 0 1 0 0 5.656 a10 10 0 0 0 2.172 -2.828a10 10 0 0 1 2.172 -2.828 a4 4 0 1 1 0 5.656a10 10 0 0 1 -2.172 -2.828a10 10 0 0 0 -2.172 -2.828" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">归档</h2>
+
+        
+        
+        
+        
+        
+        <div class="widget-archive--list">
+            <div class="archives-year">
+                    <a href="/archives/#2023">
+                        
+                            <span class="year">2023</span>
+                            <span class="count">2</span>
+                        
+                    </a> 
+                </div>
+            <div class="archives-year">
+                    <a href="/archives/#2022">
+                        
+                            <span class="year">2022</span>
+                            <span class="count">6</span>
+                        
+                    </a> 
+                </div>
+            
+        </div>
+    </section>
+        
+    </aside>
+
+
+        </div>
+        <script 
+                src="https://unpkg.com/node-vibrant@3.1.5/dist/vibrant.min.js"integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

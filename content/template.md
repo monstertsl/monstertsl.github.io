@@ -17,6 +17,7 @@ comments:
 hidden: true
 #分类
 categories:
+    - web安全
     - 教程
     - 渗透
     - 系统安全

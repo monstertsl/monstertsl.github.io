@@ -6,7 +6,413 @@
         <description>Recent content on Monstertsl&#39;s Blog</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-CN</language>
-        <lastBuildDate>Sun, 29 Jan 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://www.tanging.tk/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Thu, 13 Apr 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://www.tanging.tk/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>JWT攻击与防护浅析</title>
+        <link>https://www.tanging.tk/jwt%E6%94%BB%E5%87%BB%E4%B8%8E%E9%98%B2%E6%8A%A4%E6%B5%85%E6%9E%90/</link>
+        <pubDate>Thu, 13 Apr 2023 00:00:00 +0000</pubDate>
+        
+        <guid>https://www.tanging.tk/jwt%E6%94%BB%E5%87%BB%E4%B8%8E%E9%98%B2%E6%8A%A4%E6%B5%85%E6%9E%90/</guid>
+        <description>&lt;h2 id=&#34;jwt是什么&#34;&gt;JWT是什么&lt;/h2&gt;
+&lt;p&gt;JWT全称为JSON Web Token,将json对象作为载体来传输信息，是为了在网络应用环境间传递声明而执行的一中基于JSON的开放标准（RFC 7519），一般被用在身份提供者和服务提供者间传递被认证的用户身份信息，也可以增加一些额外的业务逻辑所必须声明信息，该token可被直接用于认证，也可用作加密。&lt;/p&gt;
+&lt;h3 id=&#34;原理&#34;&gt;原理&lt;/h3&gt;
+&lt;p&gt;1）客户端提交用户名密码等信息到服务端请求登录，服务端在验证通过后前发一个具有时效性的token，将token返回给客户端&lt;/p&gt;
+&lt;p&gt;2）客户端收到token后会将token存储在cookie或localStorage中&lt;/p&gt;
+&lt;p&gt;3）随后客户端每次请求都会携带这个token，服务端收到请求后校验该token并在验证通过后返回对应资源&lt;/p&gt;
+&lt;h2 id=&#34;jwt令牌结构&#34;&gt;JWT令牌结构&lt;/h2&gt;
+&lt;p&gt;JWT由3部分组成：Headers、Payload、Signature这三个部分构成，这些部分之间用点&lt;code&gt;.&lt;/code&gt;号隔开,形如：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;0
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.5mhBHqs5_DTLdINd9p5m7ZJ6XD0Xc55kIaCRY5r6HRA
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;0
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Headers:头部
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Payload:有效载荷
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Signature:签名
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;headers和payload&#34;&gt;Headers和Payload&lt;/h3&gt;
+&lt;p&gt;其中头部包含关于令牌本身的元数据，而载荷包含关于用户的实际“声明”，再对其各自使用base64url编码组成JWT的前两个部分，可以对上述令牌的进行解码,得到如下结果：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 0
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;HEADER:ALGORITHM &amp;amp; TOKEN TYPE
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    {
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &amp;#34;alg&amp;#34;: &amp;#34;HS256&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &amp;#34;typ&amp;#34;: &amp;#34;JWT&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;PAYLOAD:DATA
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    {
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &amp;#34;sub&amp;#34;: &amp;#34;1234567890&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &amp;#34;name&amp;#34;: &amp;#34;John Doe&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &amp;#34;iat&amp;#34;: 1516239022
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;VERIFY SIGNATURE
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    HMACSHA256(
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    base64UrlEncode(header) + &amp;#34;.&amp;#34; +
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    base64UrlEncode(payload),
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    test)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;blockquote&gt;
+&lt;p&gt;因为Headers和Payload只进行base64url编码所以不要将机密信息放在JWT的Headers和Payload&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;signature&#34;&gt;signature&lt;/h3&gt;
+&lt;p&gt;这一部分是对前两部分的签名，防止数据被纂改。加入密钥然后就使用header头里的签名算法按以下方式创建签名：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;0
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;HMACSHA256(
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  base64UrlEncode(header) + &amp;#34;.&amp;#34; +
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  base64UrlEncode(payload),
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  secret)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;在上面的示例中使用了&lt;code&gt;test&lt;/code&gt;这个密钥，在实际中如果使用这种密钥是十分容易被暴力破解的！&lt;/p&gt;
+&lt;h2 id=&#34;攻击与防护&#34;&gt;攻击与防护&lt;/h2&gt;
+&lt;h3 id=&#34;暴力破解密钥&#34;&gt;暴力破解密钥&lt;/h3&gt;
+&lt;p&gt;在这里我们使用到一个JWT的密钥爆破工具：&lt;a class=&#34;link&#34; href=&#34;https://github.com/ticarpi/jwt_tool&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;jwt_tool&lt;/a&gt;，以及一个常用JWT密钥库：&lt;a class=&#34;link&#34; href=&#34;https://github.com/wallarm/jwt-secrets&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;jwt-secrets&lt;/a&gt;
+靶场地址：&lt;a class=&#34;link&#34; href=&#34;https://authlab.digi.ninja/JWT_Cracking&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;JWT_Cracking&lt;/a&gt;    &lt;br&gt;
+获取令牌并且复制，使用爆破工具尝试破解，命令格式为：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;0
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;jwt_tool.py JWT -C -d 字典
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;
+
+&lt;figure&gt;
+	
+	&lt;div class=&#34;gallery-image&#34;&gt;
+	&lt;a data-fancybox=&#34;gallery&#34; href=&#34;img/2023-04-13-15-48-48.png&#34;&gt;
+	&lt;img src=&#34;img/2023-04-13-15-48-48.png&#34; alt=&#34;&#34;  /&gt;
+	&lt;/a&gt;
+	&lt;/div&gt;
+	
+&lt;/figure&gt;
+破解出使用的密钥为&lt;code&gt;hello&lt;/code&gt;
+
+
+&lt;figure&gt;
+	
+	&lt;div class=&#34;gallery-image&#34;&gt;
+	&lt;a data-fancybox=&#34;gallery&#34; href=&#34;img/2023-04-13-15-50-46.png&#34;&gt;
+	&lt;img src=&#34;img/2023-04-13-15-50-46.png&#34; alt=&#34;&#34;  /&gt;
+	&lt;/a&gt;
+	&lt;/div&gt;
+	
+&lt;/figure&gt;
+也可以使用&lt;a class=&#34;link&#34; href=&#34;https://jwt.io/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;JWT.IO&lt;/a&gt;进行验证，可以看见提示令牌无效
+
+
+&lt;figure&gt;
+	
+	&lt;div class=&#34;gallery-image&#34;&gt;
+	&lt;a data-fancybox=&#34;gallery&#34; href=&#34;img/2023-04-13-15-53-51.png&#34;&gt;
+	&lt;img src=&#34;img/2023-04-13-15-53-51.png&#34; alt=&#34;&#34;  /&gt;
+	&lt;/a&gt;
+	&lt;/div&gt;
+	
+&lt;/figure&gt;
+使用&lt;code&gt;hello&lt;/code&gt;作为密钥填入，提示签名已验证，证明了密钥的正确
+
+
+&lt;figure&gt;
+	
+	&lt;div class=&#34;gallery-image&#34;&gt;
+	&lt;a data-fancybox=&#34;gallery&#34; href=&#34;img/2023-04-13-15-55-49.png&#34;&gt;
+	&lt;img src=&#34;img/2023-04-13-15-55-49.png&#34; alt=&#34;&#34;  /&gt;
+	&lt;/a&gt;
+	&lt;/div&gt;
+	
+&lt;/figure&gt;
+修改JWT用户信息进行越权，服务器接收了我们伪造的登录信息
+
+
+&lt;figure&gt;
+	
+	&lt;div class=&#34;gallery-image&#34;&gt;
+	&lt;a data-fancybox=&#34;gallery&#34; href=&#34;img/2023-04-13-15-57-25.png&#34;&gt;
+	&lt;img src=&#34;img/2023-04-13-15-57-25.png&#34; alt=&#34;&#34;  /&gt;
+	&lt;/a&gt;
+	&lt;/div&gt;
+	
+&lt;/figure&gt;
+
+
+&lt;figure&gt;
+	
+	&lt;div class=&#34;gallery-image&#34;&gt;
+	&lt;a data-fancybox=&#34;gallery&#34; href=&#34;img/2023-04-13-15-57-41.png&#34;&gt;
+	&lt;img src=&#34;img/2023-04-13-15-57-41.png&#34; alt=&#34;&#34;  /&gt;
+	&lt;/a&gt;
+	&lt;/div&gt;
+	
+&lt;/figure&gt;
+对我们在前文中提到的实例JWT进行破解，因为使用了弱密钥的缘故被很快破解出密钥
+
+
+&lt;figure&gt;
+	
+	&lt;div class=&#34;gallery-image&#34;&gt;
+	&lt;a data-fancybox=&#34;gallery&#34; href=&#34;img/2023-04-13-16-00-03.png&#34;&gt;
+	&lt;img src=&#34;img/2023-04-13-16-00-03.png&#34; alt=&#34;&#34;  /&gt;
+	&lt;/a&gt;
+	&lt;/div&gt;
+	
+&lt;/figure&gt;&lt;/p&gt;
+&lt;h3 id=&#34;敏感信息泄露&#34;&gt;敏感信息泄露&lt;/h3&gt;
+&lt;p&gt;靶场地址：&lt;a class=&#34;link&#34; href=&#34;https://authlab.digi.ninja/Leaky_JWT&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Leaky JWT&lt;/a&gt;  &lt;br&gt;
+打开靶场，在这里已经模拟受害者被获取到了令牌
+
+
+&lt;figure&gt;
+	
+	&lt;div class=&#34;gallery-image&#34;&gt;
+	&lt;a data-fancybox=&#34;gallery&#34; href=&#34;img/2023-04-12-09-43-43.png&#34;&gt;
+	&lt;img src=&#34;img/2023-04-12-09-43-43.png&#34; alt=&#34;&#34;  /&gt;
+	&lt;/a&gt;
+	&lt;/div&gt;
+	
+&lt;/figure&gt;
+我们将获取到的令牌放到&lt;a class=&#34;link&#34; href=&#34;https://jwt.io/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;JWT.IO&lt;/a&gt;中进行解密，发现开发者直接将用户的账户和密钥放到JWT的载荷中进行传输。
+
+
+&lt;figure&gt;
+	
+	&lt;div class=&#34;gallery-image&#34;&gt;
+	&lt;a data-fancybox=&#34;gallery&#34; href=&#34;img/2023-04-12-09-46-36.png&#34;&gt;
+	&lt;img src=&#34;img/2023-04-12-09-46-36.png&#34; alt=&#34;&#34;  /&gt;
+	&lt;/a&gt;
+	&lt;/div&gt;
+	
+&lt;/figure&gt;
+其中密钥部分可以看出使用了MD5加密，对其进行解密得到密钥为&lt;code&gt;Password1&lt;/code&gt;，使用得到的用户名和密钥进行尝试登录发现可以登录成功。
+
+
+&lt;figure&gt;
+	
+	&lt;div class=&#34;gallery-image&#34;&gt;
+	&lt;a data-fancybox=&#34;gallery&#34; href=&#34;img/2023-04-12-09-52-03.png&#34;&gt;
+	&lt;img src=&#34;img/2023-04-12-09-52-03.png&#34; alt=&#34;&#34;  /&gt;
+	&lt;/a&gt;
+	&lt;/div&gt;
+	
+&lt;/figure&gt;&lt;/p&gt;
+&lt;h3 id=&#34;未验证签名&#34;&gt;未验证签名&lt;/h3&gt;
+&lt;p&gt;靶场地址：&lt;a class=&#34;link&#34; href=&#34;https://portswigger.net/web-security/jwt/lab-jwt-authentication-bypass-via-unverified-signature&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;通过未经验证的签名绕过 JWT 身份验证&lt;/a&gt;
+
+
+&lt;figure&gt;
+	
+	&lt;div class=&#34;gallery-image&#34;&gt;
+	&lt;a data-fancybox=&#34;gallery&#34; href=&#34;img/2023-04-13-14-34-08.png&#34;&gt;
+	&lt;img src=&#34;img/2023-04-13-14-34-08.png&#34; alt=&#34;&#34;  /&gt;
+	&lt;/a&gt;
+	&lt;/div&gt;
+	
+&lt;/figure&gt;
+进入靶场，首先使用提示的账户信息&lt;code&gt;wiener:peter&lt;/code&gt;进行登录，发现成功登录后服务器返回了JWT认证信息
+
+
+&lt;figure&gt;
+	
+	&lt;div class=&#34;gallery-image&#34;&gt;
+	&lt;a data-fancybox=&#34;gallery&#34; href=&#34;img/2023-04-13-14-35-42.png&#34;&gt;
+	&lt;img src=&#34;img/2023-04-13-14-35-42.png&#34; alt=&#34;&#34;  /&gt;
+	&lt;/a&gt;
+	&lt;/div&gt;
+	
+&lt;/figure&gt;
+刷新页面发现每次请求都会带有认证信息
+
+
+&lt;figure&gt;
+	
+	&lt;div class=&#34;gallery-image&#34;&gt;
+	&lt;a data-fancybox=&#34;gallery&#34; href=&#34;img/2023-04-13-14-36-29.png&#34;&gt;
+	&lt;img src=&#34;img/2023-04-13-14-36-29.png&#34; alt=&#34;&#34;  /&gt;
+	&lt;/a&gt;
+	&lt;/div&gt;
+	
+&lt;/figure&gt;
+尝试修改修改&lt;code&gt;Payload&lt;/code&gt;中的&lt;code&gt;sub&lt;/code&gt;为&lt;code&gt;administrator&lt;/code&gt;，重新发包，发现可以返回登录的信息
+
+
+&lt;figure&gt;
+	
+	&lt;div class=&#34;gallery-image&#34;&gt;
+	&lt;a data-fancybox=&#34;gallery&#34; href=&#34;img/2023-04-13-14-46-21.png&#34;&gt;
+	&lt;img src=&#34;img/2023-04-13-14-46-21.png&#34; alt=&#34;&#34;  /&gt;
+	&lt;/a&gt;
+	&lt;/div&gt;
+	
+&lt;/figure&gt;
+替换浏览器中的cookie，已经实现垂直越权登录了管理员账户，并且多了一个功能入口，进去根据要求删除对于用户完成即可完成&lt;/p&gt;
+&lt;p&gt;
+
+&lt;figure&gt;
+	
+	&lt;div class=&#34;gallery-image&#34;&gt;
+	&lt;a data-fancybox=&#34;gallery&#34; href=&#34;img/2023-04-13-14-48-12.png&#34;&gt;
+	&lt;img src=&#34;img/2023-04-13-14-48-12.png&#34; alt=&#34;&#34;  /&gt;
+	&lt;/a&gt;
+	&lt;/div&gt;
+	
+&lt;/figure&gt;
+
+
+&lt;figure&gt;
+	
+	&lt;div class=&#34;gallery-image&#34;&gt;
+	&lt;a data-fancybox=&#34;gallery&#34; href=&#34;img/2023-04-13-14-48-33.png&#34;&gt;
+	&lt;img src=&#34;img/2023-04-13-14-48-33.png&#34; alt=&#34;&#34;  /&gt;
+	&lt;/a&gt;
+	&lt;/div&gt;
+	
+&lt;/figure&gt;&lt;/p&gt;
+&lt;h3 id=&#34;空加密算法&#34;&gt;空加密算法&lt;/h3&gt;
+&lt;p&gt;靶场地址：&lt;a class=&#34;link&#34; href=&#34;https://portswigger.net/web-security/jwt/lab-jwt-authentication-bypass-via-flawed-signature-verification&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;通过有缺陷的签名验证绕过 JWT 身份验证&lt;/a&gt;
+
+
+&lt;figure&gt;
+	
+	&lt;div class=&#34;gallery-image&#34;&gt;
+	&lt;a data-fancybox=&#34;gallery&#34; href=&#34;img/2023-04-13-11-26-43.png&#34;&gt;
+	&lt;img src=&#34;img/2023-04-13-11-26-43.png&#34; alt=&#34;&#34;  /&gt;
+	&lt;/a&gt;
+	&lt;/div&gt;
+	
+&lt;/figure&gt;
+进入靶场，首先使用提示的账户信息&lt;code&gt;wiener:peter&lt;/code&gt;进行登录，发现成功登录后服务器返回了JWT认证信息
+
+
+&lt;figure&gt;
+	
+	&lt;div class=&#34;gallery-image&#34;&gt;
+	&lt;a data-fancybox=&#34;gallery&#34; href=&#34;img/2023-04-13-13-54-29.png&#34;&gt;
+	&lt;img src=&#34;img/2023-04-13-13-54-29.png&#34; alt=&#34;&#34;  /&gt;
+	&lt;/a&gt;
+	&lt;/div&gt;
+	
+&lt;/figure&gt;
+刷新页面发现每次请求都会带有认证信息
+
+
+&lt;figure&gt;
+	
+	&lt;div class=&#34;gallery-image&#34;&gt;
+	&lt;a data-fancybox=&#34;gallery&#34; href=&#34;img/2023-04-13-13-55-57.png&#34;&gt;
+	&lt;img src=&#34;img/2023-04-13-13-55-57.png&#34; alt=&#34;&#34;  /&gt;
+	&lt;/a&gt;
+	&lt;/div&gt;
+	
+&lt;/figure&gt;
+使用上个实例同样的方法，对登录用户的信息进行修改，在题干中已经提示了接受未签名的JWT，所以只需要修改JWT的前两部分&lt;code&gt;Headers&lt;/code&gt;中的&lt;code&gt;alg&lt;/code&gt;为&lt;code&gt;none&lt;/code&gt;，修改&lt;code&gt;Payload&lt;/code&gt;中的&lt;code&gt;sub&lt;/code&gt;为&lt;code&gt;administrator&lt;/code&gt;，因为&lt;code&gt;Signature&lt;/code&gt;部分使用了&lt;code&gt;Headers&lt;/code&gt;中声明的加密算法进行加密，所以删除掉这部分(但是要保留最后的&lt;code&gt;.&lt;/code&gt;构成一个完整的JWT)发现可以正常返回管理员账户信息
+
+
+&lt;figure&gt;
+	
+	&lt;div class=&#34;gallery-image&#34;&gt;
+	&lt;a data-fancybox=&#34;gallery&#34; href=&#34;img/2023-04-13-14-06-08.png&#34;&gt;
+	&lt;img src=&#34;img/2023-04-13-14-06-08.png&#34; alt=&#34;&#34;  /&gt;
+	&lt;/a&gt;
+	&lt;/div&gt;
+	
+&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;替换cookie，刷新页面发现登录了管理员账户，并且多了一个功能入口，进去根据要求删除对于用户完成即可完成&lt;/p&gt;
+&lt;p&gt;
+
+&lt;figure&gt;
+	
+	&lt;div class=&#34;gallery-image&#34;&gt;
+	&lt;a data-fancybox=&#34;gallery&#34; href=&#34;img/2023-04-13-14-20-47.png&#34;&gt;
+	&lt;img src=&#34;img/2023-04-13-14-20-47.png&#34; alt=&#34;&#34;  /&gt;
+	&lt;/a&gt;
+	&lt;/div&gt;
+	
+&lt;/figure&gt;
+
+
+&lt;figure&gt;
+	
+	&lt;div class=&#34;gallery-image&#34;&gt;
+	&lt;a data-fancybox=&#34;gallery&#34; href=&#34;img/2023-04-13-14-22-02.png&#34;&gt;
+	&lt;img src=&#34;img/2023-04-13-14-22-02.png&#34; alt=&#34;&#34;  /&gt;
+	&lt;/a&gt;
+	&lt;/div&gt;
+	
+&lt;/figure&gt;&lt;/p&gt;
+&lt;h3 id=&#34;jwt头部参数注入&#34;&gt;JWT头部参数注入&lt;/h3&gt;
+&lt;h3 id=&#34;jwk参数注入&#34;&gt;jwk参数注入&lt;/h3&gt;
+&lt;h3 id=&#34;kid参数注入&#34;&gt;kid参数注入&lt;/h3&gt;
+&lt;h3 id=&#34;算法修改攻击&#34;&gt;算法修改攻击&lt;/h3&gt;
+&lt;h2 id=&#34;参考链接&#34;&gt;参考链接&lt;/h2&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.topsec.com.cn/newsx/3727&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;检测与防护能力—浅析JWT攻击类型&lt;/a&gt;&lt;br&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/qq_44159028/article/details/129683126&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;web渗透之jwt 安全问题&lt;/a&gt;&lt;br&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/m0_62422842/article/details/124971440&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;JWT总结&lt;/a&gt;&lt;br&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://zhuanlan.zhihu.com/p/593391315?utm_id=0&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;浅析JWT Attack&lt;/a&gt;&lt;br&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/cdyunaq/article/details/122561096&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;渗透测试-JWT攻击&lt;/a&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>《花月令》</title>
         <link>https://www.tanging.tk/%E8%8A%B1%E6%9C%88%E4%BB%A4/</link>
         <pubDate>Sun, 29 Jan 2023 00:00:00 +0000</pubDate>
