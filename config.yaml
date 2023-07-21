@@ -1,4 +1,4 @@
-baseurl: https://www.tanging.tk
+baseurl: https://www.monstertsl.link/
 languageCode: zh-CN
 theme: hugo-theme-stack
 paginate: 5
@@ -44,7 +44,7 @@ params:
         #头像右下角小图标
         emoji: 
         #首页标语
-        subtitle: 蔷薇蔓。木笔书空。棣萼韡韡。杨入大水为萍。海棠睡。绣球落。
+        subtitle: 葵倾赤。玉簪搔头。紫薇浸月。木槿朝荣。蓼花红。菱花乃实。
         avatar:
             enabled: true
             local: true

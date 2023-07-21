@@ -2,44 +2,44 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Pages on Monstertsl&#39;s Blog</title>
-    <link>https://www.tanging.tk/page/</link>
+    <link>https://www.monstertsl.link/page/</link>
     <description>Recent content in Pages on Monstertsl&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Tue, 15 Feb 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://www.tanging.tk/page/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 15 Feb 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://www.monstertsl.link/page/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>关于</title>
-      <link>https://www.tanging.tk/about/</link>
+      <link>https://www.monstertsl.link/about/</link>
       <pubDate>Tue, 15 Feb 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://www.tanging.tk/about/</guid>
+      <guid>https://www.monstertsl.link/about/</guid>
       <description>在这之前我也搭建过一个博客网站，当时是因为白嫖到了服务器，平时用得很少所以就搭建了个博客网站，但是当时并没有使用开源的框架，手写了一个简单的</description>
     </item>
     
     <item>
       <title>归档</title>
-      <link>https://www.tanging.tk/archives/</link>
+      <link>https://www.monstertsl.link/archives/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://www.tanging.tk/archives/</guid>
+      <guid>https://www.monstertsl.link/archives/</guid>
       <description></description>
     </item>
     
     <item>
       <title>联系</title>
-      <link>https://www.tanging.tk/connect/</link>
+      <link>https://www.monstertsl.link/connect/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://www.tanging.tk/connect/</guid>
+      <guid>https://www.monstertsl.link/connect/</guid>
       <description>联系 如果你有什么好的建议，或者有什么意见请直接使用邮箱联系我 邮箱地址monstertsl@qq.com</description>
     </item>
     
     <item>
       <title>搜索</title>
-      <link>https://www.tanging.tk/search/</link>
+      <link>https://www.monstertsl.link/search/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://www.tanging.tk/search/</guid>
+      <guid>https://www.monstertsl.link/search/</guid>
       <description></description>
     </item>
     
