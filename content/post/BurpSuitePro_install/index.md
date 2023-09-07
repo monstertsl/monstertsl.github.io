@@ -45,11 +45,11 @@ lastmod:
 所以我需要先安装Java
 
 #### 下载Java
-打开[Java Downloads](https://www.oracle.com/java/technologies/downloads/)下载页面，往下滑动（这里建议使用`11<=Java<17`的版本，所以我这里下载11），再选择对应的操作系统下载就好了，我的是Windows平台
+打开[Java Downloads](https://www.oracle.com/java/technologies/downloads/)下载页面，往下滑动（如果BurpSuite版本号小于2023建议使用`11<=Java<17`的版本，如果版本号大于2023建议使用`Java>17`），再选择对应的操作系统下载就好了，我的是Windows平台
 
 ![](img/2022-05-27-16-44-45.png)
 
-因为官网有时候不太好使同时提供网盘下载[Java](https://www.aliyundrive.com/s/MN2f3zzLSpj)
+~~因为官网有时候不太好使同时提供网盘下载Java~~
 
 #### 安装Java环境
 下载好后就直接双击允许，一直点击`下一步`默认安装即可
@@ -78,19 +78,22 @@ lastmod:
 我们直接下载的官方包需要通过注册机的破解才能正常的使用
 
 ### 注册机下载
-这里提供两个版本的注册机（中文/英文）
+~~这里提供两个版本的注册机（中文/英文）~~
 
-[BurpLoaderKeygen.jar，只有破解功能](https://github.com/h3110w0r1d-y/BurpLoaderKeygen)
+~~BurpLoaderKeygen.jar，只有破解功能~~
 
-[BurpLoaderKeygenCn.jar，包含中文翻译文件](https://github.com/h3110w0r1d-y/BurpLoaderKeygen/releases/tag/2.0)
+~~BurpLoaderKeygenCn.jar，包含中文翻译文件~~
 
+之前的注册机因为被BurpSuite官方投诉，项目已经下线了，这里使用一个新的注册机
+
+[BurpSuiteCN-Release](https://github.com/Leon406/BurpSuiteCN-Release)
 ### 破解Burp Suite
 
 将注册机和下载的Burp Suite放在同一个目录里面（方便下面操作）
 
-#### 运行我们的注册机（二选一即可）
+#### 运行我们的注册机
 ```java
- java -jar .\BurpLoaderKeygen.jar
+ java -jar burpsuitloader-x.xx-all.jar
 ```
 
 ![](img/2022-05-27-16-26-37.png)
@@ -132,34 +135,19 @@ lastmod:
 
 当我们破解完成后就可以直接通过注册机的代理启动来正常使用Burp Suite
 
-将注册机和Burp Suite放置到同一个目录下，打开控制终端定位到这个目录，使用命令启动。<cite>**在使用的过程中不能关闭命令窗口不然会直接中断这个进程的运行**</cite>
+将注册机和Burp Suite放置到同一个目录下，打开控制终端定位到这个目录，使用命令启动，需要注意文件名是否正确。**在使用的过程中不能关闭命令窗口不然会直接中断这个进程的运行**
 
 ```java
- java -noverify -Dsun.java2d.uiScale=1 --illegal-access=permit -javaagent:".\BurpLoaderKeygen.jar" -Xmx2048m -jar ".\burpsuite_pro.jar"
+java -XX:+IgnoreUnrecognizedVMOptions -javaagent:burpsuitloader-3.7.17-all.jar=loader --add-opens=java.desktop/javax.swing=ALL-UNNAMED --add-opens=java.base/java.lang=ALL-UNNAMED --add-opens=java.base/jdk.internal.org.objectweb.asm=ALL-UNNAMED --add-opens=java.base/jdk.internal.org.objectweb.asm.tree=ALL-UNNAMED --add-opens=java.base/jdk.internal.org.objectweb.asm.Opcodes=ALL-UNNAMED -jar burpsuite_pro_v2023.9.2.jar
 ```
 ![](img/2022-05-31-10-55-24.png)
 
 #### 使用带中文的注册机
 
-如果想要使用中文版本可以使用带语言包的注册机来启动，启动的命令大致的相同的但是有个小地方需要注意,需要加上`-Dfile.encoding=utf-8`设置编码格式为`uft-8`免得出现中文错误的问题，同时需要给注册机加上`=cn`的参数告诉它使用中文，不然还是英文启动
+加载中文和英文的方式大致是相同的，只需要加上`hanizfy`这个参数即可
 
 ```Java
- java -noverify -Dsun.java2d.uiScale=1 --illegal-access=permit -Dfile.encoding=utf-8 -javaagent:".\BurpLoaderKeygenCn.jar=cn"  -Xmx2048m -jar ".\burpsuite_pro.jar"
-```
-##### 参数解释
-
-```java
--noverify   关闭类验证(加快启动)
-
--Dsun.java2d.uiScale=1  限制dpi自适应及UI缩放(解决高分辨率屏幕不清晰的问题)
-
---illegal-access=permit 允许访问封装的包以及反射其他模块(一般使用Java16以上才需要，这里为了保险)
-
--javaagent: 代理启动后面接注册机
-
--Xmx2048m   Xmx是用来设置你的应用程序能够使用的最大内存数 2048m就是2G内存
-
--jar    执行jar文件
+java -XX:+IgnoreUnrecognizedVMOptions -javaagent:burpsuitloader-3.7.17-all.jar=loader,hanizfy --add-opens=java.desktop/javax.swing=ALL-UNNAMED --add-opens=java.base/java.lang=ALL-UNNAMED --add-opens=java.base/jdk.internal.org.objectweb.asm=ALL-UNNAMED --add-opens=java.base/jdk.internal.org.objectweb.asm.tree=ALL-UNNAMED --add-opens=java.base/jdk.internal.org.objectweb.asm.Opcodes=ALL-UNNAMED -jar burpsuite_pro_v2023.9.2.jar
 ```
 
 #### 快捷启动
@@ -173,27 +161,28 @@ color 70 & cd /d "%~dp0"
 
 echo.-----------------------------------------------------------
 echo 请选择 BurpSuite的运行语言
-echo 【C】汉语
 echo 【E】English
+echo 【C】汉语
 echo.-----------------------------------------------------------
 echo.
+
 
 set /p language=请输入你的选择并按回车键确认:
 
 echo.
-if /i "%language%"=="c" cls&goto zh
 if /i "%language%"=="e" cls&goto en
+if /i "%language%"=="c" cls&goto zh
 
 :en
 cls
 echo.
-java -noverify -Dsun.java2d.uiScale=1 --illegal-access=permit -javaagent:".\BurpLoaderKeygen.jar" -Xmx2048m -jar ".\burpsuite_pro.jar"
+java -XX:+IgnoreUnrecognizedVMOptions -javaagent:burpsuitloader-3.7.17-all.jar=loader --add-opens=java.desktop/javax.swing=ALL-UNNAMED --add-opens=java.base/java.lang=ALL-UNNAMED --add-opens=java.base/jdk.internal.org.objectweb.asm=ALL-UNNAMED --add-opens=java.base/jdk.internal.org.objectweb.asm.tree=ALL-UNNAMED --add-opens=java.base/jdk.internal.org.objectweb.asm.Opcodes=ALL-UNNAMED -jar burpsuite_pro_v2023.9.2.jar
 exit
 
 :zh
 cls
 echo.
-java -noverify -Dsun.java2d.uiScale=1 --illegal-access=permit -Dfile.encoding=utf-8 -javaagent:".\BurpLoaderKeygenCn.jar=cn"  -Xmx2048m -jar ".\burpsuite_pro.jar"
+java -XX:+IgnoreUnrecognizedVMOptions -javaagent:burpsuitloader-3.7.17-all.jar=loader,hanizfy --add-opens=java.desktop/javax.swing=ALL-UNNAMED --add-opens=java.base/java.lang=ALL-UNNAMED --add-opens=java.base/jdk.internal.org.objectweb.asm=ALL-UNNAMED --add-opens=java.base/jdk.internal.org.objectweb.asm.tree=ALL-UNNAMED --add-opens=java.base/jdk.internal.org.objectweb.asm.Opcodes=ALL-UNNAMED -jar burpsuite_pro_v2023.9.2.jar
 ```
 
 ![](img/2022-05-31-11-44-38.png)

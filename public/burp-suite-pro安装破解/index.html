@@ -293,7 +293,7 @@
   <line x1="13.5" y1="6.5" x2="17.5" y2="10.5"></line>
 </svg>
                 <time class="article-words">
-                    1855 字
+                    1696 字
                 </time>
             </div>
         
@@ -345,7 +345,7 @@
 <p>所以我需要先安装Java</p>
 <h4 id="下载java">下载Java</h4>
 <p>打开<a class="link" href="https://www.oracle.com/java/technologies/downloads/"  target="_blank" rel="noopener"
-    >Java Downloads</a>下载页面，往下滑动（这里建议使用<code>11&lt;=Java&lt;17</code>的版本，所以我这里下载11），再选择对应的操作系统下载就好了，我的是Windows平台</p>
+    >Java Downloads</a>下载页面，往下滑动（如果BurpSuite版本号小于2023建议使用<code>11&lt;=Java&lt;17</code>的版本，如果版本号大于2023建议使用<code>Java&gt;17</code>），再选择对应的操作系统下载就好了，我的是Windows平台</p>
 <p>
 
 <figure>
@@ -357,8 +357,7 @@
 	</div>
 	
 </figure></p>
-<p>因为官网有时候不太好使同时提供网盘下载<a class="link" href="https://www.aliyundrive.com/s/MN2f3zzLSpj"  target="_blank" rel="noopener"
-    >Java</a></p>
+<p><del>因为官网有时候不太好使同时提供网盘下载Java</del></p>
 <h4 id="安装java环境">安装Java环境</h4>
 <p>下载好后就直接双击允许，一直点击<code>下一步</code>默认安装即可</p>
 <blockquote>
@@ -428,20 +427,21 @@
 <h2 id="破解">破解</h2>
 <p>我们直接下载的官方包需要通过注册机的破解才能正常的使用</p>
 <h3 id="注册机下载">注册机下载</h3>
-<p>这里提供两个版本的注册机（中文/英文）</p>
-<p><a class="link" href="https://github.com/h3110w0r1d-y/BurpLoaderKeygen"  target="_blank" rel="noopener"
-    >BurpLoaderKeygen.jar，只有破解功能</a></p>
-<p><a class="link" href="https://github.com/h3110w0r1d-y/BurpLoaderKeygen/releases/tag/2.0"  target="_blank" rel="noopener"
-    >BurpLoaderKeygenCn.jar，包含中文翻译文件</a></p>
+<p><del>这里提供两个版本的注册机（中文/英文）</del></p>
+<p><del>BurpLoaderKeygen.jar，只有破解功能</del></p>
+<p><del>BurpLoaderKeygenCn.jar，包含中文翻译文件</del></p>
+<p>之前的注册机因为被BurpSuite官方投诉，项目已经下线了，这里使用一个新的注册机</p>
+<p><a class="link" href="https://github.com/Leon406/BurpSuiteCN-Release"  target="_blank" rel="noopener"
+    >BurpSuiteCN-Release</a></p>
 <h3 id="破解burp-suite">破解Burp Suite</h3>
 <p>将注册机和下载的Burp Suite放在同一个目录里面（方便下面操作）</p>
-<h4 id="运行我们的注册机二选一即可">运行我们的注册机（二选一即可）</h4>
+<h4 id="运行我们的注册机">运行我们的注册机</h4>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">0
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"> <span class="n">java</span> <span class="o">-</span><span class="n">jar</span> <span class="o">.</span><span class="err">\</span><span class="n">BurpLoaderKeygen</span><span class="o">.</span><span class="na">jar</span>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"> <span class="n">java</span> <span class="o">-</span><span class="n">jar</span> <span class="n">burpsuitloader</span><span class="o">-</span><span class="n">x</span><span class="o">.</span><span class="na">xx</span><span class="o">-</span><span class="n">all</span><span class="o">.</span><span class="na">jar</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>
@@ -557,13 +557,13 @@
 </blockquote>
 <h3 id="运行">运行</h3>
 <p>当我们破解完成后就可以直接通过注册机的代理启动来正常使用Burp Suite</p>
-<p>将注册机和Burp Suite放置到同一个目录下，打开控制终端定位到这个目录，使用命令启动。<cite><strong>在使用的过程中不能关闭命令窗口不然会直接中断这个进程的运行</strong></cite></p>
+<p>将注册机和Burp Suite放置到同一个目录下，打开控制终端定位到这个目录，使用命令启动，需要注意文件名是否正确。<strong>在使用的过程中不能关闭命令窗口不然会直接中断这个进程的运行</strong></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">0
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"> <span class="n">java</span> <span class="o">-</span><span class="n">noverify</span> <span class="o">-</span><span class="n">Dsun</span><span class="o">.</span><span class="na">java2d</span><span class="o">.</span><span class="na">uiScale</span><span class="o">=</span><span class="mi">1</span> <span class="o">--</span><span class="n">illegal</span><span class="o">-</span><span class="n">access</span><span class="o">=</span><span class="n">permit</span> <span class="o">-</span><span class="n">javaagent</span><span class="o">:</span><span class="s">&#34;.\BurpLoaderKeygen.jar&#34;</span> <span class="o">-</span><span class="n">Xmx2048m</span> <span class="o">-</span><span class="n">jar</span> <span class="s">&#34;.\burpsuite_pro.jar&#34;</span>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">java</span> <span class="o">-</span><span class="n">XX</span><span class="o">:+</span><span class="n">IgnoreUnrecognizedVMOptions</span> <span class="o">-</span><span class="n">javaagent</span><span class="o">:</span><span class="n">burpsuitloader</span><span class="o">-</span><span class="mf">3.7.17</span><span class="o">-</span><span class="n">all</span><span class="o">.</span><span class="na">jar</span><span class="o">=</span><span class="n">loader</span> <span class="o">--</span><span class="n">add</span><span class="o">-</span><span class="n">opens</span><span class="o">=</span><span class="n">java</span><span class="o">.</span><span class="na">desktop</span><span class="o">/</span><span class="n">javax</span><span class="o">.</span><span class="na">swing</span><span class="o">=</span><span class="n">ALL</span><span class="o">-</span><span class="n">UNNAMED</span> <span class="o">--</span><span class="n">add</span><span class="o">-</span><span class="n">opens</span><span class="o">=</span><span class="n">java</span><span class="o">.</span><span class="na">base</span><span class="o">/</span><span class="n">java</span><span class="o">.</span><span class="na">lang</span><span class="o">=</span><span class="n">ALL</span><span class="o">-</span><span class="n">UNNAMED</span> <span class="o">--</span><span class="n">add</span><span class="o">-</span><span class="n">opens</span><span class="o">=</span><span class="n">java</span><span class="o">.</span><span class="na">base</span><span class="o">/</span><span class="n">jdk</span><span class="o">.</span><span class="na">internal</span><span class="o">.</span><span class="na">org</span><span class="o">.</span><span class="na">objectweb</span><span class="o">.</span><span class="na">asm</span><span class="o">=</span><span class="n">ALL</span><span class="o">-</span><span class="n">UNNAMED</span> <span class="o">--</span><span class="n">add</span><span class="o">-</span><span class="n">opens</span><span class="o">=</span><span class="n">java</span><span class="o">.</span><span class="na">base</span><span class="o">/</span><span class="n">jdk</span><span class="o">.</span><span class="na">internal</span><span class="o">.</span><span class="na">org</span><span class="o">.</span><span class="na">objectweb</span><span class="o">.</span><span class="na">asm</span><span class="o">.</span><span class="na">tree</span><span class="o">=</span><span class="n">ALL</span><span class="o">-</span><span class="n">UNNAMED</span> <span class="o">--</span><span class="n">add</span><span class="o">-</span><span class="n">opens</span><span class="o">=</span><span class="n">java</span><span class="o">.</span><span class="na">base</span><span class="o">/</span><span class="n">jdk</span><span class="o">.</span><span class="na">internal</span><span class="o">.</span><span class="na">org</span><span class="o">.</span><span class="na">objectweb</span><span class="o">.</span><span class="na">asm</span><span class="o">.</span><span class="na">Opcodes</span><span class="o">=</span><span class="n">ALL</span><span class="o">-</span><span class="n">UNNAMED</span> <span class="o">-</span><span class="n">jar</span> <span class="n">burpsuite_pro_v2023</span><span class="mf">.9.2</span><span class="o">.</span><span class="na">jar</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>
@@ -578,42 +578,13 @@
 	
 </figure></p>
 <h4 id="使用带中文的注册机">使用带中文的注册机</h4>
-<p>如果想要使用中文版本可以使用带语言包的注册机来启动，启动的命令大致的相同的但是有个小地方需要注意,需要加上<code>-Dfile.encoding=utf-8</code>设置编码格式为<code>uft-8</code>免得出现中文错误的问题，同时需要给注册机加上<code>=cn</code>的参数告诉它使用中文，不然还是英文启动</p>
+<p>加载中文和英文的方式大致是相同的，只需要加上<code>hanizfy</code>这个参数即可</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">0
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-Java" data-lang="Java"><span class="line"><span class="cl"> <span class="n">java</span> <span class="o">-</span><span class="n">noverify</span> <span class="o">-</span><span class="n">Dsun</span><span class="o">.</span><span class="na">java2d</span><span class="o">.</span><span class="na">uiScale</span><span class="o">=</span><span class="mi">1</span> <span class="o">--</span><span class="n">illegal</span><span class="o">-</span><span class="n">access</span><span class="o">=</span><span class="n">permit</span> <span class="o">-</span><span class="n">Dfile</span><span class="o">.</span><span class="na">encoding</span><span class="o">=</span><span class="n">utf</span><span class="o">-</span><span class="mi">8</span> <span class="o">-</span><span class="n">javaagent</span><span class="o">:</span><span class="s">&#34;.\BurpLoaderKeygenCn.jar=cn&#34;</span>  <span class="o">-</span><span class="n">Xmx2048m</span> <span class="o">-</span><span class="n">jar</span> <span class="s">&#34;.\burpsuite_pro.jar&#34;</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h5 id="参数解释">参数解释</h5>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 0
-</span><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="o">-</span><span class="n">noverify</span>   <span class="err">关闭类验证</span><span class="o">(</span><span class="err">加快启动</span><span class="o">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="o">-</span><span class="n">Dsun</span><span class="o">.</span><span class="na">java2d</span><span class="o">.</span><span class="na">uiScale</span><span class="o">=</span><span class="mi">1</span>  <span class="err">限制</span><span class="n">dpi</span><span class="err">自适应及</span><span class="n">UI</span><span class="err">缩放</span><span class="o">(</span><span class="err">解决高分辨率屏幕不清晰的问题</span><span class="o">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="o">--</span><span class="n">illegal</span><span class="o">-</span><span class="n">access</span><span class="o">=</span><span class="n">permit</span> <span class="err">允许访问封装的包以及反射其他模块</span><span class="o">(</span><span class="err">一般使用</span><span class="n">Java16</span><span class="err">以上才需要，这里为了保险</span><span class="o">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="o">-</span><span class="n">javaagent</span><span class="o">:</span> <span class="err">代理启动后面接注册机</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="o">-</span><span class="n">Xmx2048m</span>   <span class="n">Xmx</span><span class="err">是用来设置你的应用程序能够使用的最大内存数</span> <span class="mi">2048</span><span class="n">m</span><span class="err">就是</span><span class="mi">2</span><span class="n">G</span><span class="err">内存</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="o">-</span><span class="n">jar</span>    <span class="err">执行</span><span class="n">jar</span><span class="err">文件</span>
+<pre tabindex="0" class="chroma"><code class="language-Java" data-lang="Java"><span class="line"><span class="cl"><span class="n">java</span> <span class="o">-</span><span class="n">XX</span><span class="o">:+</span><span class="n">IgnoreUnrecognizedVMOptions</span> <span class="o">-</span><span class="n">javaagent</span><span class="o">:</span><span class="n">burpsuitloader</span><span class="o">-</span><span class="mf">3.7.17</span><span class="o">-</span><span class="n">all</span><span class="o">.</span><span class="na">jar</span><span class="o">=</span><span class="n">loader</span><span class="o">,</span><span class="n">hanizfy</span> <span class="o">--</span><span class="n">add</span><span class="o">-</span><span class="n">opens</span><span class="o">=</span><span class="n">java</span><span class="o">.</span><span class="na">desktop</span><span class="o">/</span><span class="n">javax</span><span class="o">.</span><span class="na">swing</span><span class="o">=</span><span class="n">ALL</span><span class="o">-</span><span class="n">UNNAMED</span> <span class="o">--</span><span class="n">add</span><span class="o">-</span><span class="n">opens</span><span class="o">=</span><span class="n">java</span><span class="o">.</span><span class="na">base</span><span class="o">/</span><span class="n">java</span><span class="o">.</span><span class="na">lang</span><span class="o">=</span><span class="n">ALL</span><span class="o">-</span><span class="n">UNNAMED</span> <span class="o">--</span><span class="n">add</span><span class="o">-</span><span class="n">opens</span><span class="o">=</span><span class="n">java</span><span class="o">.</span><span class="na">base</span><span class="o">/</span><span class="n">jdk</span><span class="o">.</span><span class="na">internal</span><span class="o">.</span><span class="na">org</span><span class="o">.</span><span class="na">objectweb</span><span class="o">.</span><span class="na">asm</span><span class="o">=</span><span class="n">ALL</span><span class="o">-</span><span class="n">UNNAMED</span> <span class="o">--</span><span class="n">add</span><span class="o">-</span><span class="n">opens</span><span class="o">=</span><span class="n">java</span><span class="o">.</span><span class="na">base</span><span class="o">/</span><span class="n">jdk</span><span class="o">.</span><span class="na">internal</span><span class="o">.</span><span class="na">org</span><span class="o">.</span><span class="na">objectweb</span><span class="o">.</span><span class="na">asm</span><span class="o">.</span><span class="na">tree</span><span class="o">=</span><span class="n">ALL</span><span class="o">-</span><span class="n">UNNAMED</span> <span class="o">--</span><span class="n">add</span><span class="o">-</span><span class="n">opens</span><span class="o">=</span><span class="n">java</span><span class="o">.</span><span class="na">base</span><span class="o">/</span><span class="n">jdk</span><span class="o">.</span><span class="na">internal</span><span class="o">.</span><span class="na">org</span><span class="o">.</span><span class="na">objectweb</span><span class="o">.</span><span class="na">asm</span><span class="o">.</span><span class="na">Opcodes</span><span class="o">=</span><span class="n">ALL</span><span class="o">-</span><span class="n">UNNAMED</span> <span class="o">-</span><span class="n">jar</span> <span class="n">burpsuite_pro_v2023</span><span class="mf">.9.2</span><span class="o">.</span><span class="na">jar</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h4 id="快捷启动">快捷启动</h4>
@@ -647,6 +618,7 @@
 </span><span class="lnt">24
 </span><span class="lnt">25
 </span><span class="lnt">26
+</span><span class="lnt">27
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-bat" data-lang="bat"><span class="line"><span class="cl"><span class="p">@</span><span class="k">echo</span> off
@@ -655,27 +627,28 @@
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="k">echo</span>.-----------------------------------------------------------
 </span></span><span class="line"><span class="cl"><span class="k">echo</span> 请选择 BurpSuite的运行语言
-</span></span><span class="line"><span class="cl"><span class="k">echo</span> 【C】汉语
 </span></span><span class="line"><span class="cl"><span class="k">echo</span> 【E】English
+</span></span><span class="line"><span class="cl"><span class="k">echo</span> 【C】汉语
 </span></span><span class="line"><span class="cl"><span class="k">echo</span>.-----------------------------------------------------------
 </span></span><span class="line"><span class="cl"><span class="k">echo</span>.
+</span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="k">set</span> <span class="k">/p</span> <span class="nv">language</span><span class="p">=</span>请输入你的选择并按回车键确认:
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="k">echo</span>.
-</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="k">/i</span> <span class="s2">&#34;</span><span class="nv">%language%</span><span class="s2">&#34;</span><span class="o">==</span><span class="s2">&#34;c&#34;</span> <span class="k">cls</span><span class="p">&amp;</span><span class="k">goto</span> <span class="nl">zh</span>
 </span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="k">/i</span> <span class="s2">&#34;</span><span class="nv">%language%</span><span class="s2">&#34;</span><span class="o">==</span><span class="s2">&#34;e&#34;</span> <span class="k">cls</span><span class="p">&amp;</span><span class="k">goto</span> <span class="nl">en</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="k">/i</span> <span class="s2">&#34;</span><span class="nv">%language%</span><span class="s2">&#34;</span><span class="o">==</span><span class="s2">&#34;c&#34;</span> <span class="k">cls</span><span class="p">&amp;</span><span class="k">goto</span> <span class="nl">zh</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="p">:</span><span class="nl">en</span>
 </span></span><span class="line"><span class="cl"><span class="k">cls</span>
 </span></span><span class="line"><span class="cl"><span class="k">echo</span>.
-</span></span><span class="line"><span class="cl">java -noverify -Dsun.java2d.uiScale=1 --illegal-access=permit -javaagent:<span class="s2">&#34;.\BurpLoaderKeygen.jar&#34;</span> -Xmx2048m -jar <span class="s2">&#34;.\burpsuite_pro.jar&#34;</span>
+</span></span><span class="line"><span class="cl">java -XX:+IgnoreUnrecognizedVMOptions -javaagent:burpsuitloader-3.7.17-all.jar=loader --add-opens=java.desktop/javax.swing=ALL-UNNAMED --add-opens=java.base/java.lang=ALL-UNNAMED --add-opens=java.base/jdk.internal.org.objectweb.asm=ALL-UNNAMED --add-opens=java.base/jdk.internal.org.objectweb.asm.tree=ALL-UNNAMED --add-opens=java.base/jdk.internal.org.objectweb.asm.Opcodes=ALL-UNNAMED -jar burpsuite_pro_v2023.9.2.jar
 </span></span><span class="line"><span class="cl"><span class="k">exit</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="p">:</span><span class="nl">zh</span>
 </span></span><span class="line"><span class="cl"><span class="k">cls</span>
 </span></span><span class="line"><span class="cl"><span class="k">echo</span>.
-</span></span><span class="line"><span class="cl">java -noverify -Dsun.java2d.uiScale=1 --illegal-access=permit -Dfile.encoding=utf-8 -javaagent:<span class="s2">&#34;.\BurpLoaderKeygenCn.jar=cn&#34;</span>  -Xmx2048m -jar <span class="s2">&#34;.\burpsuite_pro.jar&#34;</span>
+</span></span><span class="line"><span class="cl">java -XX:+IgnoreUnrecognizedVMOptions -javaagent:burpsuitloader-3.7.17-all.jar=loader,hanizfy --add-opens=java.desktop/javax.swing=ALL-UNNAMED --add-opens=java.base/java.lang=ALL-UNNAMED --add-opens=java.base/jdk.internal.org.objectweb.asm=ALL-UNNAMED --add-opens=java.base/jdk.internal.org.objectweb.asm.tree=ALL-UNNAMED --add-opens=java.base/jdk.internal.org.objectweb.asm.Opcodes=ALL-UNNAMED -jar burpsuite_pro_v2023.9.2.jar
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>
@@ -852,7 +825,7 @@
             2020 - 
         
         2023 <a href="https://stack-theme-mod.vercel.app/">Monstertsl</a>·<i class="fas fa-bell"></i> <a id="days">0</a>Days<br>
-      共写了12.7k字·共 8篇文章</br><span><p>
+      共写了12.5k字·共 8篇文章</br><span><p>
     </section>
     
     <section class="powerby">
@@ -917,7 +890,7 @@ document.getElementById('days').innerHTML = number_of_days;
         <li><a href="#注册机下载">注册机下载</a></li>
         <li><a href="#破解burp-suite">破解Burp Suite</a>
           <ol>
-            <li><a href="#运行我们的注册机二选一即可">运行我们的注册机（二选一即可）</a></li>
+            <li><a href="#运行我们的注册机">运行我们的注册机</a></li>
             <li><a href="#破解步骤">破解步骤</a></li>
           </ol>
         </li>
