@@ -178,7 +178,7 @@
         svg {
             stroke-width: 1.33;
             margin-right: 40px;
-
+            fill: none;
             width: 20px;
             height: 20px;
         }
@@ -216,5 +216,6 @@
         height: 24px;
         stroke: var(--body-text-color);
         stroke-width: 1.33;
+        fill: none;
     }
 }
