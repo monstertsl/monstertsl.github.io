@@ -152,7 +152,7 @@ java -XX:+IgnoreUnrecognizedVMOptions -javaagent:burpsuitloader-3.7.17-all.jar=l
 
 #### 快捷启动
 
-有些人喜欢使用英文原版有些人喜欢汉化过的界面，所以为了方便，我们可以写个脚本来控制启动,把脚本和之前的文件放到同一目录就行了，方便快捷
+有些人喜欢使用英文原版有些人喜欢汉化过的界面，所以为了方便，我们可以写个脚本来控制启动,把脚本和之前的文件放到同一目录就行了，方便快捷`-Dsun.java2d.uiScale=1 `主要解决高分辨率屏幕光标不对齐的问题
 
 ```bat
 @echo off
@@ -176,17 +176,18 @@ if /i "%language%"=="c" cls&goto zh
 :en
 cls
 echo.
-java -XX:+IgnoreUnrecognizedVMOptions -javaagent:burpsuitloader-3.7.17-all.jar=loader --add-opens=java.desktop/javax.swing=ALL-UNNAMED --add-opens=java.base/java.lang=ALL-UNNAMED --add-opens=java.base/jdk.internal.org.objectweb.asm=ALL-UNNAMED --add-opens=java.base/jdk.internal.org.objectweb.asm.tree=ALL-UNNAMED --add-opens=java.base/jdk.internal.org.objectweb.asm.Opcodes=ALL-UNNAMED -jar burpsuite_pro_v2023.9.2.jar
+start javaw -XX:+IgnoreUnrecognizedVMOptions -javaagent:burpsuitloader.jar=loader --add-opens=java.desktop/javax.swing=ALL-UNNAMED --add-opens=java.base/java.lang=ALL-UNNAMED --add-opens=java.base/jdk.internal.org.objectweb.asm=ALL-UNNAMED --add-opens=java.base/jdk.internal.org.objectweb.asm.tree=ALL-UNNAMED --add-opens=java.base/jdk.internal.org.objectweb.asm.Opcodes=ALL-UNNAMED  -Dsun.java2d.uiScale=1 -jar burpsuite_pro.jar
 exit
 
 :zh
 cls
 echo.
-java -XX:+IgnoreUnrecognizedVMOptions -javaagent:burpsuitloader-3.7.17-all.jar=loader,hanizfy --add-opens=java.desktop/javax.swing=ALL-UNNAMED --add-opens=java.base/java.lang=ALL-UNNAMED --add-opens=java.base/jdk.internal.org.objectweb.asm=ALL-UNNAMED --add-opens=java.base/jdk.internal.org.objectweb.asm.tree=ALL-UNNAMED --add-opens=java.base/jdk.internal.org.objectweb.asm.Opcodes=ALL-UNNAMED -jar burpsuite_pro_v2023.9.2.jar
+start javaw -XX:+IgnoreUnrecognizedVMOptions -javaagent:burpsuitloader.jar=loader,hanizfy --add-opens=java.desktop/javax.swing=ALL-UNNAMED --add-opens=java.base/java.lang=ALL-UNNAMED --add-opens=java.base/jdk.internal.org.objectweb.asm=ALL-UNNAMED --add-opens=java.base/jdk.internal.org.objectweb.asm.tree=ALL-UNNAMED --add-opens=java.base/jdk.internal.org.objectweb.asm.Opcodes=ALL-UNNAMED  -Dsun.java2d.uiScale=1 -jar burpsuite_pro.jar
 ```
 
 ![](img/2022-05-31-11-44-38.png)
 
+![](img/2023-12-26-14-47-59.png)
 #### 一些细节问题
 
 在使用Burp Suite的时候会遇到抓到的包其中包含汉字，但是汉字显示是一个小方块`▢`,这个时候只需要在`User options`➝`Display`➝`HTTP Message Display`中修改个中文字体就可以了（实测黑体最好看了）

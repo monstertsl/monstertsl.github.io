@@ -293,7 +293,7 @@
   <line x1="13.5" y1="6.5" x2="17.5" y2="10.5"></line>
 </svg>
                 <time class="article-words">
-                    1696 字
+                    1740 字
                 </time>
             </div>
         
@@ -588,7 +588,7 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h4 id="快捷启动">快捷启动</h4>
-<p>有些人喜欢使用英文原版有些人喜欢汉化过的界面，所以为了方便，我们可以写个脚本来控制启动,把脚本和之前的文件放到同一目录就行了，方便快捷</p>
+<p>有些人喜欢使用英文原版有些人喜欢汉化过的界面，所以为了方便，我们可以写个脚本来控制启动,把脚本和之前的文件放到同一目录就行了，方便快捷<code>-Dsun.java2d.uiScale=1 </code>主要解决高分辨率屏幕光标不对齐的问题</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 0
@@ -642,13 +642,13 @@
 </span></span><span class="line"><span class="cl"><span class="p">:</span><span class="nl">en</span>
 </span></span><span class="line"><span class="cl"><span class="k">cls</span>
 </span></span><span class="line"><span class="cl"><span class="k">echo</span>.
-</span></span><span class="line"><span class="cl">java -XX:+IgnoreUnrecognizedVMOptions -javaagent:burpsuitloader-3.7.17-all.jar=loader --add-opens=java.desktop/javax.swing=ALL-UNNAMED --add-opens=java.base/java.lang=ALL-UNNAMED --add-opens=java.base/jdk.internal.org.objectweb.asm=ALL-UNNAMED --add-opens=java.base/jdk.internal.org.objectweb.asm.tree=ALL-UNNAMED --add-opens=java.base/jdk.internal.org.objectweb.asm.Opcodes=ALL-UNNAMED -jar burpsuite_pro_v2023.9.2.jar
+</span></span><span class="line"><span class="cl"><span class="k">start</span> javaw -XX:+IgnoreUnrecognizedVMOptions -javaagent:burpsuitloader.jar=loader --add-opens=java.desktop/javax.swing=ALL-UNNAMED --add-opens=java.base/java.lang=ALL-UNNAMED --add-opens=java.base/jdk.internal.org.objectweb.asm=ALL-UNNAMED --add-opens=java.base/jdk.internal.org.objectweb.asm.tree=ALL-UNNAMED --add-opens=java.base/jdk.internal.org.objectweb.asm.Opcodes=ALL-UNNAMED  -Dsun.java2d.uiScale=1 -jar burpsuite_pro.jar
 </span></span><span class="line"><span class="cl"><span class="k">exit</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="p">:</span><span class="nl">zh</span>
 </span></span><span class="line"><span class="cl"><span class="k">cls</span>
 </span></span><span class="line"><span class="cl"><span class="k">echo</span>.
-</span></span><span class="line"><span class="cl">java -XX:+IgnoreUnrecognizedVMOptions -javaagent:burpsuitloader-3.7.17-all.jar=loader,hanizfy --add-opens=java.desktop/javax.swing=ALL-UNNAMED --add-opens=java.base/java.lang=ALL-UNNAMED --add-opens=java.base/jdk.internal.org.objectweb.asm=ALL-UNNAMED --add-opens=java.base/jdk.internal.org.objectweb.asm.tree=ALL-UNNAMED --add-opens=java.base/jdk.internal.org.objectweb.asm.Opcodes=ALL-UNNAMED -jar burpsuite_pro_v2023.9.2.jar
+</span></span><span class="line"><span class="cl"><span class="k">start</span> javaw -XX:+IgnoreUnrecognizedVMOptions -javaagent:burpsuitloader.jar=loader,hanizfy --add-opens=java.desktop/javax.swing=ALL-UNNAMED --add-opens=java.base/java.lang=ALL-UNNAMED --add-opens=java.base/jdk.internal.org.objectweb.asm=ALL-UNNAMED --add-opens=java.base/jdk.internal.org.objectweb.asm.tree=ALL-UNNAMED --add-opens=java.base/jdk.internal.org.objectweb.asm.Opcodes=ALL-UNNAMED  -Dsun.java2d.uiScale=1 -jar burpsuite_pro.jar
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>
@@ -658,6 +658,17 @@
 	<div class="gallery-image">
 	<a data-fancybox="gallery" href="img/2022-05-31-11-44-38.png">
 	<img src="img/2022-05-31-11-44-38.png" alt=""  />
+	</a>
+	</div>
+	
+</figure></p>
+<p>
+
+<figure>
+	
+	<div class="gallery-image">
+	<a data-fancybox="gallery" href="img/2023-12-26-14-47-59.png">
+	<img src="img/2023-12-26-14-47-59.png" alt=""  />
 	</a>
 	</div>
 	
@@ -825,7 +836,7 @@
             2020 - 
         
         2023 <a href="https://stack-theme-mod.vercel.app/">Monstertsl</a>·<i class="fas fa-bell"></i> <a id="days">0</a>Days<br>
-      共写了12.5k字·共 8篇文章</br><span><p>
+      共写了12.6k字·共 8篇文章</br><span><p>
     </section>
     
     <section class="powerby">
