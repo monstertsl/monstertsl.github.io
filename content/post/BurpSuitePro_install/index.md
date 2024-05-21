@@ -45,7 +45,7 @@ lastmod:
 所以我需要先安装Java
 
 #### 下载Java
-打开[Java Downloads](https://www.oracle.com/java/technologies/downloads/)下载页面，往下滑动（如果BurpSuite版本号小于2023建议使用`11<=Java<17`的版本，如果版本号大于2023建议使用`Java>17`），再选择对应的操作系统下载就好了，我的是Windows平台
+打开[Java Downloads](https://www.oracle.com/java/technologies/downloads/)下载页面，往下滑动（如果BurpSuite版本号小于2023建议使用`11<=Java<17`的版本，如果版本号大于2023建议使用`Java>17`注意如果BurpSuite版本号大于`2024.2.1.3`则需要Java版本至少为`21`才能通过命令启动），再选择对应的操作系统下载就好了，我的是Windows平台
 
 ![](img/2022-05-27-16-44-45.png)
 
