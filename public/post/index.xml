@@ -6,7 +6,16 @@
     <description>Recent content in Posts on Monstertsl&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Thu, 13 Apr 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://www.monstertsl.link/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 29 May 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://www.monstertsl.link/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>UnicodeAutoDecoder</title>
+      <link>https://www.monstertsl.link/unicodeautodecoder/</link>
+      <pubDate>Wed, 29 May 2024 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.monstertsl.link/unicodeautodecoder/</guid>
+      <description>自动将BurpSuite抓包、重放、爆破中的Unicode编码转换为易于阅读的自然语言编码(UTF-8) Auto converts Unicode encodings in Proxy, Repeater, and Intruder into easy-to-read natural language 参考以下两</description>
+    </item>
+    
     <item>
       <title>JWT攻击与防护浅析</title>
       <link>https://www.monstertsl.link/jwt%E6%94%BB%E5%87%BB%E4%B8%8E%E9%98%B2%E6%8A%A4%E6%B5%85%E6%9E%90/</link>

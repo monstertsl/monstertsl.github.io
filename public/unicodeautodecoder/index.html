@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+<script src="https://unpkg.com/jquery@3.5.1/dist/jquery.min.js"></script>
+<link rel="stylesheet" href="/css/jquery.fancybox.min.css" />
+<script src="/js/jquery.fancybox.min.js"></script>
+
+
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='自动将BurpSuite抓包、重放、爆破中的Unicode编码转换为易于阅读的自然语言编码(UTF-8)'><title>UnicodeAutoDecoder</title>
+
+<link rel='canonical' href='https://www.monstertsl.link/unicodeautodecoder/'>
+
+<link rel="stylesheet" href="/scss/style.min.25868a4a653a78636dba085cd68d1d86968efad33f1ab5aca2b7877ee19ee469.css"><meta property='og:title' content='UnicodeAutoDecoder'>
+<meta property='og:description' content='自动将BurpSuite抓包、重放、爆破中的Unicode编码转换为易于阅读的自然语言编码(UTF-8)'>
+<meta property='og:url' content='https://www.monstertsl.link/unicodeautodecoder/'>
+<meta property='og:site_name' content='Monstertsl&#39;s Blog'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='' /><meta property='article:published_time' content='2024-05-29T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2024-05-29T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="UnicodeAutoDecoder">
+<meta name="twitter:description" content="自动将BurpSuite抓包、重放、爆破中的Unicode编码转换为易于阅读的自然语言编码(UTF-8)">
+    <link rel="shortcut icon" href="/icon.png" />
+<style>
+    :root {
+        --article-font-family: "Noto Serif SC", var(--base-font-family);
+    }
+</style>
+
+<script> 
+		(function () {
+		    const customFont = document.createElement('link');
+		    customFont.href = "https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;700&display=swap"; 
+		    customFont.type = "text/css";
+		    customFont.rel = "stylesheet";
+		
+		    document.head.appendChild(customFont);
+		}());
+</script>
+
+    </head>
+    <body class="
+    article-page
+">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex 
+    <!-- 
+        extended
+     -->
+    on-phone--column extended
+">
+    
+<div id="article-toolbar">
+    <a href="https://www.monstertsl.link/" class="back-home">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="15 6 9 12 15 18" />
+</svg>
+
+
+
+        <span>返回</span>
+    </a>
+</div>
+    <aside class="sidebar left-sidebar sticky">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header class="site-info">
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu809810022d2c05b6d29c074f64cb5cd3_275130_300x0_resize_box_3.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+            </figure>
+            
+        
+        
+        <h1 class="site-name"><a href="/">Monstertsl&#39;s Blog</a></h1>
+        <h2 class="site-description">桐花馥。菡萏为莲。茉莉来宾。凌霄结。凤仙绛于庭。鸡冠环户。</h2></header>
+
+    <ol class="menu" id="main-menu">
+        
+        
+        
+
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/about/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/connect/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-messages" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M21 14l-3 -3h-7a1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1h9a1 1 0 0 1 1 1v10" />
+  <path d="M14 15v2a1 1 0 0 1 -1 1h-7l-3 3v-10a1 1 0 0 1 1 -1h2" />
+</svg>
+
+
+
+                
+                <span>联系</span>
+            </a>
+        </li>
+        
+
+        
+            <li id="dark-mode-toggle">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                <span>暗色模式</span>
+            </li>
+        
+    </ol>
+</aside>
+
+<main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/%E6%8F%92%E4%BB%B6/" >
+                插件
+            </a>
+        
+            <a href="/categories/burpsuite/" >
+                BurpSuite
+            </a>
+        
+            <a href="/categories/%E6%B8%97%E9%80%8F%E5%B7%A5%E5%85%B7/" >
+                渗透工具
+            </a>
+        
+    </header>
+    
+
+    <h2 class="article-title">
+        <a href="/unicodeautodecoder/">UnicodeAutoDecoder</a>
+    </h2>
+
+    
+    <h3 class="article-subtitle">
+        自动将BurpSuite抓包、重放、爆破中的Unicode编码转换为易于阅读的自然语言编码(UTF-8)
+    </h3>
+    
+
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">May 29, 2024</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-pencil" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4"></path>
+  <line x1="13.5" y1="6.5" x2="17.5" y2="10.5"></line>
+</svg>
+                <time class="article-words">
+                    676 字
+                </time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 2 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+</div>
+</header>
+
+    <section class="article-content">
+    
+    
+    <p>自动将BurpSuite抓包、重放、爆破中的Unicode编码转换为易于阅读的自然语言编码(UTF-8)<br>
+Auto converts Unicode encodings in Proxy, Repeater, and Intruder into easy-to-read natural language</p>
+<p>参考以下两个项目进行创建<br>
+Refer to the following two authors create project<br>
+<a class="link" href="https://github.com/amir-h-fallahi/UnicodeDecoder"  target="_blank" rel="noopener"
+    >https://github.com/amir-h-fallahi/UnicodeDecoder</a><br>
+<a class="link" href="https://github.com/no001ce/N-DecodeAllUnicode"  target="_blank" rel="noopener"
+    >https://github.com/no001ce/N-DecodeAllUnicode</a></p>
+<p>因为一开始我使用的是<a class="link" href="https://github.com/amir-h-fallahi/UnicodeDecoder"  target="_blank" rel="noopener"
+    >UnicodeDecoder</a>,后面发现他会导致在重放和爆破的时候对请求/响应中的中文进行编码，导致无法正常阅读，所以在<a class="link" href="https://github.com/amir-h-fallahi/UnicodeDecoder"  target="_blank" rel="noopener"
+    >UnicodeDecoder</a>的基础上，参照<a class="link" href="https://github.com/no001ce/N-DecodeAllUnicode"  target="_blank" rel="noopener"
+    >N-DecodeAllUnicode</a>进行修改</p>
+<h2 id="使用方式">使用方式</h2>
+<p>脚本使用python编写，需要先在BurpSuite中配置python环境，安装<a class="link" href="https://www.jython.org/download.html"  target="_blank" rel="noopener"
+    >Jython</a>在Java环境中实现python
+BurpSuite - Extensions(扩展) - Extensions settings(扩展设置) - Python environment（Python环境） - Location of Jython standalone JAR file（Jython的JAR文件位置） - Select file（选择文件）
+选择下载好的<a class="link" href="https://www.jython.org/download.html"  target="_blank" rel="noopener"
+    >Jython</a></p>
+<h3 id="载入插件">载入插件</h3>
+<p>BurpSuite - Extensions(扩展) - Installed（安装） - Burp extensions（Burp扩展） - Add（添加） - Extension type（扩展类型） - Python - Extension file - Select file（选择文件）
+选择下载好的<a class="link" href="https://github.com/monstertsl/UnicodeAutoDecoder"  target="_blank" rel="noopener"
+    >UnicodeAutoDecoder</a></p>
+<h2 id="演示">演示</h2>
+<h4 id="未使用">未使用</h4>
+<p>
+
+<figure>
+	
+	<div class="gallery-image">
+	<a data-fancybox="gallery" href="./img/uninstallUnicodeAutoDecoder.png">
+	<img src="./img/uninstallUnicodeAutoDecoder.png" alt=""  />
+	</a>
+	</div>
+	
+</figure></p>
+<h4 id="使用">使用</h4>
+<p>
+
+<figure>
+	
+	<div class="gallery-image">
+	<a data-fancybox="gallery" href="./img/installUnicodeAutoDecoder.png">
+	<img src="./img/installUnicodeAutoDecoder.png" alt=""  />
+	</a>
+	</div>
+	
+</figure></p>
+<h2 id="源码">源码</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 0
+</span><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># coding=utf-8</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">burp</span> <span class="kn">import</span> <span class="n">IBurpExtender</span><span class="p">,</span> <span class="n">IHttpListener</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">re</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">BurpExtender</span><span class="p">(</span><span class="n">IBurpExtender</span><span class="p">,</span> <span class="n">IHttpListener</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">def</span> <span class="nf">registerExtenderCallbacks</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">callbacks</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">		<span class="bp">self</span><span class="o">.</span><span class="n">_callbacks</span> <span class="o">=</span> <span class="n">callbacks</span>
+</span></span><span class="line"><span class="cl">		<span class="bp">self</span><span class="o">.</span><span class="n">_helpers</span> <span class="o">=</span> <span class="n">callbacks</span><span class="o">.</span><span class="n">getHelpers</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">		<span class="n">callbacks</span><span class="o">.</span><span class="n">setExtensionName</span><span class="p">(</span><span class="s2">&#34;UnicodeAutoDecoder&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="n">callbacks</span><span class="o">.</span><span class="n">registerHttpListener</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="n">callbacks</span><span class="o">.</span><span class="n">printOutput</span><span class="p">(</span><span class="s2">&#34;UnicodeAutoDecoder By monstertsl&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="n">callbacks</span><span class="o">.</span><span class="n">printOutput</span><span class="p">(</span><span class="s2">&#34;Auto converts Unicode encodings in Proxy, Repeater, and Intruder into easy-to-read natural language&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="n">callbacks</span><span class="o">.</span><span class="n">printOutput</span><span class="p">(</span><span class="s2">&#34;GitHub: https://github.com/monstertsl/UnicodeAutoDecoder&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="n">callbacks</span><span class="o">.</span><span class="n">printOutput</span><span class="p">(</span><span class="s2">&#34;Refer to the following two authors create project&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="n">callbacks</span><span class="o">.</span><span class="n">printOutput</span><span class="p">(</span><span class="s2">&#34;GitHub: https://github.com/amir-h-fallahi/UnicodeDecoder&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="n">callbacks</span><span class="o">.</span><span class="n">printOutput</span><span class="p">(</span><span class="s2">&#34;GitHub: https://github.com/no001ce/N-DecodeAllUnicode&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">def</span> <span class="nf">processHttpMessage</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">toolFlag</span><span class="p">,</span> <span class="n">messageIsRequest</span><span class="p">,</span> <span class="n">messageInfo</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">		<span class="n">toolName</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_callbacks</span><span class="o">.</span><span class="n">getToolName</span><span class="p">(</span><span class="n">toolFlag</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="n">toolName</span> <span class="o">==</span> <span class="s2">&#34;Repeater&#34;</span> <span class="ow">or</span> <span class="n">toolName</span> <span class="o">==</span> <span class="s2">&#34;Proxy&#34;</span> <span class="ow">or</span> <span class="n">toolName</span> <span class="o">==</span> <span class="s2">&#34;Intruder&#34;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">			<span class="k">if</span> <span class="ow">not</span> <span class="n">messageIsRequest</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">				<span class="n">is_response_json</span> <span class="o">=</span> <span class="kc">False</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">				<span class="n">response</span> <span class="o">=</span> <span class="n">messageInfo</span><span class="o">.</span><span class="n">getResponse</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">				<span class="n">analyzedResponse</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_helpers</span><span class="o">.</span><span class="n">analyzeResponse</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">				<span class="n">response_headers</span> <span class="o">=</span> <span class="n">analyzedResponse</span><span class="o">.</span><span class="n">getHeaders</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">				<span class="k">for</span> <span class="n">header</span> <span class="ow">in</span> <span class="n">response_headers</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">					<span class="k">if</span> <span class="n">header</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&#34;content-type: application/json&#34;</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">						<span class="n">is_response_json</span> <span class="o">=</span> <span class="kc">True</span>
+</span></span><span class="line"><span class="cl">				
+</span></span><span class="line"><span class="cl">				<span class="k">if</span> <span class="n">is_response_json</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">					<span class="n">body</span> <span class="o">=</span> <span class="n">response</span><span class="p">[</span><span class="n">analyzedResponse</span><span class="o">.</span><span class="n">getBodyOffset</span><span class="p">():]</span>
+</span></span><span class="line"><span class="cl">					<span class="n">bodyStr</span> <span class="o">=</span> <span class="n">body</span><span class="o">.</span><span class="n">tostring</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">					<span class="n">u_escape</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;</span><span class="se">\\</span><span class="s1">u[a-z0-9A-Z]</span><span class="si">{4}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">bodyStr</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">					<span class="n">u_escape</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">u_escape</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">					<span class="k">if</span> <span class="n">u_escape</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">						<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">u_escape</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">							<span class="n">decodeUnicodes</span> <span class="o">=</span> <span class="n">i</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;unicode_escape&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf8&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">							<span class="n">bodyStr</span> <span class="o">=</span> <span class="n">bodyStr</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">decodeUnicodes</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">						<span class="n">finalModifiedBody</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_helpers</span><span class="o">.</span><span class="n">stringToBytes</span><span class="p">(</span><span class="n">bodyStr</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">						<span class="n">messageInfo</span><span class="o">.</span><span class="n">setResponse</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_helpers</span><span class="o">.</span><span class="n">buildHttpMessage</span><span class="p">(</span><span class="n">response_headers</span><span class="p">,</span> <span class="n">finalModifiedBody</span><span class="p">))</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="测试url">测试URL</h2>
+<p><a class="link" href="https://aiqicha.baidu.com/index/getCPlaceAjax"  target="_blank" rel="noopener"
+    >https://aiqicha.baidu.com/index/getCPlaceAjax</a><br>
+<a class="link" href="https://passport.baidu.com/v2/api/getqrcode"  target="_blank" rel="noopener"
+    >https://passport.baidu.com/v2/api/getqrcode</a></p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    <aside class="related-contents--wrapper">
+    
+    
+        <h2 class="section-title">相关文章</h2>
+        <div class="related-contents">
+            <div class="flex article-list--tile">
+                
+                    
+<article class="has-image">
+    <a href="/burp-suite-pro%E5%AE%89%E8%A3%85%E7%A0%B4%E8%A7%A3/">
+        
+        
+            <div class="article-image">
+                <img src="/burp-suite-pro%E5%AE%89%E8%A3%85%E7%A0%B4%E8%A7%A3/_hu01953c3dd819e2955c5ee5ac3db5fe30_103117_1d46de58a007faa074b5bcfa1ae43030.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post Burp Suite Pro安装破解"
+                        
+                        data-hash="md5-Xz//eZUC6F4j68yKYJTVCg==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Burp Suite Pro安装破解</h2>
+        </div>
+    </a>
+</article>
+                
+            </div>
+        </div>
+    
+</aside>
+
+     
+    
+
+    <footer class="site-footer">
+  
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+
+<script>
+(function(u, c) {
+  var d = document, t = 'script', o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+  o.src = u;
+  if (c) { o.addEventListener('load', function(e) { c(e); }); }
+  s.parentNode.insertBefore(o, s);
+})('http://cdn.bootcss.com/pangu/3.3.0/pangu.min.js', function() {
+  pangu.spacingPage();
+});
+</script>
+
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2024 <a href="https://stack-theme-mod.vercel.app/">Monstertsl</a>·<i class="fas fa-bell"></i> <a id="days">0</a>Days<br>
+      共写了13.3k字·共 9篇文章</br><span><p>
+    </section>
+    
+    <section class="powerby">
+         <br />
+        <br />
+         <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">© Licensed Under CC BY-NC-SA 4.0</a>
+    </section>
+
+<script>
+var s1 = '2022-02-15';
+s1 = new Date(s1.replace(/-/g, "/"));
+s2 = new Date();
+var days = s2.getTime() - s1.getTime();
+var number_of_days = parseInt(days / (1000 * 60 * 60 * 24));
+document.getElementById('days').innerHTML = number_of_days;
+</script>
+    
+</footer>
+
+
+
+
+            </main>
+    
+    
+    
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#使用方式">使用方式</a>
+      <ol>
+        <li><a href="#载入插件">载入插件</a></li>
+      </ol>
+    </li>
+    <li><a href="#演示">演示</a>
+      <ol>
+        <li>
+          <ol>
+            <li><a href="#未使用">未使用</a></li>
+            <li><a href="#使用">使用</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#源码">源码</a></li>
+    <li><a href="#测试url">测试URL</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+        
+            <form action="/search/" class="search-form widget" >
+        <p>
+            <label>搜索</label>
+            <input name="keyword" required placeholder="在这里输入你想要查找的内容..." />
+        
+            <button title="搜索">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+            </button>
+        </p>
+    </form>
+        
+            <section class="widget tagCloud">
+    <div class="widget-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-tag" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11 3L20 12a1.5 1.5 0 0 1 0 2L14 20a1.5 1.5 0 0 1 -2 0L3 11v-4a4 4 0 0 1 4 -4h4" />
+  <circle cx="9" cy="9" r="2" />
+</svg>
+
+
+
+    </div>
+    <h2 class="widget-title section-title">标签</h2>
+
+    <div class="tagCloud-tags">
+        
+            <a href="/tags/hugo/" class="font_size_3">
+                Hugo
+            </a>
+        
+            <a href="/tags/blog/" class="font_size_2">
+                blog
+            </a>
+        
+            <a href="/tags/github/" class="font_size_2">
+                GitHub
+            </a>
+        
+            <a href="/tags/4everland/" class="font_size_1">
+                4everland
+            </a>
+        
+            <a href="/tags/android/" class="font_size_1">
+                Android
+            </a>
+        
+            <a href="/tags/burpsuite/" class="font_size_1">
+                BurpSuite
+            </a>
+        
+            <a href="/tags/html/" class="font_size_1">
+                html
+            </a>
+        
+            <a href="/tags/jwt/" class="font_size_1">
+                JWT
+            </a>
+        
+            <a href="/tags/kali/" class="font_size_1">
+                kali
+            </a>
+        
+            <a href="/tags/markdown/" class="font_size_1">
+                markdown
+            </a>
+        
+    </div>
+</section>
+        
+            <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-infinity" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M9.828 9.172a4 4 0 1 0 0 5.656 a10 10 0 0 0 2.172 -2.828a10 10 0 0 1 2.172 -2.828 a4 4 0 1 1 0 5.656a10 10 0 0 1 -2.172 -2.828a10 10 0 0 0 -2.172 -2.828" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">归档</h2>
+
+        
+        
+        
+        
+        
+        <div class="widget-archive--list">
+            <div class="archives-year">
+                    <a href="/archives/#2024">
+                        
+                            <span class="year">2024</span>
+                            <span class="count">1</span>
+                        
+                    </a> 
+                </div>
+            <div class="archives-year">
+                    <a href="/archives/#2023">
+                        
+                            <span class="year">2023</span>
+                            <span class="count">2</span>
+                        
+                    </a> 
+                </div>
+            <div class="archives-year">
+                    <a href="/archives/#2022">
+                        
+                            <span class="year">2022</span>
+                            <span class="count">6</span>
+                        
+                    </a> 
+                </div>
+            
+        </div>
+    </section>
+        
+    </aside>
+
+
+        </div>
+        <script 
+                src="https://unpkg.com/node-vibrant@3.1.5/dist/vibrant.min.js"integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
