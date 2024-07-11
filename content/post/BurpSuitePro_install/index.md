@@ -182,7 +182,7 @@ exit
 :zh
 cls
 echo.
-start javaw -XX:+IgnoreUnrecognizedVMOptions -javaagent:burpsuitloader.jar=loader,hanizfy --add-opens=java.desktop/javax.swing=ALL-UNNAMED --add-opens=java.base/java.lang=ALL-UNNAMED --add-opens=java.base/jdk.internal.org.objectweb.asm=ALL-UNNAMED --add-opens=java.base/jdk.internal.org.objectweb.asm.tree=ALL-UNNAMED --add-opens=java.base/jdk.internal.org.objectweb.asm.Opcodes=ALL-UNNAMED  -Dsun.java2d.uiScale=1 -jar burpsuite_pro.jar
+start javaw -XX:+IgnoreUnrecognizedVMOptions -javaagent:burpsuitloader.jar=loader,hanizfy --add-opens=java.desktop/javax.swing=ALL-UNNAMED --add-opens=java.base/java.lang=ALL-UNNAMED --add-opens=java.base/jdk.internal.org.objectweb.asm=ALL-UNNAMED --add-opens=java.base/jdk.internal.org.objectweb.asm.tree=ALL-UNNAMED --add-opens=java.base/jdk.internal.org.objectweb.asm.Opcodes=ALL-UNNAMED  -Dsun.java2d.uiScale=1 -Dfile.encoding=utf-8 -jar burpsuite_pro.jar
 ```
 
 ![](img/2022-05-31-11-44-38.png)
